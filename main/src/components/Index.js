@@ -16,7 +16,8 @@ class Index extends React.Component {
                 audio: true,
                 video: true
             },
-            username: 'user'
+            username: 'user',
+            url: 'https://server-ickjzqdkhr.now.sh'
         });
       }
       componentDidMount() {
@@ -27,7 +28,7 @@ class Index extends React.Component {
           this.webrtc.on('videoRemoved', this.removeVideo);
         });
       }
-    
+
       addVideo(video, peer) {
         console.log('video added', peer);
         const remotes = this.refs.remotes;
@@ -45,7 +46,7 @@ class Index extends React.Component {
           remotes.append(container);
         }
       }
-    
+
       removeVideo(video, peer) {
         console.log('video removed ', peer);
         const remotes = this.refs.remotes;
@@ -54,16 +55,16 @@ class Index extends React.Component {
           remotes.removeChild(el);
         }
       }
-    
+
       render() {
-        return ( 
+        return (
             <div>
                 <video className = "local"
                 id = "localVideo"
-                ref = "local" > </video> 
+                ref = "local" > </video>
                 <div className = "remotes"
                 id = "remoteVideos"
-                ref = "remotes" > </div> 
+                ref = "remotes" > </div>
             </div>
         );
       }

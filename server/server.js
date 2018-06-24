@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3001;
+var sockets = require('./sockets');
+var config = require('getconfig')
+const PORT = process.env.PORT || 8888;
+const IP = process.env.IP || '0.0.0.0';
 var knex = require('knex');
 var connect = knex({
     client: 'postgresql',
@@ -21,6 +24,8 @@ app.post('/login', (req, res) => {
 
 })
 
-app.listen(PORT, function(){
+var server = app.listen(PORT, IP, function(){
     console.log(`app listening on port ${PORT}!`);
 });
+
+sockets(server, config)
