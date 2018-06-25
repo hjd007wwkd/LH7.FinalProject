@@ -1,7 +1,7 @@
 import React from 'react';
 
 //main page that combine all the subcomponent
-class Index extends React.Component {
+class WebRTC extends React.Component {
     constructor(props) {
         super(props);
         this.addVideo = this.addVideo.bind(this);
@@ -70,4 +70,4 @@ class Index extends React.Component {
       }
 };
 
-export default Index;
+export default WebRTC;

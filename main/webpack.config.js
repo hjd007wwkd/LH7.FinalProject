@@ -5,7 +5,7 @@ const IP = process.env.IP || '0.0.0.0';
 module.exports = {
     entry: [
         `webpack-dev-server/client?http://${IP}:${PORT}`,
-        './src/app.js'
+        './src/index.js'
     ],
     output: {
         path: path.join(__dirname, 'public'),
