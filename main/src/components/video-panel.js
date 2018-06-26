@@ -6,7 +6,7 @@ function renderVideos() {
   return userArray.map((pic) => {
     return (
       <div className="video">
-        <img src="https://i.imgur.com/WoFLlzP.jpg" alt="user" />
+        <img src="https://i.ytimg.com/vi/OjMiTGrCSaA/hqdefault.jpg" alt="user" />
         <p>User{pic}</p>  
       </div>
     );

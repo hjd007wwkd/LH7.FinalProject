@@ -1,17 +1,17 @@
 .main-content {
-  background: #36393f;
+  background: $grey1;
   flex: 1;
   display: flex;
   flex-direction: column;
 }
 
 .navbar {
-  background: #36393f;
+  background: $grey1;
   height: 50px;
   margin: 0px;
   border: 0px;
   border-radius: 0px;
-  border-bottom: 1px solid #212327;
+  border-bottom: 1px solid $border-dark;
 }
 
 #message-area {
@@ -21,54 +21,72 @@
   padding: 0px 15px 0px 15px;
 }
 
+// MESSAGE LIST
 .message-list {
   flex: 1;
   padding: 0px;
+  overflow-y: auto;
+} 
+
+.username {
+  font-weight: bold;
+}
+
+.message-list::-webkit-scrollbar {
+  width: 6px;
+  background-color: transparent;
+}
+
+.message-list::-webkit-scrollbar-thumb {
+  background-color: $grey2;
 }
 
 .message-container {
   display: flex;
-  border-top: 1px solid #3e4146;
+  border-top: 1px solid $border-light;
   padding: 15px 0px 15px 0px;
 }
 
 .message-column1 {
-  padding: 10px;
+  padding: 0px 10px;
 }
 
 .message-column2 {
   flex: 1;
   display: flex;
   flex-direction: column;
-  color: #b3b4b6;
+  color: $text-color-light;
 }
 
 .message-column2 > p {
   margin: 0px;
 }
 
+.message-time {
+  margin-left: 20px;
+  color: $grey4;
+}
 
-/* BOTTOM CHATBAR */
+// BOTTOM CHATBAR
 #chat-bar {
-  border-top: 1px solid #484c52;
+  border-top: 1px solid $border-light;
   height: 80px;
   padding: 12px 0px 0px 0px;
 }
 
 .chat-area > textarea {
   resize: none;
-  background: #484c52;
+  background: $chatarea-color;
   width: 100%;
   height: 40px;
   border: none;
   border-radius: 3px;
   padding: 10px;
-  margin-bottom: 3px;
-  color: #bcc2ca;
+  color: $text-color-light;
 }
 
 #message-typing-status {
-  color: #bcc2ca;
+  color: $text-color-light;
   font-size: 12px;
   margin: 0px;
 }
