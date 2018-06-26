@@ -10,7 +10,8 @@ class App extends Component {
     this.hasJoinedRoom = false;
     this.webrtc = new SimpleWebRTC({
       localVideoEl: 'localVideo',
-      remoteVideosEl: '',
+      remoteVideosEl: 'remoteVideos',
+      autoRemoveVideos: true,
       autoRequestMedia: false,
       detectSpeakingEvents: true,
       autoAdjustMic: false,
@@ -31,7 +32,7 @@ class App extends Component {
 
   handleVideoOff() {
     this.webrtc.stopLocalVideo();
-    this.webrtc.sendToAll('chat', {peer: this.webrtc.connection.getSessionid()});
+    // this.webrtc.sendToAll('chat', {peer: this.webrtc.connection.getSessionid()});
   }
 
   componentDidMount() {
@@ -41,6 +42,7 @@ class App extends Component {
         this.webrtc.joinRoom('room');
       }
     });
+
     this.webrtc.on('readyToCall', () => {
       if (!this.hasJoinedRoom){
         this.hasJoinedRoom = true;
@@ -50,7 +52,7 @@ class App extends Component {
     this.webrtc.on('localStream', () => {
       if (this.hasJoinedRoom){
         this.hasJoinedRoom = false;
-        this.webrtc.leaveRoom();
+        this.webrtc.leaveRoom('room');
         this.hasJoinedRoom = true;
         this.webrtc.joinRoom('room');
       }

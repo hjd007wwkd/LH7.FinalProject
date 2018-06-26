@@ -14,6 +14,7 @@ module.exports = function (server, config) {
 
         // pass a message to another id
         client.on('message', function (details) {
+            console.log(details.payload);
             if (!details) return;
 
             var otherClient = io.to(details.to);
