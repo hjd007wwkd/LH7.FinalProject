@@ -12,7 +12,24 @@ const userArray = [
 const renderUsernames = () => {
   return userArray.map((user) => {
     return (
-      <li><a>{user.name}</a></li>
+      <li>
+        <a>
+          <div className="sidebar-user-container">
+            
+            <div className="column1">
+              <img className="miniavatar" src="https://i.ytimg.com/vi/OjMiTGrCSaA/hqdefault.jpg" alt="userrow" />
+            </div>
+
+            <div className="column2">
+              <div>
+                <p>{user.name}</p>
+                <p>Online<div className="status-light"></div></p>
+              </div>
+            </div>
+
+          </div>
+        </a>
+      </li>
     );
   })
 }
@@ -28,7 +45,7 @@ const SideBar = () => {
          <h3>MSN</h3>
       </div>
 
-      <div className="sidebar-usernames">
+      <div className="sidebar-user-list">
         <ul class="nav nav-pills nav-stacked">
           {renderUsernames()}
         </ul>

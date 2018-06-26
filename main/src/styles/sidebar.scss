@@ -29,18 +29,54 @@
   width: 45px;
 }
 
-.sidebar-usernames {
+.sidebar-user-list {
   flex: 1;
   overflow-y: auto;
 }
 
-.sidebar-usernames::-webkit-scrollbar {
+.sidebar-user-list::-webkit-scrollbar {
   width: 6px;
   background-color: transparent;
 }
 
-.sidebar-usernames::-webkit-scrollbar-thumb {
+.sidebar-user-list::-webkit-scrollbar-thumb {
   background-color: $grey3;
+}
+
+.sidebar-user-container {
+  display: flex;
+
+  .column1 {
+    padding: 0px;
+  }
+
+  .column2 {
+    margin: 0px auto;
+
+    div {
+      margin: auto 0px;
+
+      p {
+        line-height: 100%;
+        margin: 0px;
+      }
+
+      p:first-child {
+        font-weight: bold;
+      }
+
+      p:nth-child(2) {
+        font-size: 11px;
+      }
+    }
+  }
+}
+
+.status-light {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: green;
 }
 
 .nav-stacked > li+li {
@@ -49,7 +85,7 @@
 
 .nav-pills > li > a {
   color: $text-color-light;
-  margin: 0px 10px 0px 10px;
+  margin: 0px;
   padding: 10px;
 }
 

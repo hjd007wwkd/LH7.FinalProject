@@ -42,11 +42,11 @@ function renderMessages() {
   return msgData.map((message) => {
     return (
       <div className="message-container">
-        <div className="message-column1"> 
+        <div className="column1"> 
           <img className="miniavatar" src="https://i.ytimg.com/vi/OjMiTGrCSaA/hqdefault.jpg" alt="user" />
         </div>
 
-        <div className="message-column2">
+        <div className="column2">
           
           <div className="message-header">
             <span className="message username">{message.username}</span>
