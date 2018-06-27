@@ -1,6 +1,6 @@
 var socketIO = require('socket.io'),
     uuid = require('node-uuid'),
-    crypto = require('crypto')
+    crypto = require('crypto');
 
 module.exports = function (server, config) {
     var io = socketIO.listen(server);
@@ -14,7 +14,6 @@ module.exports = function (server, config) {
 
         // pass a message to another id
         client.on('message', function (details) {
-            console.log(details.payload);
             if (!details) return;
 
             var otherClient = io.to(details.to);
