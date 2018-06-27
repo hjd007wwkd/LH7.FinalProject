@@ -19,7 +19,7 @@ class App extends Component {
           video: true
       },
       username: 'user',
-      url: 'https://warm-garden-36395.herokuapp.com'
+      url: 'https://young-temple-88043.herokuapp.com/'
     });
 
     this.handleVideoOn = this.handleVideoOn.bind(this);
