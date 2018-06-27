@@ -2,9 +2,13 @@
   background: $grey2;
   display: flex;
   flex-direction: column;
-  width: 200px;
-  resize: horizontal;
+  min-width: 175px;
   overflow-x: hidden;
+}
+
+.slidebar-top:hover .sidebar{
+  transition: 1s;
+  display: hidden;
 }
 
 .sidebar-top {
@@ -36,14 +40,19 @@
 
 .sidebar-user-list::-webkit-scrollbar {
   width: 6px;
-  background-color: transparent;
+  background: transparent;
 }
 
 .sidebar-user-list::-webkit-scrollbar-thumb {
-  background-color: $grey3;
+  background: $grey3;
 }
 
-.sidebar-user-container {
+.sidebar-user-container img {
+  width: 35px;
+  height: 35px;
+}
+
+.sidebar-user-container, .sidebar-userinfo {
   display: flex;
 
   .column1 {
@@ -51,6 +60,7 @@
   }
 
   .column2 {
+    flex: 1;
     margin: 0px auto;
 
     div {
@@ -59,10 +69,16 @@
       p {
         line-height: 100%;
         margin: 0px;
+
+        div {
+          margin-right: 5px;
+        }
+        
       }
 
       p:first-child {
         font-weight: bold;
+        padding-bottom: 2px;
       }
 
       p:nth-child(2) {
@@ -70,13 +86,20 @@
       }
     }
   }
+  .column3 {
+    width: 10px;
+    margin: auto;
+    color: $grey1;
+  }
 }
 
 .status-light {
-  width: 10px;
-  height: 10px;
+  display: inline-block;
+  margin-right: 5px;
+  width: 9px;
+  height: 9px;
   border-radius: 999px;
-  background: green;
+  background: lightgreen;
 }
 
 .nav-stacked > li+li {
@@ -91,34 +114,26 @@
 
 .nav-pills > li > a:hover {
   background: $grey1;
+  .column3 {
+    color: $grey3;
+  }
 }
 
 // USER PROFILE
 .sidebar-userinfo {
   background: $grey3;
-  display: flex;
   height: 80px;
   padding: 10px;
+
+  .column1 {
+    margin: auto 0px;
+  }
 }
 
 .miniavatar {
   height: 50px;
   width: 50px;
   border: 1px solid $border-dark;
-  border-radius: 10px;
+  border-radius: 999px;
   margin: auto 0px;
-}
-
-.userinfo-details {
-  color: $text-color-light2;
-  margin: auto 10px;
-}
-
-.userinfo-details > p {
-  margin: 0px;
-  line-height: 100%;
-}
-
-.username {
-  font-size: 17px;
 }

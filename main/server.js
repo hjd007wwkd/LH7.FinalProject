@@ -11,7 +11,8 @@ new WebpackDevServer(webpack(config), {
         aggregateTimeout: 300,
         poll: 1000,
         ignored: /node_modules/
-    }
+    },
+    historyApiFallback: true
 })
 .listen(PORT, IP, function (err, result) {
     if (err) {

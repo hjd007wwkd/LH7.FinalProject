@@ -7,7 +7,7 @@ const userArray = [
   {name: 'Brad'}, {name: 'Julie'}, {name: 'Chloe'}, {name: 'Susan'}, 
   {name: 'Bob'}, {name: 'Sarah'}, {name: 'Kenneth'}, {name: 'Jack'},
   {name: 'Brad'}, {name: 'Julie'}, {name: 'Chloe'}, {name: 'Susan'}
-]
+];
 
 const renderUsernames = () => {
   return userArray.map((user) => {
@@ -17,14 +17,18 @@ const renderUsernames = () => {
           <div className="sidebar-user-container">
             
             <div className="column1">
-              <img className="miniavatar" src="https://i.ytimg.com/vi/OjMiTGrCSaA/hqdefault.jpg" alt="userrow" />
+              <img className="miniavatar" src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png" alt="userrow" />
             </div>
 
             <div className="column2">
               <div>
                 <p>{user.name}</p>
-                <p>Online<div className="status-light"></div></p>
+                <p><div className="status-light"></div>Online</p>
               </div>
+            </div>
+            
+            <div className="column3">
+              <i class="fas fa-ellipsis-v"></i>
             </div>
 
           </div>
@@ -38,11 +42,12 @@ const renderUsernames = () => {
 const SideBar = () => {
   return (
     <div className="sidebar">
+
       <div className="sidebar-top">
         <a href="/" className="navbar-brand">
-          <img src="https://i.ytimg.com/vi/OjMiTGrCSaA/hqdefault.jpg" alt="msn" />
+          <img src="https://www.softexia.com/wp-content/uploads/2013/05/Windows-Live-Messenger.png" alt="msn" />
         </a>
-         <h3>MSN</h3>
+         <h3>msn</h3>
       </div>
 
       <div className="sidebar-user-list">
@@ -52,12 +57,19 @@ const SideBar = () => {
       </div>
 
       <div className="sidebar-userinfo">
-        <img className="miniavatar" src="https://i.ytimg.com/vi/OjMiTGrCSaA/hqdefault.jpg" alt="user" />
-        <div className="userinfo-details">
-          <p className="username">Username</p>
-          <p>Online</p>
+        <div className="column1">
+          <img className="miniavatar" src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png" alt="userrow" />
         </div>
+
+        <div className="column2">
+          <div>
+            <p>Username</p>
+            <p><div className="status-light"></div>Online</p>
+          </div>
+        </div>
+        <div className="column3"></div>
       </div>
+
     </div>
   );
 }

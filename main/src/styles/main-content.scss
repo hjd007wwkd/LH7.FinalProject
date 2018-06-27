@@ -12,6 +12,13 @@
   border: 0px;
   border-radius: 0px;
   border-bottom: 1px solid $border-dark;
+  display: flex;
+
+  p {
+    font-size: 20px;
+    margin: auto;
+    color: $text-color-light;
+  }
 }
 
 #message-area {
@@ -49,6 +56,11 @@
 
 .column1 {
   padding-left: 10px;
+
+  img {
+    width: 35px;
+    height: 35px;
+  }
 }
 
 .column2 {
@@ -59,7 +71,7 @@
   color: $text-color-light;
 }
 
-.column2 > p {
+.column2 p {
   margin: 0px;
 }
 
