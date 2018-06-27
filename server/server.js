@@ -4,8 +4,7 @@ var sockets = require('./sockets');
 var config = require('getconfig')
 const PORT = process.env.PORT || 8888;
 const IP = process.env.IP || '0.0.0.0';
-var knex = require('knex');
-var connect = knex({
+var knex = require('knex')({
     client: 'postgresql',
     connection: {
         user : 'vagrant',
@@ -15,7 +14,7 @@ var connect = knex({
     migrations: {
         tableName: 'knex_migrations'
     }
-})
+});
 
 
 app.use(express.static(__dirname+"/public"));

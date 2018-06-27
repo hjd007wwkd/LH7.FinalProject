@@ -1,7 +1,4 @@
-import React, { Component } from 'react';
-import RenderVideos from './video';
-
-let users = 0;
+import React, { Component }  from 'react';
 
 class VideoPanel extends Component {
   constructor(props) {
@@ -13,28 +10,15 @@ class VideoPanel extends Component {
   componentDidMount() {
     this.props.webrtc.on('videoAdded', this.addVideo);
     this.props.webrtc.on('videoRemoved', this.removeVideo);
-    this.props.webrtc.connection.on('message', (data) => {
-      if (data.type === 'chat') {
-        console.log(data.payload.peer);
-        const videos = this.refs.videos;
-        const el = document.getElementById(data.payload.peer ? 'container_' + data.payload.peer + '_video_incoming' : 'localScreenContainer');
-        if (videos && el) {
-          videos.removeChild(el);
-        }
-      }
-    })
   }
 
   addVideo(video, peer) {
-    console.log('video added', peer);
     const videos = this.refs.videos;
-    console.log(videos);
     if (videos) {
       const container = document.createElement('div');
       container.className = 'video';
       container.id = 'container_' + this.props.webrtc.getDomId(peer);
       container.appendChild(video);
-      // suppress contextmenu
       video.oncontextmenu = function() {
         return false;
       };
@@ -43,7 +27,6 @@ class VideoPanel extends Component {
   }
 
   removeVideo(video, peer) {
-    console.log('video removed ', peer);
     const videos = this.refs.videos;
     const el = document.getElementById(peer ? 'container_' + this.props.webrtc.getDomId(peer) : 'localScreenContainer');
     if (videos && el) {
