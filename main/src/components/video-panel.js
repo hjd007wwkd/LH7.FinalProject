@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import RenderVideos from './video';
 
 let users = 0;
 
-class VideoPanel extends React.Component {
+class VideoPanel extends Component {
   constructor(props) {
     super(props);
     this.addVideo = this.addVideo.bind(this);

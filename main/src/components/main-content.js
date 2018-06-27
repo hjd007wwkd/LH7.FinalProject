@@ -1,12 +1,13 @@
 import React from 'react';
-import NavBar from './navbar';
 import MessageList from './message-list';
 import ChatBar from './chat-bar';
 
 const Main = () => {
   return (
     <div className="main-content">
-      <NavBar />
+      <div className="main-topbar">
+        <p>Channel Name</p>
+      </div>
       <div id="message-area">
         <MessageList />
         <ChatBar />

@@ -1,7 +1,5 @@
 import React from 'react';
 
-
-
 function renderMessages() {
   return msgData.map((message) => {
     return (
@@ -29,9 +27,9 @@ function renderMessages() {
 
 const MessageList = () => {
   return (
-      <div className="message-list">
-        {renderMessages()}
-      </div>
+    <div className="message-list">
+      {renderMessages()}
+    </div>
   );
 }
 

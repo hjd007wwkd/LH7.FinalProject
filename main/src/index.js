@@ -2,6 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import App from './components/app';
+import Home from './components/home';
 import './styles/styles.scss';
 
 const AppRouter = () => {
@@ -9,7 +10,7 @@ const AppRouter = () => {
     <BrowserRouter>
       <div>
         <Switch>
-          <Route path='/' component={App} />
+          <Route path='/' component={Home} />
           <Route path='/room' component={App} />
         </Switch>
       </div>
