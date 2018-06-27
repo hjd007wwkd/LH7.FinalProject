@@ -1,10 +1,55 @@
 import React from 'react';
 
 const LeftPanel = () => {
+
+  const renderCarousel = () => {
+
+    return (
+      <div class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img class="d-block w-100" src="..." alt="First slide"/>
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="..." alt="Second slide"/>
+          </div>
+          <div class="carousel-item">
+            <img class="d-block w-100" src="..." alt="Third slide"/>
+          </div>
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+    );
+  }
   
   return (
-    <div>
-      LEFT PANEL
+    <div className="leftpanel">
+      <div className="lp-header">
+        <img id="main-logo" src="http://www.stickpng.com/assets/images/58482332cef1014c0b5e49be.png" alt="logo" />
+      </div>
+
+      <div className="lp-content">
+        
+        <ul class="nav nav-tabs">
+          <li><a href="#">Featured</a></li>
+          <li><a href="#">Subscriptions</a></li>
+        </ul>
+
+        {renderCarousel()}
+
+      </div>
     </div>
   );
 }

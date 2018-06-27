@@ -12,8 +12,8 @@ const userArray = [
 const renderUsernames = () => {
   return userArray.map((user) => {
     return (
-      <li>
-        <a>
+      <li className="nav-li">
+        <a className="nav-link">
           <div className="sidebar-user-container">
             
             <div className="column1">
@@ -51,7 +51,7 @@ const SideBar = () => {
       </div>
 
       <div className="sidebar-user-list">
-        <ul class="nav nav-pills nav-stacked">
+        <ul class="nav nav-pills">
           {renderUsernames()}
         </ul>
       </div>

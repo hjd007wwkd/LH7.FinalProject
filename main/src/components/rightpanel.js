@@ -3,7 +3,7 @@ import React from 'react';
 const RightPanel = () => {
   
   return (
-    <div>
+    <div className="rightpanel">
       RIGHT PANEL
     </div>
   );

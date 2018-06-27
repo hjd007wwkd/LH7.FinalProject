@@ -2,7 +2,7 @@
   background: $grey2;
   display: flex;
   flex-direction: column;
-  min-width: 175px;
+  width: 175px;
   overflow-x: hidden;
 }
 
@@ -15,7 +15,8 @@
   background: $grey2;
   height: 50px;
   border-bottom: 1px solid $border-dark;
-  color: $text-color-light2;
+  color: $text-color-light;
+  display: flex;
 }
 
 .sidebar-top > h3 {
@@ -52,8 +53,13 @@
   height: 35px;
 }
 
+.nav-li {
+  width: 100%;
+}
+
 .sidebar-user-container, .sidebar-userinfo {
   display: flex;
+  width: 100%;
 
   .column1 {
     padding: 0px;

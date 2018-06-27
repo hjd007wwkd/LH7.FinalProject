@@ -1,0 +1,30 @@
+.leftpanel {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  background: $grey3;
+  color: $text-color-light;
+}
+
+.lp-header {
+  display: flex;
+  height: 70px;
+
+  #main-logo {
+    margin: auto;
+    width: 85%;
+    background: $text-color-light;
+  }
+}
+
+.lp-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/////////////
+.rightpanel {
+  flex: 1;
+  background: $grey1;
+}
