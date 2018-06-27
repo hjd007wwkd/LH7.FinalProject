@@ -5,28 +5,35 @@ const LeftPanel = () => {
   const renderCarousel = () => {
 
     return (
-      <div class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-        </ol>
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
           <div class="carousel-item active">
-            <img class="d-block w-100" src="..." alt="First slide"/>
+            <div class="carousel-item-container">
+              <img class="d-block w-100 carousel-video" src="https://i.imgur.com/YYmI8Uz.jpg" alt="First slide"/>
+              <img class="d-block w-100 carousel-video" src="https://i.imgur.com/RZrxsVG.jpg" alt="First slide"/>
+              <img class="d-block w-100 carousel-video" src="https://i.imgur.com/ZWSZGKj.jpg" alt="Third slide"/>
+            </div>
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="..." alt="Second slide"/>
+            <div class="carousel-item-container">
+              <img class="d-block w-100 carousel-video" src="https://i.imgur.com/kXcZdiS.jpg" alt="Second slide"/>
+              <img class="d-block w-100 carousel-video" src="https://i.imgur.com/RZrxsVG.jpg" alt="First slide"/>
+              <img class="d-block w-100 carousel-video" src="https://i.imgur.com/YYmI8Uz.jpg" alt="First slide"/>
+            </div>
           </div>
           <div class="carousel-item">
-            <img class="d-block w-100" src="..." alt="Third slide"/>
+            <div class="carousel-item-container">
+              <img class="d-block w-100 carousel-video" src="https://i.imgur.com/YYmI8Uz.jpg" alt="First slide"/>
+              <img class="d-block w-100 carousel-video" src="https://i.imgur.com/ZWSZGKj.jpg" alt="Third slide"/>
+              <img class="d-block w-100 carousel-video" src="https://i.imgur.com/kXcZdiS.jpg" alt="Second slide"/>
+            </div>
           </div>
         </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="sr-only">Previous</span>
         </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="sr-only">Next</span>
         </a>
@@ -43,8 +50,12 @@ const LeftPanel = () => {
       <div className="lp-content">
         
         <ul class="nav nav-tabs">
-          <li><a href="#">Featured</a></li>
-          <li><a href="#">Subscriptions</a></li>
+          <li class="nav-item">
+            <a class="nav-link">Featured</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link">Subscriptions</a>
+          </li>
         </ul>
 
         {renderCarousel()}

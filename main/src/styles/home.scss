@@ -23,6 +23,29 @@
   flex-direction: column;
 }
 
+.carousel {
+  flex: 1;
+  display: flex;
+  margin: 20px;
+}
+
+.carousel-inner, .carousel-item, .carousel-item-container {
+  height: 100%;
+}
+
+.carousel-item-container {
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  .carousel-video {
+    margin: auto;
+    max-width: 500px;
+    height: 250px;
+  }
+}
+
 /////////////
 .rightpanel {
   flex: 1;
