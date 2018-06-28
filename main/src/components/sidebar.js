@@ -9,8 +9,9 @@ const userArray = [
   {name: 'Brad'}, {name: 'Julie'}, {name: 'Chloe'}, {name: 'Susan'}
 ];
 
-const renderUsernames = () => {
-  return userArray.map((user) => {
+const renderUsernames = (userList) => {
+  return userList.length === 0 ? true : 
+  userList.map((user) => {
     return (
       <li className="nav-li">
         <a className="nav-link">
@@ -22,7 +23,7 @@ const renderUsernames = () => {
 
             <div className="column2">
               <div>
-                <p>{user.name}</p>
+                <p>{user}</p>
                 <p><div className="status-light"></div>Online</p>
               </div>
             </div>
@@ -39,7 +40,7 @@ const renderUsernames = () => {
 }
 
 // pass in USER_DATA & CHANNEL_LIST
-const SideBar = () => {
+const SideBar = (props) => {
   return (
     <div className="sidebar">
 
@@ -52,7 +53,7 @@ const SideBar = () => {
 
       <div className="sidebar-user-list">
         <ul class="nav nav-pills">
-          {renderUsernames()}
+          {renderUsernames(props.userList)}
         </ul>
       </div>
 
@@ -63,7 +64,7 @@ const SideBar = () => {
 
         <div className="column2">
           <div>
-            <p>Username</p>
+            <p>{props.username}</p>
             <p><div className="status-light"></div>Online</p>
           </div>
         </div>
