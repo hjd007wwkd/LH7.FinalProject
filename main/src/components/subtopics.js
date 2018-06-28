@@ -15,11 +15,13 @@ const SubTopics = ({ subtopics }) => {
   }
 
   return (
-    <div className="mega-menu-container">
-      <ul className="dropdown-menu mega-menu subtopic-container">
+    <ul class="dropdown-menu mega-menu">
+      <div className="subtopic-container">
         {renderSubTopics()}
-      </ul>
-    </div>
+      </div>
+
+      <div className="subtopic-spacer"></div>
+    </ul>
   );
 }
 

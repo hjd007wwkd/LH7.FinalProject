@@ -8,13 +8,14 @@
 
 .lp-header {
   display: flex;
-  height: 80px;
+  height: $home-nav-height;
   border-bottom: 1px solid $border-dark;
+  background: $grey3;
 
   #main-logo {
     margin: auto;
     width: 85%;
-    height: 60px;
+    height: $home-nav-height - 20px;
   }
 }
 
@@ -68,7 +69,7 @@
 }
 
 .navbar-container {
-  background: $grey2;
+  background: $grey3;
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -88,113 +89,94 @@
 //   }
 // }
 
-.navbar-spacer {
-  height: 20px;
-}
+// .navbar-spacer {
+//   height: 20px;
+// }
 
-.navbar-inner {
-  flex: 1;
-  display: flex;
-}
+// .navbar-inner {
+//   flex: 1;
+//   display: flex;
+// }
 
-.flex-spacer {
-  flex: 1;
-}
+// .flex-spacer {
+//   flex: 1;
+// }
 
-.home-user {
-  width: 30px;
-  margin-right: 20px;
+// .home-user {
+//   width: 30px;
+//   margin-right: 20px;
 
-  img {
-    width: 100%;
-    height: 100%;
-  }
-}
+//   img {
+//     width: 100%;
+//     height: 100%;
+//   }
+// }
 
-.nav-mega {
-  display: flex;
-  justify-content: start;
-}
+// .nav-mega {
+//   display: flex;
+//   justify-content: start;
+// }
 
 
-.dropdown {
-  flex: 1;
-  min-width: 100px;
-  background: $grey3;
-  border-radius: 5px 5px 0px 0px;
-  margin-right: 5px;
-  display: flex;
-  left: 0px;
+// .dropdown {
+//   flex: 1;
+//   min-width: 100px;
+//   background: $grey3;
+//   border-radius: 5px 5px 0px 0px;
+//   margin-right: 5px;
+//   display: flex;
+//   left: 0px;
   
-  &:hover, &:focus, &:focus-within {
-    background: $grey1;
-    text-decoration: none;
+//   &:hover, &:focus, &:focus-within {
+//     background: $grey1;
+//     text-decoration: none;
     
-    a {
-      text-decoration: none;
-      color: black;
-    }
-  }
+//     a {
+//       text-decoration: none;
+//       color: black;
+//     }
+//   }
   
-  .show {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    max-height: 120px;
-    width: 1000px;
-  }
-}
+//   .show {
+//     display: flex;
+//     flex-direction: column;
+//     flex-wrap: wrap;
+//     max-height: 120px;
+//     width: 1000px;
+//   }
+// }
 
-.dropdown-toggle {
-  flex: 1;
-  margin: 0px;
-  text-align: center;
-  border: 0px;
-  background: transparent;
-  color: $text-color-light;
-  display: flex;
+// .dropdown-toggle {
+//   flex: 1;
+//   margin: 0px;
+//   text-align: center;
+//   border: 0px;
+//   background: transparent;
+//   color: $text-color-light;
+//   display: flex;
   
-  p {
-    margin: 40px auto;
-  }
+//   p {
+//     margin: 40px auto;
+//   }
   
-  &:after {
-    display: none;
-  }
-}
+//   &:after {
+//     display: none;
+//   }
+// }
 
-.mega-menu-container {
-  position: static;
-}
+// .mega-menu-container {
+//   position: static;
+// }
 
-.dropdown-menu {
-  background: $grey1;
-  width: 100%;
-  border: 0px;
-  padding: 0px;
-  margin: 10px;
-}
+// .dropdown-menu {
+//   background: $grey1;
+//   width: 100%;
+//   border: 0px;
+//   padding: 0px;
+//   margin: 10px;
+// }
 
-.btn-light {
-  background: $grey1;
-  color: $text-color-light;
-  border: 0px;
-  width: 100%;
 
-  &:focus {
-    border: 0px;
-    box-shadow: unset;
-  }
-  &:active {
-    border: 0px;
-  }
-}
-
-.collapsing {
-  -webkit-transition: none;
-  transition: none;
-  display: none;
-}
 
 .roomlist-container {
   flex: 1;
@@ -219,4 +201,83 @@
 .room {
   width: 400px;
   height: 224px;
+}
+
+////////////@at-root
+.navbar {
+  height: $home-nav-height;
+}
+
+.nav-mega {
+  width: 100%;
+}
+
+.dropdown {
+  position: static;
+  min-width: 100px;
+  display: flex;
+}
+
+.nav-mega .dropdown-menu.mega-menu {
+  box-sizing: border-box;
+  min-width: auto;
+  width: 100%;
+  margin-top: 0.5px;
+  padding: 10px;
+  background: $grey3;
+}
+
+.dropdown-menu.show {
+  border: 0px;
+  display: flex;
+  max-height: 140px;
+}
+
+.subtopic-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 120px;
+  
+    li {
+      width: 120px;
+    }
+}
+
+.subtopic-spacer {
+  flex: 1;
+}
+
+.btn-light {
+  background: $grey3;
+  color: $text-color-light;
+  border: 0px;
+  width: 120px;
+
+  &:focus {
+    border: 0px;
+    box-shadow: unset;
+  }
+  &:active {
+    border: 0px;
+  }
+}
+
+.subtopic-spacer {
+  flex: 1;
+}
+
+// .nav-mega .dropdown-menu.mega-menu > li {
+//   padding: 20px;
+// }
+
+.dropdown-toggle {
+  line-height: 80px;
+  width: 100%;
+  text-align: center;
+  vertical-align: bottom;
+}
+
+.dropdown-toggle:after {
+  display: none;
 }

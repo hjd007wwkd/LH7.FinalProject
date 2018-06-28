@@ -31,11 +31,10 @@ class NavBar extends Component {
   // <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#topics">
   //   <i class="fas fa-bars"></i>
   // </button>
-
+  
   render() {
     return (
       <div className="pos-f-t navbar-container">
-        <div className="navbar-spacer"></div>
         <Topics topics={this.getTopics()} changeTopic={this.changeTopic} topicPool={this.state.topicPool}/>
       </div>
     );

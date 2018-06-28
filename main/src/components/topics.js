@@ -20,9 +20,9 @@ const Topics = ({ topics, changeTopic, topicPool }) => {
         const subtopics = getSubtopics(data)
 
         return (
-          <li className="dropdown">
-            <a className="dropdown-toggle" data-toggle="dropdown" href="">
-              <p>{data}</p>
+          <li class="dropdown">
+            <a href="" class="dropdown-toggle" data-toggle="dropdown">
+              {data}
             </a>
             <SubTopics subtopics={subtopics} />
           </li>
@@ -32,14 +32,12 @@ const Topics = ({ topics, changeTopic, topicPool }) => {
   }
 
   return (
-    <div className="navbar-inner" id="topics">
-      <ul className="nav nav-mega">
-        {renderTopics()}
-      </ul>
-      <div className="flex-spacer"></div>
-      <a className="home-user" href="">
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQV3h9oJ8Ovn42zpFAgZ-zTt-l95lEcHiTFnonCR9R0L1zTNKNv" alt="user"/>
-      </a>
+    <div class="navbar">
+      <div class="navbar-inner">
+        <ul class="nav nav-mega">
+          {renderTopics()}
+        </ul>
+      </div>
     </div>
   )
 }
