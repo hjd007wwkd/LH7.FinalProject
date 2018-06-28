@@ -26,29 +26,17 @@ class NavBar extends Component {
     })
     return topicArray;
   }
-  
-  getSubTopics() {
-    const subtopicArray = [];
-    this.state.topicPool.map((data) => {
-      if(data.topic === this.state.selectedTopic) {
-        subtopicArray.push(data.subtopic)
-      }
-    })
-    return subtopicArray;
-  }
+
+  // leave commented for possible later implementation
+  // <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#topics">
+  //   <i class="fas fa-bars"></i>
+  // </button>
 
   render() {
     return (
       <div className="pos-f-t navbar-container">
-
-        <nav className="navbar">
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#topics">
-            <i class="fas fa-bars"></i>
-          </button>
-        </nav>
-
+        <div className="navbar-spacer"></div>
         <Topics topics={this.getTopics()} changeTopic={this.changeTopic} topicPool={this.state.topicPool}/>
-
       </div>
     );
   }
