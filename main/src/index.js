@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import App from './components/app';
 import Home from './components/home';
+import 'bootstrap';
 import './styles/styles.scss';
 
 const AppRouter = () => {
