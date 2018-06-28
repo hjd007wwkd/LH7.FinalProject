@@ -35,6 +35,7 @@ class VideoPanel extends Component {
   }
   
   render() {
+    const style = this.props.hideMyVideo ? {display: 'none'} : {}
     return (
       <div id="video-panel">
         <header>
@@ -43,7 +44,7 @@ class VideoPanel extends Component {
           <button onClick={this.props.handleVideoOff}>Off</button>
         </header>
         <div ref = "videos" id="video-container">
-          <div className="video">
+          <div className="video" style={style}>
             <video className = "local"
                   id = "localVideo"
                   ref = "local">

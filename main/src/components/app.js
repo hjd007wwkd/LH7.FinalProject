@@ -17,7 +17,8 @@ class App extends Component {
         roomId: 1
       },
       peers: [],
-      messages: []
+      messages: [],
+      hideMyVideo: true
     }
 
     this.webrtc = new SimpleWebRTC({
@@ -98,10 +99,16 @@ class App extends Component {
 
   handleVideoOn() {
     this.webrtc.startLocalVideo();
+    this.setState(() => ({
+      hideMyVideo: false
+    }))
   }
 
   handleVideoOff() {
     this.webrtc.stopLocalVideo();
+    this.setState(() => ({
+      hideMyVideo: true
+    }))
     this.webrtc.sendToAll('removeVideo', {peer: this.webrtc.connection.getSessionid()});
   }
 
@@ -110,7 +117,11 @@ class App extends Component {
       <div className="wrapper">
         <SideBar userList={this.state.peers} username={this.state.user.username}/>
         <Main handleMessageAdd = {this.handleMessageAdd} messages = {this.state.messages}/>
-        <VideoPanel handleVideoOn={this.handleVideoOn} handleVideoOff={this.handleVideoOff} webrtc={this.webrtc}/>
+        <VideoPanel 
+          handleVideoOn={this.handleVideoOn} 
+          handleVideoOff={this.handleVideoOff} 
+          webrtc={this.webrtc}
+          hideMyVideo={this.state.hideMyVideo}/>
       </div>
     );
   }

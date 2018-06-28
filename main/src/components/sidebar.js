@@ -1,14 +1,5 @@
 import React from 'react';
 
-const userArray = [
-  {name: 'Bob'}, {name: 'Sarah'}, {name: 'Kenneth'}, {name: 'Jack'},
-  {name: 'Brad'}, {name: 'Julie'}, {name: 'Chloe'}, {name: 'Susan'}, 
-  {name: 'Bob'}, {name: 'Sarah'}, {name: 'Kenneth'}, {name: 'Jack'},
-  {name: 'Brad'}, {name: 'Julie'}, {name: 'Chloe'}, {name: 'Susan'}, 
-  {name: 'Bob'}, {name: 'Sarah'}, {name: 'Kenneth'}, {name: 'Jack'},
-  {name: 'Brad'}, {name: 'Julie'}, {name: 'Chloe'}, {name: 'Susan'}
-];
-
 const renderUsernames = (userList) => {
   return userList.length === 0 ? true : 
   userList.map((user) => {
