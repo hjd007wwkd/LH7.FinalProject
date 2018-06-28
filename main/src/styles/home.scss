@@ -65,6 +65,58 @@
   background: $grey1;
 }
 
-.navbar-toggler-icon {
-  font-size: 15px;
+.navbar-container {
+  background: $grey2;
+}
+
+.navbar-toggler {
+  border: 2px solid $grey4;
+  padding: 10px;
+
+  i {
+    font-size: 20px;
+    color: $grey4;
+  }
+}
+
+.nav-link {
+  color: $text-color-light;
+
+  &:hover, &:active {
+    border: 0px;
+    background: $grey1;
+  }
+  
+  &:focus {
+    border: 0px;
+    background: $grey1;
+  }  
+}
+
+.btn-light {
+  background: $grey1;
+  color: $text-color-light;
+  border: 0px;
+
+  &:focus {
+    border: 0px;
+    box-shadow: unset;
+  }
+  &:active {
+    border: 0px;
+  }
+}
+
+.subtopic-container {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 200px;
+  background: $grey1;
+}
+
+.collapsing {
+  -webkit-transition: none;
+  transition: none;
+  display: none;
 }
