@@ -13,6 +13,8 @@ class VideoPanel extends Component {
   }
 
   addVideo(video, peer) {
+    console.log(video)
+    console.log(peer)
     const videos = this.refs.videos;
     if (videos) {
       const container = document.createElement('div');
@@ -27,6 +29,8 @@ class VideoPanel extends Component {
   }
 
   removeVideo(video, peer) {
+    console.log(video)
+    console.log(peer)
     const videos = this.refs.videos;
     const el = document.getElementById(peer ? 'container_' + this.props.webrtc.getDomId(peer) : 'localScreenContainer');
     if (videos && el) {
