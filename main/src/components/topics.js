@@ -1,25 +1,40 @@
 import React from 'react';
+import SubTopics from './subtopics';
 
 
-const Topics = ({ topics, changeTopic }) => {
+const Topics = ({ topics, changeTopic, topicPool }) => {
+
+  const getSubtopics = (topic) => {
+    const subtopics = [];
+    topicPool.map((data) => {
+      if(data.topic === topic) {
+        subtopics.push(data.subtopic)
+      }
+    })
+    return subtopics;
+  }
   
   const renderTopics = () => {
     return (
       topics.map((data) => {
+        const subtopics = getSubtopics(data)
         return (
-          <a class="nav-item nav-link" onClick={changeTopic} data-toggle="collapse" data-target="#subtopics" href="">
-            {data}
-          </a>
+          <li className="dropdown">
+            <a className="dropdown-toggle" data-toggle="dropdown" href="">
+              {data}
+            </a>
+            <SubTopics subtopics={subtopics} />
+          </li>
         );
       })
     );
   }
 
   return (
-    <div className="topic-container collapse navbar-expand-lg" id="topics">
-      <div class="nav nav-tabs">
+    <div className="navbar-inner collapse" id="topics">
+      <ul className="nav nav-mega">
         {renderTopics()}
-      </div>
+      </ul>
     </div>
   )
 }

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Topics from './topics';
-import SubTopics from './subtopics';
 
 class NavBar extends Component {
   constructor(props) {
@@ -48,8 +47,7 @@ class NavBar extends Component {
           </button>
         </nav>
 
-        <Topics topics={this.getTopics()} changeTopic={this.changeTopic} />
-        <SubTopics subtopics={this.getSubTopics()} />
+        <Topics topics={this.getTopics()} changeTopic={this.changeTopic} topicPool={this.state.topicPool}/>
 
       </div>
     );

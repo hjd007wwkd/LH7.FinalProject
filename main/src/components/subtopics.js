@@ -6,17 +6,19 @@ const SubTopics = ({ subtopics }) => {
     return (
       subtopics.map((data) => {
         return (
-          <button type="button" class="btn btn-light">{data}</button>
+          <li>
+            <button type="button" class="btn btn-light">{data}</button>
+          </li>
         );
       })
     );
   }
 
   return (
-    <div className="subtopic-container collapse" id="subtopics">
-       {renderSubTopics()}
-    </div>
-  )
+    <ul className="dropdown-menu mega-menu subtopic-container">
+      {renderSubTopics()}
+    </ul>
+  );
 }
 
 export default SubTopics;

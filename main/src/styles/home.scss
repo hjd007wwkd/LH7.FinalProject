@@ -62,6 +62,8 @@
 /////////////
 .rightpanel {
   flex: 1;
+  display: flex;
+  flex-direction: column;
   background: $grey1;
 }
 
@@ -71,32 +73,69 @@
 
 .navbar-toggler {
   border: 2px solid $grey4;
-  padding: 10px;
+  padding: 5px;
 
   i {
-    font-size: 20px;
+    font-size: 18px;
     color: $grey4;
   }
 }
 
-.nav-link {
-  color: $text-color-light;
+.nav-mega {
+  height: 30px;
+}
 
-  &:hover, &:active {
-    border: 0px;
+.dropdown {
+  min-width: 100px;
+  background: $grey3;
+  border-radius: 5px 5px 0px 0px;
+  margin-right: 5px;
+  display: flex;
+
+  &:hover, &:focus, &:focus-within {
     background: $grey1;
+    text-decoration: none;
+
+    a {
+      text-decoration: none;
+      color: black;
+    }
   }
+}
+
+.dropdown-toggle {
+  flex: 1;
+  margin: auto;
+  text-align: center;
+  border: 0px;
+  background: transparent;
+  color: $text-color-light;
+  
+  &:after {
+    display: none;
+  }
+}
+
+.subtopic-container {
+  background: $grey1;
+  max-height: 200px;
+  width: 100%;
+  border: 0px;
   
   &:focus {
-    border: 0px;
-    background: $grey1;
-  }  
+    display: flex;
+    display: hidden;
+    flex-direction: column;
+    flex-wrap: wrap;
+    top: 10px;
+  }
 }
 
 .btn-light {
   background: $grey1;
   color: $text-color-light;
   border: 0px;
+  width: 100%;
 
   &:focus {
     border: 0px;
@@ -107,16 +146,33 @@
   }
 }
 
-.subtopic-container {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-  max-height: 200px;
-  background: $grey1;
-}
-
 .collapsing {
   -webkit-transition: none;
   transition: none;
   display: none;
+}
+
+.roomlist-container {
+  flex: 1;
+  display: flex;
+  padding: 20px;
+}
+
+.roomlist {
+  flex: 1;
+  display: flex;
+  flex-wrap: wrap;
+  overflow-y: scroll;
+  margin: auto;
+  height: 100%;
+  justify-content: space-around;
+}
+
+.room-container{
+  margin: 10px;
+}
+
+.room {
+  width: 400px;
+  height: 224px;
 }
