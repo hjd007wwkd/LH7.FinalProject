@@ -1,10 +1,12 @@
 import React from 'react';
 
-const RoomList = () => {
-
-  const renderRoomList = () => {
+const Carousel = () => {
+  const three = [0, 1, 2];
+  
+  const renderCarouselColumn = (n) => {
     return (
-      roomArray.map((data) => {
+      featuredArray.map((data, index) => {
+        if(index )
         const roomLink = '/room/' + data.roomID
         return (
           <div className="room-container">
@@ -32,21 +34,51 @@ const RoomList = () => {
       })
     );
   }
-  
+
   return (
-    <div className="roomlist-container">
-      <div className="roomlist">
-        {renderRoomList()}
+    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        {three.map((n) => {
+        <div class="carousel-item active">
+          <div class="carousel-item-container">
+            
+          </div>
+        </div>
+        })}
       </div>
+
+      <a class="carousel-control carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+
+      <a class="carousel-control carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
     </div>
   );
 }
 
-export default RoomList;
+export default Carousel;
 
+  {/* <div class="carousel-item">
+    <div class="carousel-item-container">
+      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="Second slide"/>
+      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="First slide"/>
+      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="First slide"/>
+    </div>
+  </div>
+  
+  <div class="carousel-item">
+    <div class="carousel-item-container">
+      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="First slide"/>
+      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="Third slide"/>
+      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="Second slide"/>
+    </div>
+  </div> */}
 
-
-const roomArray = [
+const featuredArray = [
   {
     roomID: 1,
     owner: {
@@ -127,68 +159,5 @@ const roomArray = [
     },
     roomImage: 'https://i.ytimg.com/vi/YBi6-UoXxZw/maxresdefault.jpg',
     usersOnline: 10
-  },
-  {
-    roomID: 10,
-    owner: {
-      username: 'Karl4563452',
-      avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
-    },
-    roomImage: 'https://static.makeuseof.com/wp-content/uploads/2017/08/twitch-change-video-gaming-670x335.jpg',
-    usersOnline: 134
-  },
-  {
-    roomID: 11,
-    owner: {
-      username: 'Sarah45345',
-      avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
-    },
-    roomImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRczL8wU1EYEbH9eFpSVoM7UwKeQDAsNtqEhL0S155TUcN_bdUO',
-    usersOnline: 304
-  },
-  {
-    roomID: 12,
-    owner: {
-      username: 'Jrodan111',
-      avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
-    },
-    roomImage: 'https://ptzoptics.com/wp-content/uploads/2017/10/live-streaming-cameras-on-gary.jpg',
-    usersOnline: 3
-  },
-  {
-    roomID: 13,
-    owner: {
-      username: 'Bob3452',
-      avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
-    },
-    roomImage: 'https://i.ytimg.com/vi/YBi6-UoXxZw/maxresdefault.jpg',
-    usersOnline: 10
-  },
-  {
-    roomID: 14,
-    owner: {
-      username: 'Karl4563452',
-      avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
-    },
-    roomImage: 'https://static.makeuseof.com/wp-content/uploads/2017/08/twitch-change-video-gaming-670x335.jpg',
-    usersOnline: 134
-  },
-  {
-    roomID: 15,
-    owner: {
-      username: 'Sarah45345',
-      avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
-    },
-    roomImage: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRczL8wU1EYEbH9eFpSVoM7UwKeQDAsNtqEhL0S155TUcN_bdUO',
-    usersOnline: 304
-  },
-  {
-    roomID: 16,
-    owner: {
-      username: 'Jrodan111',
-      avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
-    },
-    roomImage: 'https://ptzoptics.com/wp-content/uploads/2017/10/live-streaming-cameras-on-gary.jpg',
-    usersOnline: 3
   }
 ];
