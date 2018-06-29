@@ -44,7 +44,6 @@ class App extends Component {
     });
     this.webrtc.on('connectionReady', () => {
       this.webrtc.joinRoom(this.state.room.roomname);
-      console.log(this.state.room.roomname);
       this.webrtc.connection.emit('setUsername', this.state.user.username);
     });
     this.webrtc.on('readyToCall', () => {
@@ -94,10 +93,6 @@ class App extends Component {
         ))
       }
     })
-  }
-
-  componentDidlUpdate() {
-    console.log(this.state.activePeersId);
   }
 
   addVideo(stream, peer){
