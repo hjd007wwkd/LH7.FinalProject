@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Room = ({ data }) => {
+const Room = ({ data, inCarousel }) => {
   const roomLink = '/room/' + data.roomID
 
   return (
     <div className="room-container">
 
       <a href={roomLink}>
-        <img className="room" src={data.roomImage} alt="First slide"/>
+        <img className={"room " + (inCarousel ? "carousel-video" : "roomlist-video")} src={data.roomImage} alt="First slide"/>
       </a>
 
       <div className="user-container">

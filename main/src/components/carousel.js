@@ -11,7 +11,7 @@ const Carousel = () => {
     
     for(let i = start; i < end; i ++) {
       carouselColumnArray.push(
-        <Room data={featuredArray[i]} />
+        <Room data={featuredArray[i]} inCarousel={true} />
       )
     }
     
@@ -45,21 +45,13 @@ const Carousel = () => {
 
 export default Carousel;
 
-  {/* <div class="carousel-item">
-    <div class="carousel-item-container">
-      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="Second slide"/>
-      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="First slide"/>
-      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="First slide"/>
-    </div>
-  </div>
-  
-  <div class="carousel-item">
-    <div class="carousel-item-container">
-      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="First slide"/>
-      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="Third slide"/>
-      <img class="d-block w-100 carousel-video" src="https://i.imgur.com/7ipEuOI.jpg" alt="Second slide"/>
-    </div>
-  </div> */}
+
+
+
+
+
+
+
 
 const featuredArray = [
   {

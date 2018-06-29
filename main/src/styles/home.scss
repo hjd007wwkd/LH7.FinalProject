@@ -40,23 +40,25 @@
   margin: 0px 20px 20px 20px;
 }
 
-.carousel-inner, .carousel-item, .carousel-item-container {
+.carousel-inner, .carousel-item {
   height: 100%;
 }
 
 .carousel-item-container {
+  margin: auto;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: space-between;
 
   .carousel-video {
     margin: auto;
-    max-width: 500px;
-    height: 250px;
+    width: 450px;
+    height: 220px;
   }
 
   .room-container {
     margin: auto;
+    flex: 1;
   }
 }
 
@@ -104,10 +106,17 @@
   &::-webkit-scrollbar-thumb {
     background: #1d1d1d;
   }
+
+  .roomlist-video {
+    margin: auto;
+    width: 350px;
+    height: 190px;
+  }
 }
 
 .room-container{
   margin: 10px;
+
 
   .user-container {
     margin-top: 10px;
@@ -129,10 +138,8 @@
   }
 }
 
-.room {
-  width: 400px;
-  height: 224px;
-}
+
+
 
 ///////////////////////
 .navbar {
@@ -210,7 +217,7 @@
   font-weight: bold;
     
   &:hover, &:active, &:focus {
-    background: linear-gradient($grey3, $grey1);
+    background: $grey1;
     text-decoration: none;
     color: $text-color-light;
   }
