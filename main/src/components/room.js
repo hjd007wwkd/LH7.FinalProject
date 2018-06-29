@@ -23,6 +23,10 @@ const Room = ({ data }) => {
           </div>
         </div>
 
+        <div className="column3">
+          <p>{data.roomName}</p>
+        </div>
+
       </div>
     </div>
   )

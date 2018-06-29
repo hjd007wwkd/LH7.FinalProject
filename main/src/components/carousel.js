@@ -2,7 +2,6 @@ import React from 'react';
 import Room from './room';
 
 const Carousel = () => {
-  const carouselColumns = [0, 1, 2];
   
   const renderCarouselColumn = (n) => {
     const start = n * 3;
@@ -28,7 +27,7 @@ const Carousel = () => {
   return (
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
-        {carouselColumns.map((n) => renderCarouselColumn(n) )}
+        {[0, 1, 2].map((n) => renderCarouselColumn(n) )}
       </div>
 
       <a class="carousel-control carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -65,6 +64,7 @@ export default Carousel;
 const featuredArray = [
   {
     roomID: 1,
+    roomName: 'Sports Central',
     owner: {
       username: 'Bob3452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -74,6 +74,7 @@ const featuredArray = [
   },
   {
     roomID: 2,
+    roomName: 'Politics Now',
     owner: {
       username: 'Karl4563452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -83,6 +84,7 @@ const featuredArray = [
   },
   {
     roomID: 3,
+    roomName: 'eSports eSports',
     owner: {
       username: 'Sarah45345',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -92,6 +94,7 @@ const featuredArray = [
   },
   {
     roomID: 4,
+    roomName: 'FoodCentral',
     owner: {
       username: 'Jrodan111',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -101,6 +104,7 @@ const featuredArray = [
   },
   {
     roomID: 5,
+    roomName: 'Gordon Ramsay',
     owner: {
       username: 'Bob3452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -110,6 +114,7 @@ const featuredArray = [
   },
   {
     roomID: 6,
+    roomName: 'The Young Turks',
     owner: {
       username: 'Karl4563452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -119,6 +124,7 @@ const featuredArray = [
   },
   {
     roomID: 7,
+    roomName: 'Russia Today',
     owner: {
       username: 'Sarah45345',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -128,6 +134,7 @@ const featuredArray = [
   },
   {
     roomID: 8,
+    roomName: 'Hot Wings',
     owner: {
       username: 'Jrodan111',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -137,6 +144,7 @@ const featuredArray = [
   },
   {
     roomID: 9,
+    roomName: 'Starcraft Player',
     owner: {
       username: 'Bob3452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'

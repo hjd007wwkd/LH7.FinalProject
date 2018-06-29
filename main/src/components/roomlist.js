@@ -19,6 +19,7 @@ export default RoomList;
 const roomArray = [
   {
     roomID: 1,
+    roomName: 'Sports Central',
     owner: {
       username: 'Bob3452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -28,6 +29,7 @@ const roomArray = [
   },
   {
     roomID: 2,
+    roomName: 'Politics Now',
     owner: {
       username: 'Karl4563452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -37,6 +39,7 @@ const roomArray = [
   },
   {
     roomID: 3,
+    roomName: 'eSports eSports',
     owner: {
       username: 'Sarah45345',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -46,6 +49,7 @@ const roomArray = [
   },
   {
     roomID: 4,
+    roomName: 'FoodCentral',
     owner: {
       username: 'Jrodan111',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -55,6 +59,7 @@ const roomArray = [
   },
   {
     roomID: 5,
+    roomName: 'Gordon Ramsay',
     owner: {
       username: 'Bob3452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -64,6 +69,7 @@ const roomArray = [
   },
   {
     roomID: 6,
+    roomName: 'The Young Turks',
     owner: {
       username: 'Karl4563452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -73,6 +79,7 @@ const roomArray = [
   },
   {
     roomID: 7,
+    roomName: 'Russia Today',
     owner: {
       username: 'Sarah45345',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -82,6 +89,7 @@ const roomArray = [
   },
   {
     roomID: 8,
+    roomName: 'Hot Wings',
     owner: {
       username: 'Jrodan111',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'
@@ -91,6 +99,7 @@ const roomArray = [
   },
   {
     roomID: 9,
+    roomName: 'Starcraft Player',
     owner: {
       username: 'Bob3452',
       avatar: 'https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png'

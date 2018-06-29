@@ -24,7 +24,7 @@
   display: flex;
   flex-direction: column;
 
-  p {
+  & > p {
     margin: 0px auto;
     padding: 10px 0px;
     width: 300px;
@@ -37,7 +37,7 @@
 .carousel {
   flex: 1;
   display: flex;
-  margin: 0px 20px;
+  margin: 0px 20px 20px 20px;
 }
 
 .carousel-inner, .carousel-item, .carousel-item-container {
@@ -53,6 +53,10 @@
     margin: auto;
     max-width: 500px;
     height: 250px;
+  }
+
+  .room-container {
+    margin: auto;
   }
 }
 
@@ -107,6 +111,21 @@
 
   .user-container {
     margin-top: 10px;
+
+    & > .column2 {
+      flex: none;
+    }
+
+    & > .column3 {
+      flex: 1;
+      margin: 0px;
+      
+      & > p {
+        padding-left: 10px;
+        color: $text-color-light;
+        font-size: 25px;
+      }
+    }
   }
 }
 
