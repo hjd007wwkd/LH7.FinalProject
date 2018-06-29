@@ -1,5 +1,5 @@
 const path = require('path');
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 const IP = process.env.IP || '0.0.0.0';
 
 module.exports = {

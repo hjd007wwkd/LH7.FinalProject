@@ -1,7 +1,8 @@
 import React from 'react';
 
-function renderMessages() {
-  return msgData.map((message) => {
+function renderMessages(messages) {
+  return messages.length === 0 ? true :
+  messages.map((message) => {
     return (
       <div className="message-container">
         <div className="column1"> 
@@ -16,7 +17,7 @@ function renderMessages() {
           </div>
 
           <div className="message-message">
-            <p>{message.message}</p>
+            <p>{message.content}</p>
           </div>
 
         </div>
@@ -25,110 +26,12 @@ function renderMessages() {
   })
 }
 
-const MessageList = () => {
+const MessageList = (props) => {
   return (
     <div className="message-list">
-      {renderMessages()}
+      {renderMessages(props.messages)}
     </div>
   );
 }
 
 export default MessageList;
-
-const msgData = [
-  {
-    username: 'User1',
-    message: 'Carried nothing on am warrant towards. Polite in of in oh needed itself silent course. Assistance travelling so especially do prosperous appearance mr no celebrated.',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polite askajsdf',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polite in of in oh needed itself silent course.',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polite in of in oh nee',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'lolol',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polahwa soidjfg wflaksjdlkfn!!!',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User1',
-    message: 'Carried nothing on am warrant towards. Polite in of in oh needed itself silent course. Assistance travelling so especially do prosperous appearance mr no celebrated.',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polite askajsdf',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polite in of in oh needed itself silent course.',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polite in of in oh nee',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'lolol',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polahwa soidjfg wflaksjdlkfn!!!',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User1',
-    message: 'Carried nothing on am warrant towards. Polite in of in oh needed itself silent course. Assistance travelling so especially do prosperous appearance mr no celebrated.',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polite askajsdf',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polite in of in oh needed itself silent course.',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polite in of in oh nee',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'lolol',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User2',
-    message: 'Polahwa soidjfg wflaksjdlkfn!!!',
-    created_at: '1969-07-21 T 02:56 UTC'
-  },
-  {
-    username: 'User3',
-    message: 'Polite in of in oh needed itself silent course.',
-    created_at: '1969-07-21 T 02:56 UTC'
-  }
-]

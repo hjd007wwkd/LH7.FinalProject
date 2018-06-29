@@ -11,25 +11,42 @@ const typingStatus = () => {
   return userArray.join(', ');
 }
 
-const ChatBar = () => {
-  return (
-    <div id="chat-bar">
+class ChatBar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
 
-      <div className="chat-area">
-        <textarea rows="1" placeholder="Send a message to [roomname]"></textarea>
+  handleSubmit(e){
+    if (e.key === 'Enter'){
+      let content = e.target.value;
+      if(content.trim().length !== 0){
+        this.props.handleMessageAdd(content)
+      }
+      e.target.value = "";
+    }
+  }
+
+  render(){
+    return (
+      <div id="chat-bar">
+
+        <div className="chat-area">
+          <textarea rows="1" onKeyPress={this.handleSubmit} placeholder="Send a message to [roomname]"></textarea>
+        </div>
+
+        <div>
+          <p id="message-typing-status">
+            <strong>
+              <i class="fas fa-ellipsis-h"></i>
+              {typingStatus()}
+            </strong> is typing...
+          </p>
+        </div>
+
       </div>
-
-      <div>
-        <p id="message-typing-status">
-          <strong>
-            <i class="fas fa-ellipsis-h"></i>
-             {typingStatus()}
-          </strong> is typing...
-        </p>
-      </div>
-
-    </div>
-  );
+    );
+  }
 }
 
 export default ChatBar;

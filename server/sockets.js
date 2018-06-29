@@ -2,7 +2,10 @@ var socketIO = require('socket.io'),
     uuid = require('node-uuid'),
     crypto = require('crypto');
 
-module.exports = function (server, config) {
+clients = {};
+activeClients = {};
+
+module.exports = function (server, config, knex) {
     var io = socketIO.listen(server);
 
     io.sockets.on('connection', function (client) {
@@ -11,6 +14,40 @@ module.exports = function (server, config) {
             video: true,
             audio: false
         };
+
+        client.on('addMsg', function (msg){
+            knex('messages').insert({content: msg.message.content, user_id: msg.userId, room_id: msg.roomId}).then(function(){
+                console.log('success')
+            })
+            client.to(client.room).emit('message', {type: 'addMsg', message: msg})
+        })
+
+        client.on('setUsername', function (data){
+            client.username = data
+            if(!clients[client.room]){
+                clients[client.room] = []
+            }
+            clients[client.room].push(client.username);
+            io.in(client.room).emit('message', {type: 'addPeerInfo', peers: clients[client.room]})
+        })
+
+        client.on('active', function(data){
+            if(!activeClients[client.room]){
+                activeClients[client.room] = []
+            }
+            if(data) {
+                activeClients[client.room].push(data);
+            }
+            client.to(client.room).emit('message', {type: 'active', peers: activeClients[client.room]})
+        })
+
+        client.on('disabled', function(data){
+            var index = activeClients[client.room].indexOf(data);
+            if (index > -1) {
+              activeClients[client.room].splice(index, 1);
+            }
+            client.to(client.room).emit('message', {type: 'disabled', peers: activeClients[client.room]})
+        })
 
         // pass a message to another id
         client.on('message', function (details) {
@@ -43,6 +80,7 @@ module.exports = function (server, config) {
                 if (!type) {
                     client.leave(client.room);
                     client.room = undefined;
+                    client.username = undefined;
                 }
             }
         }
@@ -61,14 +99,35 @@ module.exports = function (server, config) {
             safeCb(cb)(null, describeRoom(name));
             client.join(name);
             client.room = name;
+            if(!activeClients[client.room]){
+                activeClients[client.room] = []
+            }
+            client.emit('message', {type: 'active', peers: activeClients[client.room]})
+
+            knex('messages').join('users', 'messages.user_id', 'users.id').join('rooms', 'messages.room_id', 'rooms.id')
+            .select('messages.content', 'messages.created_at', 'users.username', 'rooms.name', 'rooms.id').where('rooms.name', name).then(function(rows) {
+                client.emit('message', {type: 'initMsg', payload: {messages: rows, room: {roomname: rows[0].name, roomId: rows[0].id}}});
+            })
+        }
+
+        function siginalLost() {
+            if(client.username && clients[client.room]) {
+                const index = clients[client.room].indexOf(client.username);
+                if (index > -1) {
+                  clients[client.room].splice(index, 1);
+                }
+                io.in(client.room).emit('message', {type: 'removePeerInfo', peers: clients[client.room]})
+            }
         }
 
         // we don't want to pass "leave" directly because the
         // event type string of "socket end" gets passed too.
         client.on('disconnect', function () {
+            siginalLost()
             removeFeed();
         });
         client.on('leave', function () {
+            siginalLost()
             removeFeed();
         });
 
