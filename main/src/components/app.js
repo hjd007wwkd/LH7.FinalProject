@@ -5,8 +5,8 @@ import Main from './main-content';
 import VideoPanel from './video-panel';
 
 class App extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.webrtc = new SimpleWebRTC({
       localVideoEl: 'localVideo',
       remoteVideosEl: '',
@@ -55,13 +55,15 @@ class App extends Component {
       }
     })
   }
-
+  
+  
   render() {
+    const roomID = this.props.match.params.id;
     return (
       <div className="wrapper">
         <SideBar />
         <Main />
-        <VideoPanel handleVideoOn={this.handleVideoOn} handleVideoOff={this.handleVideoOff} webrtc={this.webrtc}/>
+        <VideoPanel handleVideoOn={this.handleVideoOn} handleVideoOff={this.handleVideoOff} webrtc={this.webrtc} />
       </div>
     );
   }

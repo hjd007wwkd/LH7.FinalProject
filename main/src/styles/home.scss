@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 600px;
-  background: $grey2;
+  background: $grey3;
   color: $text-color-light;
 }
 
@@ -65,7 +65,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: $grey1;
+  background: $grey2;
 }
 
 .navbar-container {
@@ -77,111 +77,10 @@
 
 }
 
-// .navbar-toggler {
-//   border: 2px solid $grey4;
-//   padding: 5px;
-//   width: 50px;
-//   right: 0;
-
-//   i {
-//     font-size: 18px;
-//     color: $grey4;
-//   }
-// }
-
-// .navbar-spacer {
-//   height: 20px;
-// }
-
-// .navbar-inner {
-//   flex: 1;
-//   display: flex;
-// }
-
-// .flex-spacer {
-//   flex: 1;
-// }
-
-// .home-user {
-//   width: 30px;
-//   margin-right: 20px;
-
-//   img {
-//     width: 100%;
-//     height: 100%;
-//   }
-// }
-
-// .nav-mega {
-//   display: flex;
-//   justify-content: start;
-// }
-
-
-// .dropdown {
-//   flex: 1;
-//   min-width: 100px;
-//   background: $grey3;
-//   border-radius: 5px 5px 0px 0px;
-//   margin-right: 5px;
-//   display: flex;
-//   left: 0px;
-  
-//   &:hover, &:focus, &:focus-within {
-//     background: $grey1;
-//     text-decoration: none;
-    
-//     a {
-//       text-decoration: none;
-//       color: black;
-//     }
-//   }
-  
-//   .show {
-//     display: flex;
-//     flex-direction: column;
-//     flex-wrap: wrap;
-//     max-height: 120px;
-//     width: 1000px;
-//   }
-// }
-
-// .dropdown-toggle {
-//   flex: 1;
-//   margin: 0px;
-//   text-align: center;
-//   border: 0px;
-//   background: transparent;
-//   color: $text-color-light;
-//   display: flex;
-  
-//   p {
-//     margin: 40px auto;
-//   }
-  
-//   &:after {
-//     display: none;
-//   }
-// }
-
-// .mega-menu-container {
-//   position: static;
-// }
-
-// .dropdown-menu {
-//   background: $grey1;
-//   width: 100%;
-//   border: 0px;
-//   padding: 0px;
-//   margin: 10px;
-// }
-
-
-
 .roomlist-container {
   flex: 1;
   display: flex;
-  padding: 20px;
+  padding: 20px 0px;
 }
 
 .roomlist {
@@ -192,10 +91,23 @@
   margin: auto;
   height: 100%;
   justify-content: space-around;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: #1d1d1d;
+  }
 }
 
 .room-container{
   margin: 10px;
+
+  .user-container {
+    margin-top: 10px;
+  }
 }
 
 .room {
@@ -203,9 +115,10 @@
   height: 224px;
 }
 
-////////////@at-root
+///////////////////////
 .navbar {
   height: $home-nav-height;
+  padding: 40px 0px 0px 0px;
 }
 
 .nav-mega {
@@ -224,13 +137,14 @@
   width: 100%;
   margin-top: 0.5px;
   padding: 10px;
-  background: $grey3;
+  background: $grey1;
 }
 
 .dropdown-menu.show {
   border: 0px;
   display: flex;
   max-height: 140px;
+  border-radius: 0px 0px 5px 5px;
 }
 
 .subtopic-container {
@@ -239,9 +153,9 @@
   flex-wrap: wrap;
   max-height: 120px;
   
-    li {
-      width: 120px;
-    }
+  li {
+    width: 120px;
+  }
 }
 
 .subtopic-spacer {
@@ -249,7 +163,7 @@
 }
 
 .btn-light {
-  background: $grey3;
+  background: $grey1;
   color: $text-color-light;
   border: 0px;
   width: 120px;
@@ -267,17 +181,22 @@
   flex: 1;
 }
 
-// .nav-mega .dropdown-menu.mega-menu > li {
-//   padding: 20px;
-// }
-
 .dropdown-toggle {
-  line-height: 80px;
+  line-height: 40px;
   width: 100%;
   text-align: center;
-  vertical-align: bottom;
-}
+  color: $text-color-light;
+  border-radius: 0px;
+  font-size: 20px;
+  font-weight: bold;
+    
+  &:hover, &:active, &:focus {
+    background: linear-gradient($grey3, $grey1);
+    text-decoration: none;
+    color: $text-color-light;
+  }
 
-.dropdown-toggle:after {
-  display: none;
+  &:after {
+    display: none;
+  }
 }
