@@ -6,7 +6,7 @@ const renderUsernames = (userList) => {
     return (
       <li className="nav-li">
         <a className="nav-link">
-          <div className="sidebar-user-container">
+          <div className="user-container">
             
             <div className="column1">
               <img className="miniavatar" src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png" alt="userrow" />
@@ -17,18 +17,12 @@ const renderUsernames = (userList) => {
                 <p>{user}</p>
                 <p><div className="status-light"></div>Online</p>
               </div>
-  
-              <div className="column2">
-                <div>
-                  <p>{user.name}</p>
-                  <p><div className="status-light"></div>Online</p>
-                </div>
-              </div>
-              
-              <div className="column3">
-                <i class="fas fa-ellipsis-v"></i>
-              </div>
             </div>
+              
+            <div className="column3">
+              <i class="fas fa-ellipsis-v"></i>
+            </div>
+
           </div>
         </a>
       </li>
