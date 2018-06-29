@@ -2,7 +2,8 @@ var socketIO = require('socket.io'),
     uuid = require('node-uuid'),
     crypto = require('crypto');
 
-clients = {}
+clients = {};
+activeClients = {};
 
 module.exports = function (server, config, knex) {
     var io = socketIO.listen(server);
@@ -28,6 +29,24 @@ module.exports = function (server, config, knex) {
             }
             clients[client.room].push(client.username);
             io.in(client.room).emit('message', {type: 'addPeerInfo', peers: clients[client.room]})
+        })
+
+        client.on('active', function(data){
+            if(!activeClients[client.room]){
+                activeClients[client.room] = []
+            }
+            if(data) {
+                activeClients[client.room].push(data);
+            }
+            client.to(client.room).emit('message', {type: 'active', peers: activeClients[client.room]})
+        })
+
+        client.on('disabled', function(data){
+            var index = activeClients[client.room].indexOf(data);
+            if (index > -1) {
+              activeClients[client.room].splice(index, 1);
+            }
+            client.to(client.room).emit('message', {type: 'disabled', peers: activeClients[client.room]})
         })
 
         // pass a message to another id
@@ -80,6 +99,10 @@ module.exports = function (server, config, knex) {
             safeCb(cb)(null, describeRoom(name));
             client.join(name);
             client.room = name;
+            if(!activeClients[client.room]){
+                activeClients[client.room] = []
+            }
+            client.emit('message', {type: 'active', peers: activeClients[client.room]})
 
             knex('messages').join('users', 'messages.user_id', 'users.id').join('rooms', 'messages.room_id', 'rooms.id')
             .select('messages.content', 'messages.created_at', 'users.username', 'rooms.name', 'rooms.id').where('rooms.name', name).then(function(rows) {
