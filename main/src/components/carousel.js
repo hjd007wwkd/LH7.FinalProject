@@ -1,50 +1,34 @@
 import React from 'react';
+import Room from './room';
 
 const Carousel = () => {
-  const three = [0, 1, 2];
+  const carouselColumns = [0, 1, 2];
   
   const renderCarouselColumn = (n) => {
+    const start = n * 3;
+    const end = start + 3;
+    const isActive = !n;
+    const carouselColumnArray = [];
+    
+    for(let i = start; i < end; i ++) {
+      carouselColumnArray.push(
+        <Room data={featuredArray[i]} />
+      )
+    }
+    
     return (
-      featuredArray.map((data, index) => {
-        if(index )
-        const roomLink = '/room/' + data.roomID
-        return (
-          <div className="room-container">
-
-            <a href={roomLink}>
-              <img className="room" src={data.roomImage} alt="First slide"/>
-            </a>
-
-            <div className="user-container">
-
-              <div className="column1">
-                <img className="miniavatar" src={data.owner.avatar} alt="userrow" />
-              </div>
-
-              <div className="column2">
-                <div>
-                  <p>{data.owner.username}</p>
-                  <p>{data.usersOnline} users online</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        );
-      })
-    );
+      <div className={"carousel-item " + (isActive ? "active" : "")}>
+        <div className="carousel-item-container">
+        {carouselColumnArray}
+        </div>
+      </div>
+    )
   }
 
   return (
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
       <div class="carousel-inner">
-        {three.map((n) => {
-        <div class="carousel-item active">
-          <div class="carousel-item-container">
-            
-          </div>
-        </div>
-        })}
+        {carouselColumns.map((n) => renderCarouselColumn(n) )}
       </div>
 
       <a class="carousel-control carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">

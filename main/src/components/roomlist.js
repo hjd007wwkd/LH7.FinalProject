@@ -1,42 +1,12 @@
 import React from 'react';
+import Room from './room';
 
 const RoomList = () => {
 
-  const renderRoomList = () => {
-    return (
-      roomArray.map((data) => {
-        const roomLink = '/room/' + data.roomID
-        return (
-          <div className="room-container">
-
-            <a href={roomLink}>
-              <img className="room" src={data.roomImage} alt="First slide"/>
-            </a>
-
-            <div className="user-container">
-
-              <div className="column1">
-                <img className="miniavatar" src={data.owner.avatar} alt="userrow" />
-              </div>
-
-              <div className="column2">
-                <div>
-                  <p>{data.owner.username}</p>
-                  <p>{data.usersOnline} users online</p>
-                </div>
-              </div>
-
-            </div>
-          </div>
-        );
-      })
-    );
-  }
-  
   return (
     <div className="roomlist-container">
       <div className="roomlist">
-        {renderRoomList()}
+        {roomArray.map((data) => <Room data={data} /> )}
       </div>
     </div>
   );
