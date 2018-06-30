@@ -3,6 +3,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow-x: auto;
 }
 
 .main-topbar {
@@ -29,22 +30,23 @@
 }
 
 // MESSAGE LIST
-.message-list {
+#message-list {
   flex: 1;
   padding: 0px;
   overflow-y: auto;
+
 } 
 
 .username {
   font-weight: bold;
 }
 
-.message-list::-webkit-scrollbar {
+#message-list::-webkit-scrollbar {
   width: 6px;
   background: transparent;
 }
 
-.message-list::-webkit-scrollbar-thumb {
+#message-list::-webkit-scrollbar-thumb {
   background: $grey2;
 }
 
@@ -52,6 +54,7 @@
   display: flex;
   border-top: 1px solid $border-light;
   padding: 15px 0px 15px 0px;
+  hyphens: auto;
 }
 
 .column1 {
@@ -77,6 +80,8 @@
 
 .message-message {
   padding-top: 5px;
+  max-width: 100%;
+
 }
 
 .message-time {
@@ -100,6 +105,17 @@
   border-radius: 3px;
   padding: 10px;
   color: $text-color-light;
+  overflow: auto;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $grey2;
+  }
+  
 }
 
 #message-typing-status {

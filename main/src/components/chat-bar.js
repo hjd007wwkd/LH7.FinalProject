@@ -19,11 +19,14 @@ class ChatBar extends React.Component {
 
   handleSubmit(e){
     if (e.key === 'Enter'){
+      e.preventDefault();
       let content = e.target.value;
       if(content.trim().length !== 0){
-        this.props.handleMessageAdd(content)
+        this.props.handleMessageAdd(content);
+          
       }
       e.target.value = "";
+
     }
   }
 
