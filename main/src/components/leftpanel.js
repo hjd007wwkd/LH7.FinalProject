@@ -1,8 +1,10 @@
 import React from 'react';
 import Carousel from './carousel';
 
-const LeftPanel = () => {
-
+const LeftPanel = (props) => {
+  const feature = [...props.allRooms].sort((a, b) => {
+    return b.usersOnline - a.usersOnline
+  }).slice(0, 9);
   return (
     <div className="leftpanel">
       <div className="lp-header">
@@ -11,7 +13,7 @@ const LeftPanel = () => {
 
       <div className="lp-content">
         <p>Featured Streams</p>
-        <Carousel />
+        <Carousel feature={feature}/>
       </div>
     </div>
   );
