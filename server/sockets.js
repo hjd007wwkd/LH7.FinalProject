@@ -4,6 +4,26 @@ var socketIO = require('socket.io'),
 
 clients = {};
 activeClients = {};
+onlineUsers = {
+  1: 10,
+  2: 134,
+  3: 304,
+  4: 3,
+  5: 10,
+  6: 134,
+  7: 304,
+  8: 3,
+  9: 10,
+  10: 134,
+  11: 304,
+  12: 3,
+  13: 10,
+  14: 134,
+  15: 304,
+  16: 3,
+  17: 304,
+  18: 3
+}
 
 module.exports = function (server, config, knex) {
     var io = socketIO.listen(server);
@@ -15,9 +35,40 @@ module.exports = function (server, config, knex) {
             audio: false
         };
 
+        knex('topics').join('subtopics', 'topics.id', 'subtopics.topic_id')
+        .select({topic: 'topics.name'}, {subtopic: 'subtopics.name'}).then(function(rows){
+          client.emit('getNav', rows);
+        })
+
+        knex('topics').join('subtopics', 'topics.id', 'subtopics.topic_id')
+        .join('rooms', 'subtopics.id', 'rooms.subtopic_id')
+        .join('users', 'users.id', 'rooms.user_id')
+        .select({roomID: 'rooms.id'}, {roomName: 'rooms.name'}, {topic: 'topics.name'},
+          {subtopic: 'subtopics.name'}, {username: 'users.username'}, {avatar: 'users.avatar'},
+          {roomImage: 'rooms.image'}).then(function(rows){
+            client.emit('getRooms', rows.map((item) => {
+              var online = onlineUsers[item.roomID] ? onlineUsers[item.roomID] : 0
+              return {
+                roomID: item.roomID,
+                roomName: item.roomName,
+                topic: item.topic,
+                subtopic: item.subtopic,
+                owner: {
+                  username: item.username,
+                  avatar: item.avatar
+                },
+                roomImage: item.roomImage,
+                usersOnline: online
+              }
+            })
+          )
+        })
+
         client.on('addMsg', function (msg){
-            knex('messages').insert({content: msg.message.content, user_id: msg.userId, room_id: msg.roomId}).then(function(){
+            knex('users').select('id').where('username', msg.username).then(function(row){
+              knex('messages').insert({content: msg.message.content, user_id: row[0].id, room_id: msg.roomId}).then(function(){
                 console.log('success')
+              })
             })
             client.to(client.room).emit('message', {type: 'addMsg', message: msg})
         })
@@ -105,7 +156,7 @@ module.exports = function (server, config, knex) {
             client.emit('message', {type: 'active', peers: activeClients[client.room]})
 
             knex('messages').join('users', 'messages.user_id', 'users.id').join('rooms', 'messages.room_id', 'rooms.id')
-            .select('messages.content', 'messages.created_at', 'users.username', 'rooms.name', 'rooms.id').where('rooms.name', name).then(function(rows) {
+            .select('messages.content', 'messages.created_at', 'users.username', 'rooms.name', 'rooms.id').where('rooms.id', name).then(function(rows) {
                 client.emit('message', {type: 'initMsg', payload: {messages: rows, room: {roomname: rows[0].name, roomId: rows[0].id}}});
             })
         }
