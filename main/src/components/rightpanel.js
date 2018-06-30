@@ -6,19 +6,19 @@ class RightPanel extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // topics should be either an array with just topics and subtopics
       currTopic: 'Home',
-      currSubtopic: '',
+      currSubtopic: ''
     }
     this.changeTopic = this.changeTopic.bind(this);
     this.changeSubtopic = this.changeSubtopic.bind(this);
   }
 
   filterRoomsByTopic(topic) {
+    const allRooms = this.props.allRooms;
     if (topic === 'Home') {
-      return this.props.allRooms
+      return allRooms
     } else {
-      return this.props.allRooms.filter((room) => {
+      return allRooms.filter((room) => {
         return room.topic === topic
       })
     }

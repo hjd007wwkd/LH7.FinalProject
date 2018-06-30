@@ -16,6 +16,7 @@ class Topics extends Component {
   renderTopics() {
     return (
       this.props.topics.map((data) => {
+        console.log(data)
         const subtopics = this.getSubtopics(data)
         return (
           <li className="dropdown">
@@ -29,8 +30,9 @@ class Topics extends Component {
     );
   }
 
-  componentDidMount() {
-    for(let elem of document.getElementsByClassName('dropdown-toggle')) {
+  componentDidUpdate() {
+    const navButtons = document.getElementsByClassName('dropdown-toggle');
+    for(let elem of navButtons) {
       elem.addEventListener('click', this.props.changeTopic)
     }
   }
@@ -52,6 +54,5 @@ class Topics extends Component {
     )
   }
 }
-
 
 export default Topics;
