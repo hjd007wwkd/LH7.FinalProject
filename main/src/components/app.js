@@ -53,6 +53,7 @@ class App extends Component {
         this.setState(() => (
           data.payload
         ))
+        console.log(this.state.activePeersId)
       } else if (data.type === 'addMsg') {
         this.setState((prevState) => ({
           messages: [...prevState.messages, data.message.message]
@@ -74,6 +75,7 @@ class App extends Component {
           {peers: data.peers}
         ))
       } else if (data.type === 'active') {
+        console.log(data);
         const index = data.peers.indexOf(this.webrtc.connection.connection.id);
         if (index > -1) {
           data.peers.splice(index, 1);
@@ -109,19 +111,19 @@ class App extends Component {
       this.setState(()=>(
         {start: true, live: true}
       ))
-      this.webrtc.connection.emit('active', this.webrtc.connection.connection.id)
+      this.webrtc.connection.emit('activeUser')
     } else if (!this.state.live) {
       this.webrtc.resume()
       this.setState(()=>(
         {live: true}
       ))
-      this.webrtc.connection.emit('active', this.webrtc.connection.connection.id)
+      this.webrtc.connection.emit('activeUser')
     } else if (this.state.live) {
       this.webrtc.pause()
       this.setState(()=>(
         {live: false}
       ))
-      this.webrtc.connection.emit('disabled', this.webrtc.connection.connection.id)
+      this.webrtc.connection.emit('disabledUser')
     }
   }
 
@@ -150,18 +152,19 @@ class App extends Component {
   }
  
   disconnect(){
-    this.webrtc.connection.emit('disabled', this.webrtc.connection.connection.id)
+    this.webrtc.connection.emit('disabledUser')
     this.webrtc.stopLocalVideo();
     this.webrtc.leaveRoom();
     this.webrtc.disconnect();
   }
  
-  componentWillUnmount() {
+  componentDidUnmount() {
     this.disconnect();
   }
  
   render() {
     const style = !this.state.start || !this.state.live ? {display: 'none'} : {};
+    const styleActive = this.state.activePeersId.length === 2 ? {display: 'none'} : {};
     return (
       <div className="wrapper">
         <SideBar userList={this.state.peers} username={this.state.username}/>
@@ -169,7 +172,7 @@ class App extends Component {
         <div id="video-panel">
           <header>
             VIDEO HEADER
-          <button onClick={this.handleVideoToggle}>On</button>
+          <button onClick={this.handleVideoToggle} style={styleActive}>On</button>
           </header>
           <div ref = "videos" id="video-container">
             <div className="video" style={style}>
