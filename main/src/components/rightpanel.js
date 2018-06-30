@@ -16,7 +16,6 @@ class RightPanel extends Component {
 
   changeTopic(e) {
     e.preventDefault();
-    console.log(this.state.currTopic)
     this.setState({
       currTopic: e.target.text,
       currSubtopic: ''

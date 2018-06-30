@@ -15,12 +15,13 @@ const Topics = ({ topics, topicPool, changeTopic, changeSubtopic }) => {
   }
   
   const renderTopics = () => {
+    let textInput = React.createRef();
     return (
       topics.map((data) => {
         const subtopics = getSubtopics(data)
         return (
           <li className="dropdown">
-            <a href="" className="dropdown-toggle" data-toggle="dropdown" onClick={() => console.log('hi')}>
+            <a href="" className="dropdown-toggle" data-toggle="dropdown" onClick={changeTopic}>
               {data}
             </a>
             <SubTopics subtopics={subtopics} />
