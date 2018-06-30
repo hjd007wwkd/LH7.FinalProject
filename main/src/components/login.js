@@ -25,11 +25,10 @@ class Login extends Component {
   }
 
   render() {
-    console.log('hi')
     return (
       <ul className="login nav">
         <li className="dropdown">
-          <a href="#" data-toggle="dropdown"><b>Log In<i className="fas fa-door-open"></i></b> <span className="caret"></span></a>
+          <a href="#" data-toggle="dropdown"><b>Log In<i className="fas fa-door-open"></i></b></a>
           
           <ul id="login-dp" className="dropdown-menu">
             <li>
@@ -48,14 +47,10 @@ class Login extends Component {
                         <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Password" required />
                       </div>
                       <div className="form-group">
-                        <button type="submit" className="btn btn-primary btn-block">Sign in</button>
+                        <button type="submit" className="btn btn-secondary btn-block">Sign in</button>
                       </div>
 
                   </form>
-                </div>
-
-                <div className="bottom text-center">
-                  New here ? <a href="#"><b>Register</b></a>
                 </div>
 
               </div>

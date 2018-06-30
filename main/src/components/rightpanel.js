@@ -31,7 +31,6 @@ class RightPanel extends Component {
   }
 
   changeTopic(e) {
-    e.preventDefault();
     this.setState({
       currTopic: e.target.text,
       currSubtopic: ''
@@ -47,8 +46,16 @@ class RightPanel extends Component {
   render() {
     return (
       <div className="rightpanel">
-        <NavBar topics={this.props.topics} changeTopic={this.changeTopic} changeSubtopic={this.changeSubtopic} />
-        <RoomList roomArray={this.state.currSubtopic ? this.filterRoomsBySubtopic(this.state.currSubtopic) : this.filterRoomsByTopic(this.state.currTopic)} />
+        <NavBar 
+          topics={this.props.topics} 
+          changeTopic={this.changeTopic} 
+          changeSubtopic={this.changeSubtopic}
+          />
+        <RoomList 
+          roomArray={this.state.currSubtopic ? 
+            this.filterRoomsBySubtopic(this.state.currSubtopic) : 
+            this.filterRoomsByTopic(this.state.currTopic)} 
+          />
       </div>
     );
   }

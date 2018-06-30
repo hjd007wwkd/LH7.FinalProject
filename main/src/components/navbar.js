@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Topics from './topics';
 import Login from './login';
+import Register from './register';
 
 class NavBar extends Component {
 
@@ -17,6 +18,7 @@ class NavBar extends Component {
   render() {
     return (
       <div className="pos-f-t navbar-container">
+
         <Topics 
           topics={this.getTopics()} 
           topicPool={this.props.topics} 
@@ -24,6 +26,7 @@ class NavBar extends Component {
           changeSubtopic={this.props.changeSubtopic}
         />
         <Login />
+        <Register />
       </div>
     );
   }

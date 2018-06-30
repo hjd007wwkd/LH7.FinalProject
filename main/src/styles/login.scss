@@ -1,8 +1,7 @@
 .login > .dropdown > a {
   font-size: 30px;
 }
-
-#login-dp{
+#login-dp, #register-dp{
   position: fixed;
   min-width: 250px;
   max-width: 300px;
@@ -11,23 +10,21 @@
   overflow:hidden;
   background-color:rgba(255,255,255,.8);
 }
-#login-dp .help-block{
+#login-dp, #register-dp .help-block{
   font-size:12px    
 }
-#login-dp .bottom{
+#login-dp, #register-dp .bottom{
   width: 100%;
   background-color:rgba(255,255,255,.8);
   border-top:1px solid #ddd;
   clear:both;
   padding:14px;
 }
-#login-dp .social-buttons{
-  margin:12px 0    
-}
-#login-dp .social-buttons a{
+
+#login-dp, #register-dp .social-buttons a{
   width: 49%;
 }
-#login-dp .form-group {
+#login-dp, #register-dp .form-group {
   margin-bottom: 10px;
 }
 .btn-fb{
@@ -47,12 +44,20 @@
   background-color:#59b5fa;
 }
 @media(max-width:768px){
-  #login-dp{
-      background-color: inherit;
-      color: #fff;
+  #login-dp, #register-dp{
+    background-color: inherit;
+    color: #fff;
   }
-  #login-dp .bottom{
-      background-color: inherit;
-      border-top:0 none;
+  #login-dp, #register-dp .bottom{
+    background-color: inherit;
+    border-top:0 none;
   }
+}
+
+#login-dp {
+  width: 0%;
+}
+
+ul#register-dp.dropdown-menu.show {
+  padding-bottom: 14px;
 }
