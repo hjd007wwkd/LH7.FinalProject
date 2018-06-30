@@ -39,12 +39,12 @@ class Login extends Component {
                   <form className="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
                       
                       <div className="form-group">
-                        <label className="sr-only" for="exampleInputEmail2">Email address</label>
-                        <input type="email" className="form-control" id="exampleInputEmail2" placeholder="Email address" required />
+                        <label className="sr-only" for="inputEmailLogin">Email address</label>
+                        <input type="email" className="form-control" id="inputEmailLogin" placeholder="Email address" required />
                       </div>
                       <div className="form-group">
-                        <label className="sr-only" for="exampleInputPassword2">Password</label>
-                        <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Password" required />
+                        <label className="sr-only" for="inputPasswordLogin">Password</label>
+                        <input type="password" className="form-control" id="inputPasswordLogin" placeholder="Password" required />
                       </div>
                       <div className="form-group">
                         <button type="submit" className="btn btn-secondary btn-block">Sign in</button>

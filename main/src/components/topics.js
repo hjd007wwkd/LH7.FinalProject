@@ -48,6 +48,11 @@ class Topics extends Component {
               </a>
             </li>
             {this.renderTopics()}
+            <li className="dropdown">
+              <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+                Create New Room
+              </button>
+            </li>
           </ul>
         </div>
       </div>
