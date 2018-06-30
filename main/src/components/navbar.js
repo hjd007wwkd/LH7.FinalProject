@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Topics from './topics';
+import Login from './login';
 
 class NavBar extends Component {
 
@@ -22,6 +23,7 @@ class NavBar extends Component {
           changeTopic={this.props.changeTopic} 
           changeSubtopic={this.props.changeSubtopic}
         />
+        <Login />
       </div>
     );
   }

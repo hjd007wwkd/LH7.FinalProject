@@ -78,7 +78,6 @@
   background: $grey3;
   height: 80px;
   display: flex;
-  flex-direction: column;
   border-bottom: 1px solid $border-dark;
 
 }
@@ -142,7 +141,9 @@
 
 
 ///////////////////////
+
 .navbar {
+  flex: 1;
   height: $home-nav-height;
   padding: 40px 0px 0px 0px;
 }
