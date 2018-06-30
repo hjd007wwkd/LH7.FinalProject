@@ -27,7 +27,6 @@ class RightPanel extends Component {
   }
 
   filterRoomsBySubtopic(subtopic) {
-    console.log(subtopic)
     return roomArray.filter((room) => {
       return room.subtopic === subtopic
     })
@@ -38,7 +37,6 @@ class RightPanel extends Component {
       currTopic: e.target.text,
       currSubtopic: ''
     })
-    console.log(this.state.currTopic)
   }
 
   changeSubtopic(e) {
