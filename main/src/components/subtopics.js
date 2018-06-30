@@ -1,28 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-const SubTopics = ({ subtopics }) => {
-
-  const renderSubTopics = () => {
+class SubTopics extends Component {
+  renderSubTopics() {
     return (
-      subtopics.map((data) => {
+      this.props.subtopics.map((data) => {
         return (
           <li>
-            <button type="button" class="btn btn-light">{data}</button>
+            <button type="button" className="btn btn-light subtopic-btn">{data}</button>
           </li>
         );
       })
     );
   }
 
-  return (
-    <ul class="dropdown-menu mega-menu">
-      <div className="subtopic-container">
-        {renderSubTopics()}
-      </div>
+  componentDidMount() {
+    for(let elem of document.getElementsByClassName('subtopic-btn')) {
+      elem.addEventListener('click', this.props.changeSubtopic)
+    }
+  }
 
-      <div className="subtopic-spacer"></div>
-    </ul>
-  );
+  render() {
+    return (
+      <ul class="dropdown-menu mega-menu">
+        <div className="subtopic-container">
+          {this.renderSubTopics()}
+        </div>
+        <div className="subtopic-spacer"></div>
+      </ul>
+    );
+  }
 }
 
 export default SubTopics;

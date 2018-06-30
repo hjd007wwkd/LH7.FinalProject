@@ -9,34 +9,50 @@ class RightPanel extends Component {
       allRooms: roomArray,
       // topics should be either an array with just topics and subtopics
       topics: databaseTopics,
-      currTopic: 'home',
+      currTopic: 'Home',
       currSubtopic: '',
     }
     this.changeTopic = this.changeTopic.bind(this);
     this.changeSubtopic = this.changeSubtopic.bind(this);
   }
 
+  filterRoomsByTopic(topic) {
+    if (topic === 'Home') {
+      return roomArray
+    } else {
+      return roomArray.filter((room) => {
+        return room.topic === topic
+      })
+    }
+  }
+
+  filterRoomsBySubtopic(subtopic) {
+    console.log(subtopic)
+    return roomArray.filter((room) => {
+      return room.subtopic === subtopic
+    })
+  }
+
   changeTopic(e) {
-    e.preventDefault();
-    console.log(this.state.currTopic)
     this.setState({
       currTopic: e.target.text,
       currSubtopic: ''
     })
+    console.log(this.state.currTopic)
   }
-  
+
   changeSubtopic(e) {
-    e.preventDefault();
     this.setState({
-      currSubtopic: e.target.text
+      currSubtopic: e.target.textContent
     })
+    console.log(this.state.currSubtopic)
   }
 
   render() {
     return (
       <div className="rightpanel">
-        <NavBar topics={databaseTopics} changeTopic={this.changeTopic} changeSubtopic={this.changeSubtopic} />
-        <RoomList />
+        <NavBar currTopic={this.state.currTopic} topics={databaseTopics} changeTopic={this.changeTopic} changeSubtopic={this.changeSubtopic} />
+        <RoomList roomArray={this.state.currSubtopic ? this.filterRoomsBySubtopic(this.state.currSubtopic) : this.filterRoomsByTopic(this.state.currTopic)} />
       </div>
     );
   }
@@ -44,44 +60,44 @@ class RightPanel extends Component {
 
 export default RightPanel;
 
-const databaseTopics = [ 
-  {topic: 'Tech', subtopic: 'Big 5'},
-  {topic: 'Tech', subtopic: 'Big Data'},
-  {topic: 'Tech', subtopic: 'Startups'},
-  {topic: 'Tech', subtopic: 'Gadgets'},
-  {topic: 'Tech', subtopic: 'Software'},
-  {topic: 'Tech', subtopic: 'Hardware'},
-  {topic: 'Tech', subtopic: 'Ideas'},
-  {topic: 'Tech', subtopic: 'Science'},
-  {topic: 'Tech', subtopic: 'Security'},
-  {topic: 'Tech', subtopic: 'Transportation'},
-  {topic: 'Tech', subtopic: 'Culture'},
+const databaseTopics = [
+  { topic: 'Tech', subtopic: 'Big 5' },
+  { topic: 'Tech', subtopic: 'Big Data' },
+  { topic: 'Tech', subtopic: 'Startups' },
+  { topic: 'Tech', subtopic: 'Gadgets' },
+  { topic: 'Tech', subtopic: 'Software' },
+  { topic: 'Tech', subtopic: 'Hardware' },
+  { topic: 'Tech', subtopic: 'Ideas' },
+  { topic: 'Tech', subtopic: 'Science' },
+  { topic: 'Tech', subtopic: 'Security' },
+  { topic: 'Tech', subtopic: 'Transportation' },
+  { topic: 'Tech', subtopic: 'Culture' },
 
-  {topic: 'Sports', subtopic: 'NBA'},
-  {topic: 'Sports', subtopic: 'NFL'},
-  {topic: 'Sports', subtopic: 'NHL'},
-  {topic: 'Sports', subtopic: 'MLB'},
-  {topic: 'Sports', subtopic: 'FIFA'},
-  {topic: 'Sports', subtopic: 'Tennis'},
-  {topic: 'Sports', subtopic: 'Rugby'},
-  {topic: 'Sports', subtopic: 'World Cup'},
+  { topic: 'Sports', subtopic: 'NBA' },
+  { topic: 'Sports', subtopic: 'NFL' },
+  { topic: 'Sports', subtopic: 'NHL' },
+  { topic: 'Sports', subtopic: 'MLB' },
+  { topic: 'Sports', subtopic: 'FIFA' },
+  { topic: 'Sports', subtopic: 'Tennis' },
+  { topic: 'Sports', subtopic: 'Rugby' },
+  { topic: 'Sports', subtopic: 'World Cup' },
 
-  {topic: 'Finance', subtopic: 'General Market News'},
-  {topic: 'Finance', subtopic: 'Stocks'},
-  {topic: 'Finance', subtopic: 'Rates & Bonds'},
-  {topic: 'Finance', subtopic: 'Currencies'},
-  {topic: 'Finance', subtopic: 'Futures'},
-  {topic: 'Finance', subtopic: 'ETFs'},
-  {topic: 'Finance', subtopic: 'Commodities'},
+  { topic: 'Finance', subtopic: 'General Market News' },
+  { topic: 'Finance', subtopic: 'Stocks' },
+  { topic: 'Finance', subtopic: 'Rates & Bonds' },
+  { topic: 'Finance', subtopic: 'Currencies' },
+  { topic: 'Finance', subtopic: 'Futures' },
+  { topic: 'Finance', subtopic: 'ETFs' },
+  { topic: 'Finance', subtopic: 'Commodities' },
 
-  {topic: 'Politics', subtopic: 'International'},
-  {topic: 'Politics', subtopic: 'US'},
-  {topic: 'Politics', subtopic: 'China'},
-  {topic: 'Politics', subtopic: 'Europe'},
-  {topic: 'Politics', subtopic: 'Canada'},
-  {topic: 'Politics', subtopic: 'England'},
-  {topic: 'Politics', subtopic: 'Russia'},
-  {topic: 'Politics', subtopic: 'Middle East'}
+  { topic: 'Politics', subtopic: 'International' },
+  { topic: 'Politics', subtopic: 'US' },
+  { topic: 'Politics', subtopic: 'China' },
+  { topic: 'Politics', subtopic: 'Europe' },
+  { topic: 'Politics', subtopic: 'Canada' },
+  { topic: 'Politics', subtopic: 'England' },
+  { topic: 'Politics', subtopic: 'Russia' },
+  { topic: 'Politics', subtopic: 'Middle East' }
 ]
 
 const roomArray = [

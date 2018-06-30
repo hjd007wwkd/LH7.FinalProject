@@ -1,6 +1,8 @@
 import React from 'react';
 
 const Room = ({ data, inCarousel }) => {
+  console.log(data)
+  
   const roomLink = '/room/' + data.roomID
 
   return (

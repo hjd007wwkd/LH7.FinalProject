@@ -23,10 +23,8 @@ class ChatBar extends React.Component {
       let content = e.target.value;
       if(content.trim().length !== 0){
         this.props.handleMessageAdd(content);
-          
       }
       e.target.value = "";
-
     }
   }
 

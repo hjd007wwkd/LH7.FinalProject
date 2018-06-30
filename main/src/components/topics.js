@@ -1,12 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import SubTopics from './subtopics';
 
-
-const Topics = ({ topics, topicPool, changeTopic, changeSubtopic }) => {
-
-  const getSubtopics = (topic) => {
+class Topics extends Component {
+  
+  getSubtopics(topic) {
     const subtopics = [];
-    topicPool.map((data) => {
+    this.props.topicPool.map((data) => {
       if(data.topic === topic) {
         subtopics.push(data.subtopic)
       }
@@ -14,36 +13,44 @@ const Topics = ({ topics, topicPool, changeTopic, changeSubtopic }) => {
     return subtopics;
   }
   
-  const renderTopics = () => {
+  renderTopics() {
     return (
-      topics.map((data) => {
-        const subtopics = getSubtopics(data)
+      this.props.topics.map((data) => {
+        const subtopics = this.getSubtopics(data)
         return (
           <li className="dropdown">
-            <a href="" className="dropdown-toggle" data-toggle="dropdown" onClick={() => console.log('hi')}>
+            <a href="" className="dropdown-toggle" data-toggle="dropdown" >
               {data}
             </a>
-            <SubTopics subtopics={subtopics} />
+            <SubTopics subtopics={subtopics} changeSubtopic={this.props.changeSubtopic} />
           </li>
         );
       })
     );
   }
 
-  return (
-    <div className="navbar">
-      <div className="navbar-inner">
-        <ul className="nav nav-mega">
-          <li className="dropdown">
-            <a href="/" className="dropdown-toggle" data-toggle="dropdown">
-              Home
-            </a>
-          </li>
-          {renderTopics()}
-        </ul>
+  componentDidMount() {
+    for(let elem of document.getElementsByClassName('dropdown-toggle')) {
+      elem.addEventListener('click', this.props.changeTopic)
+    }
+  }
+
+  render() {
+    return (
+      <div className="navbar">
+        <div className="navbar-inner">
+          <ul className="nav nav-mega">
+            <li className="dropdown">
+              <a href="/" className="dropdown-toggle" data-toggle="dropdown">
+                Home
+              </a>
+            </li>
+            {this.renderTopics()}
+          </ul>
+        </div>
       </div>
-    </div>
-  )
+    )
+  }
 }
 
 

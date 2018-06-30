@@ -1,12 +1,12 @@
 import React from 'react';
 import Room from './room';
 
-const RoomList = () => {
-
+const RoomList = ({ roomArray }) => {
+  console.log(roomArray)
   return (
     <div className="roomlist-container">
       <div className="roomlist">
-        {roomArray.map((data) => <Room data={data} inCarousel={false} /> )}
+        {roomArray.map((roomData) => <Room data={roomData} inCarousel={false} /> )}
       </div>
     </div>
   );
@@ -14,7 +14,7 @@ const RoomList = () => {
 
 export default RoomList;
 
-const roomArray = [
+const aaa = [
   {
     roomID: 1,
     roomName: 'Sports Central',
