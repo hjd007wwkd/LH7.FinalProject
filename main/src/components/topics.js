@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import SubTopics from './subtopics';
-import CreateRoom from './create-room';
-
 
 class Topics extends Component {
   
@@ -54,7 +52,7 @@ class Topics extends Component {
                 Create New Room
               </button>
             </li>
-            <CreateRoom topics={this.props.topics} topicPool={this.props.topicPool}/>
+            
           </ul>
         </div>
       </div>

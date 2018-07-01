@@ -147,13 +147,13 @@
 .nav-mega {
   width: 100%;
   
-  .dropdown {
-    position: static;
-    min-width: 100px;
-    display: flex;
-  }
 }
 
+.dropdown {
+  position: static;
+  min-width: 100px;
+  display: flex;
+}
 
 .nav-mega .dropdown-menu.mega-menu {
   box-sizing: border-box;
