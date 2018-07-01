@@ -12,8 +12,8 @@ class Home extends Component {
       topics: [],
       featureRooms: [],
       user: {
-        username: false,
-        avatar: false
+        username: props.cookies.get('username') || false,
+        avatar: props.cookies.get('avatar') || false
       }
     }
     this.socket = io('https://ancient-forest-74575.herokuapp.com/');

@@ -68,9 +68,9 @@ module.exports = function (server, config, knex) {
         client.on('register', function(username, email, password) {
             const avatar = toonavatar.generate_avatar();
             console.log(avatar);
-            knex('users').select('email').where('email', email).then(function(row){
+            knex('users').select('email').where('email', email).orWhere('usernmae', username).then(function(row){
                 if(row.length > 0) {
-                    client.emit('fail', 'Email existed');
+                    client.emit('fail', 'Email or Username existed');
                 } else {
                     knex('users').insert({username: username, email: email, password: password, avatar: avatar}).then(function(){
                         client.emit('success', username, avatar);
