@@ -27,8 +27,8 @@ class NavBar extends Component {
           changeSubtopic={this.props.changeSubtopic}
         />
         <CreateRoom />
-        <Login />
-        <Register />
+        <Login socket={this.props.socket}/>
+        <Register socket={this.props.socket}/>
 
       </div>
     );

@@ -50,6 +50,7 @@ class RightPanel extends Component {
           topics={this.props.topics} 
           changeTopic={this.changeTopic} 
           changeSubtopic={this.changeSubtopic}
+          socket={this.props.socket}
           />
         <RoomList 
           roomArray={this.state.currSubtopic ? 

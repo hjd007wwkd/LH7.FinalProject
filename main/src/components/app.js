@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import {Redirect} from "react-router-dom";
 import LioWebRTC from 'liowebrtc';
+import { withCookies } from 'react-cookie';
 import SideBar from './sidebar';
 import Main from './main-content';
 
@@ -7,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'hjd',
+      username: props.cookies.get('username'),
       roomId: this.props.match.params.id,
       peers: [],
       peersVideo: [],
@@ -27,70 +29,70 @@ class App extends Component {
   }
  
   componentDidMount() {
-    this.webrtc = new LioWebRTC({
-      // The local video ref set within your render function
-      localVideoEl: this.localVid,
-      // Immediately request camera access
-      autoRequestMedia: false,
-      // The url for your signaling server
-      url: 'https://ancient-forest-74575.herokuapp.com/',
-      debug: true
-    });
-    this.webrtc.on('connectionReady', () => {
-      this.webrtc.joinRoom(this.state.roomId);
-      this.webrtc.connection.emit('setUsername', this.state.username);
-    });
-    this.webrtc.on('readyToCall', () => {
-      this.webrtc.leaveRoom(this.state.roomId);
-      this.webrtc.joinRoom(this.state.roomId);
-      this.webrtc.connection.emit('setUsername', this.state.username);
-    });
-    this.webrtc.on('videoAdded', this.addVideo);
-    this.webrtc.on('videoRemoved', this.removeVideo);
+    if(this.props.cookies.get('username')){
+      this.webrtc = new LioWebRTC({
+        // The local video ref set within your render function
+        localVideoEl: this.localVid,
+        // Immediately request camera access
+        autoRequestMedia: false,
+        // The url for your signaling server
+        url: 'https://ancient-forest-74575.herokuapp.com/',
+        debug: true
+      });
+      this.webrtc.on('connectionReady', () => {
+        this.webrtc.joinRoom(this.state.roomId);
+        this.webrtc.connection.emit('setUsername', this.state.username);
+      });
+      this.webrtc.on('readyToCall', () => {
+        this.webrtc.leaveRoom(this.state.roomId);
+        this.webrtc.joinRoom(this.state.roomId);
+        this.webrtc.connection.emit('setUsername', this.state.username);
+      });
+      this.webrtc.on('videoAdded', this.addVideo);
+      this.webrtc.on('videoRemoved', this.removeVideo);
 
-    this.webrtc.connection.on('message', (data) => {
-      if (data.type === 'initMsg') {
-        this.setState(() => (
-          data.payload
-        ))
-        console.log(this.state.activePeersId)
-      } else if (data.type === 'addMsg') {
-        this.setState((prevState) => ({
-          messages: [...prevState.messages, data.message.message]
-        }))
-      } else if (data.type === 'addPeerInfo') {
-        const index = data.peers.indexOf(this.state.username);
-        if (index > -1) {
-          data.peers.splice(index, 1);
+      this.webrtc.connection.on('message', (data) => {
+        if (data.type === 'initMsg') {
+          this.setState(() => (
+            data.payload
+          ))
+          console.log(this.state.activePeersId)
+        } else if (data.type === 'addMsg') {
+          this.setState((prevState) => ({
+            messages: [...prevState.messages, data.message.message]
+          }))
+        } else if (data.type === 'addPeerInfo') {
+          const index = data.peers.indexOf(this.state.username);
+          if (index > -1) {
+            data.peers.splice(index, 1);
+          }
+          this.setState(() => (
+            {peers: data.peers}
+          ))
+        } else if (data.type === 'removePeerInfo') {
+          const index = data.peers.indexOf(this.state.username);
+          if (index > -1) {
+            data.peers.splice(index, 1);
+          }
+          this.setState(() => (
+            {peers: data.peers}
+          ))
+        } else if (data.type === 'active') {
+          console.log(data);
+          const index = data.peers.indexOf(this.webrtc.connection.connection.id);
+          if (index > -1) {
+            data.peers.splice(index, 1);
+          }
+          this.setState(() => (
+            {activePeersId: data.peers}
+          ))
+        } else if (data.type === 'disabled') {
+          this.setState(() => (
+            {activePeersId: data.peers}
+          ))
         }
-        this.setState(() => (
-          {peers: data.peers}
-        ))
-      } else if (data.type === 'removePeerInfo') {
-        const index = data.peers.indexOf(this.state.username);
-        if (index > -1) {
-          data.peers.splice(index, 1);
-        }
-        this.setState(() => (
-          {peers: data.peers}
-        ))
-      } else if (data.type === 'active') {
-        console.log(data);
-        const index = data.peers.indexOf(this.webrtc.connection.connection.id);
-        if (index > -1) {
-          data.peers.splice(index, 1);
-        }
-        this.setState(() => (
-          {activePeersId: data.peers}
-        ))
-      } else if (data.type === 'disabled') {
-        this.setState(() => (
-          {activePeersId: data.peers}
-        ))
-      }
-    })
-
-
+      })
+    }
   }
 
   addVideo(stream, peer){
@@ -165,7 +167,7 @@ class App extends Component {
   render() {
     const style = !this.state.start || !this.state.live ? {display: 'none'} : {};
     const styleActive = this.state.activePeersId.length === 2 ? {display: 'none'} : {};
-    return (
+    return  this.props.cookies.get('username') ? (
       <div className="wrapper">
         <SideBar userList={this.state.peers} username={this.state.username}/>
         <Main handleMessageAdd = {this.handleMessageAdd} messages = {this.state.messages}/>
@@ -185,8 +187,12 @@ class App extends Component {
           </div>
         </div>
       </div>
-    );
+    ) : (<Redirect
+      to={{
+        pathname: "/"
+      }}
+    />);
   }
 }
 
-export default App;
+export default withCookies(App);

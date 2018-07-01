@@ -16,7 +16,6 @@ class Topics extends Component {
   renderTopics() {
     return (
       this.props.topics.map((data) => {
-        console.log(data)
         const subtopics = this.getSubtopics(data)
         return (
           <li className="dropdown">
