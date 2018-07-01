@@ -3,25 +3,18 @@ import React, { Component } from "react";
 class Login extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      email: "",
-      password: ""
-    };
-  }
-
-  validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
-  }
-
-  handleChange(event) {
-    this.setState({
-      [event.target.id]: event.target.value
-    });
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleSubmit(event) {
     event.preventDefault();
+    const email = event.target.email.value.trim();
+    const password = event.target.password.value.trim();
+    if(email.length > 0 && password.length > 0) {
+      this.props.socket.emit('login', email, password)
+    }
+    event.target.email.value = "";
+    event.target.password.value = "";
   }
 
   render() {
@@ -36,15 +29,15 @@ class Login extends Component {
                 
                 <div className="col-md-12">
                   <h4>Log In</h4>
-                  <form className="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
+                  <form onSubmit={this.handleSubmit} className="form" role="form" method="post" action="login" accept-charset="UTF-8" id="login-nav">
                       
                       <div className="form-group">
                         <label className="sr-only" for="inputEmailLogin">Email address</label>
-                        <input type="email" className="form-control" id="inputEmailLogin" placeholder="Email address" required />
+                        <input type="email" name="email" className="form-control" id="inputEmailLogin" placeholder="Email address" required />
                       </div>
                       <div className="form-group">
                         <label className="sr-only" for="inputPasswordLogin">Password</label>
-                        <input type="password" className="form-control" id="inputPasswordLogin" placeholder="Password" required />
+                        <input type="password" name="password" className="form-control" id="inputPasswordLogin" placeholder="Password" required />
                       </div>
                       <div className="form-group">
                         <button type="submit" className="btn btn-secondary btn-block">Sign in</button>

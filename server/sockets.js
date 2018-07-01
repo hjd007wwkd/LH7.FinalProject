@@ -1,10 +1,11 @@
 var socketIO = require('socket.io'),
     uuid = require('node-uuid'),
-    crypto = require('crypto');
+    crypto = require('crypto'),
+    toonavatar = require('cartoon-avatar');;
 
-clients = {};
-activeClients = {};
-onlineUsers = {
+var clients = {};
+var activeClients = {};
+var onlineUsers = {
   1: 10,
   2: 134,
   3: 304,
@@ -64,6 +65,34 @@ module.exports = function (server, config, knex) {
           )
         })
 
+        client.on('register', function(username, email, password) {
+            const avatar = toonavatar.generate_avatar();
+            console.log(avatar);
+            knex('users').select('email').where('email', email).then(function(row){
+                if(row.length > 0) {
+                    client.emit('fail', 'Email existed');
+                } else {
+                    knex('users').insert({username: username, email: email, password: password, avatar: avatar}).then(function(){
+                        client.emit('success', username, avatar);
+                    })
+                }
+            })
+        })
+
+        client.on('login', function(email, password) {
+            knex('users').select('email', 'username', 'password', 'avatar').where('email', email).then(function(row){
+                if(row.length > 0) {
+                    if(row[0].password.toString() === password.toString()) {
+                        client.emit('success', row[0].username, row[0].avatar);
+                    } else {
+                        client.emit('fail', 'Password Incorrect');
+                    }
+                } else {
+                    client.emit('fail', 'No email existed');
+                }
+            })
+        })
+
         client.on('addMsg', function (msg){
             knex('users').select('id').where('username', msg.username).then(function(row){
               knex('messages').insert({content: msg.message.content, user_id: row[0].id, room_id: msg.roomId}).then(function(){
@@ -73,12 +102,14 @@ module.exports = function (server, config, knex) {
             client.to(client.room).emit('message', {type: 'addMsg', message: msg})
         })
 
-        client.on('setUsername', function (data){
-            client.username = data
+        client.on('setUsername', function (username, avatar){
+            client.username = username
+            client.avatar = avatar
             if(!clients[client.room]){
-                clients[client.room] = []
+                clients[client.room] = {}
             }
-            clients[client.room].push(client.username);
+
+            clients[client.room][client.username] = {username: client.username, avatar: client.avatar};
             io.in(client.room).emit('message', {type: 'addPeerInfo', peers: clients[client.room]})
         })
 
@@ -154,17 +185,14 @@ module.exports = function (server, config, knex) {
             client.emit('message', {type: 'active', peers: activeClients[client.room]})
 
             knex('messages').join('users', 'messages.user_id', 'users.id').join('rooms', 'messages.room_id', 'rooms.id')
-            .select('messages.content', 'messages.created_at', 'users.username', 'rooms.name', 'rooms.id').where('rooms.id', name).then(function(rows) {
+            .select('messages.content', 'messages.created_at', 'users.username', 'users.avatar', 'rooms.name', 'rooms.id').where('rooms.id', name).then(function(rows) {
                 client.emit('message', {type: 'initMsg', payload: {messages: rows, room: {roomname: rows[0].name, roomId: rows[0].id}}});
             })
         }
 
         function siginalLost() {
             if(client.username && clients[client.room]) {
-                const index = clients[client.room].indexOf(client.username);
-                if (index > -1) {
-                  clients[client.room].splice(index, 1);
-                }
+                delete clients[client.room][client.username];
                 io.in(client.room).emit('message', {type: 'removePeerInfo', peers: clients[client.room]})
             }
         }
