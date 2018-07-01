@@ -2,7 +2,6 @@ import React from 'react';
 import Room from './room';
 
 const RoomList = ({ roomArray }) => {
-  console.log(roomArray)
   return (
     <div className="roomlist-container">
       <div className="roomlist">

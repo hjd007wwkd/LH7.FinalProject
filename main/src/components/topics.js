@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import SubTopics from './subtopics';
+import CreateRoom from './create-room';
+
 
 class Topics extends Component {
   
@@ -16,7 +18,6 @@ class Topics extends Component {
   renderTopics() {
     return (
       this.props.topics.map((data) => {
-        console.log(data)
         const subtopics = this.getSubtopics(data)
         return (
           <li className="dropdown">
@@ -54,6 +55,7 @@ class Topics extends Component {
               </button>
             </li>
           </ul>
+          <CreateRoom topics={this.props.topics} topicPool={this.props.topicPool}/>
         </div>
       </div>
     )
