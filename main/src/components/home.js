@@ -18,6 +18,7 @@ class Home extends Component {
       }
     }
     this.socket = io('https://ancient-forest-74575.herokuapp.com/');
+    this.clearCookie = this.clearCookie.bind(this);
   }
 
   componentDidMount() {
@@ -50,11 +51,19 @@ class Home extends Component {
     })
   }
 
+  clearCookie() {
+    this.props.cookies.remove('username')
+    this.props.cookies.remove('avatar')
+    this.setState(() => ({
+      user: { username: false, avatar: false }
+    }))
+  }
+
   render() {
     return (
       <div className="wrapper">
         <LeftPanel allRooms={this.state.allRooms}/>
-        <RightPanel socket={this.socket} topics={this.state.topics} allRooms={this.state.allRooms} username={this.state.user.username} />
+        <RightPanel socket={this.socket} topics={this.state.topics} allRooms={this.state.allRooms} user={this.state.user} clearCookie={this.clearCookie} />
       </div>
     );
   }

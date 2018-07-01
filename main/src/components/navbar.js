@@ -25,12 +25,13 @@ class NavBar extends Component {
           topicPool={this.props.topics} 
           changeTopic={this.props.changeTopic} 
           changeSubtopic={this.props.changeSubtopic}
-          username={this.props.username}
+          user={this.props.user}
         />
-        {this.props.username ?
-          <React.Fragment> 
-            <CreateRoom topics={this.getTopics()} topicPool={this.props.topics} socket={this.props.socket} username={this.props.username} /> 
-          </React.Fragment>:
+        {this.props.user.username ?
+          <React.Fragment>
+            <CreateRoom topics={this.getTopics()} topicPool={this.props.topics} socket={this.props.socket} username={this.props.user.username} />
+            <button onClick={this.props.clearCookie}>Log Out</button> 
+          </React.Fragment> :
           <React.Fragment>
             <Login socket={this.props.socket}/> 
             <Register socket={this.props.socket}/>
