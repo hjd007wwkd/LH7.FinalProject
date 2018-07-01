@@ -16,8 +16,9 @@ class CreateRoom extends Component {
     e.preventDefault()
     const subtopic = e.target.elements.subtopic.value.trim();
     const roomname = e.target.elements.roomname.value.trim();
+    const image = e.target.elements.image.value.trim();
     if(subtopic && roomname) {
-      this.socket.emit('createRoom', subtopic, roomname, this.props.username)
+      this.socket.emit('createRoom', subtopic, roomname, image, this.props.username)
     }
   }
 
@@ -72,6 +73,10 @@ class CreateRoom extends Component {
 
                   <h6>Subtopic:</h6>
                   {this.renderSubtopicsDropdown()}
+                  <br />
+
+                  <h6>Room Image:</h6>
+                  <input type="text" className="form-control" placeholder="Room Image URL" name="image" required />
                   <br />
 
                   <h6>Room Name:</h6>
