@@ -13,7 +13,11 @@ class Home extends Component {
       featureRooms: [],
       user: {
         username: props.cookies.get('username') || false,
+<<<<<<< HEAD
         avatar: props.cookies.get('avatar') || false
+=======
+        avatar: props.cookies.get('avatar') || false,
+>>>>>>> 373f962abefdb0ce6b16e442df24839b435bf7fb
       }
     }
     this.socket = io('https://ancient-forest-74575.herokuapp.com/');
@@ -42,6 +46,11 @@ class Home extends Component {
 
     this.socket.on('fail', (email) => {
       console.log('existing email: ', email)
+    })
+
+    this.socket.on('roomCreated', (roomID) => {
+      console.log(roomID)
+      this.props.history.push('/room/' + roomID[0].id);
     })
   }
 
