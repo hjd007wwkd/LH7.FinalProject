@@ -5,26 +5,6 @@ var socketIO = require('socket.io'),
 
 var clients = {};
 var activeClients = {};
-var onlineUsers = {
-  1: 10,
-  2: 134,
-  3: 304,
-  4: 3,
-  5: 10,
-  6: 134,
-  7: 304,
-  8: 3,
-  9: 10,
-  10: 134,
-  11: 304,
-  12: 3,
-  13: 10,
-  14: 134,
-  15: 304,
-  16: 3,
-  17: 304,
-  18: 3
-}
 
 module.exports = function (server, config, knex) {
     var io = socketIO.listen(server);
@@ -48,7 +28,7 @@ module.exports = function (server, config, knex) {
           {subtopic: 'subtopics.name'}, {username: 'users.username'}, {avatar: 'users.avatar'},
           {roomImage: 'rooms.image'}).then(function(rows){
             client.emit('getRooms', rows.map((item) => {
-              var online = onlineUsers[item.roomID] ? onlineUsers[item.roomID] : 0
+              var online = clients[item.roomID] ? Object.keys(clients[item.roomID]).length : 0
               return {
                 roomID: item.roomID,
                 roomName: item.roomName,
@@ -68,9 +48,9 @@ module.exports = function (server, config, knex) {
         client.on('register', function(username, email, password) {
             const avatar = toonavatar.generate_avatar();
             console.log(avatar);
-            knex('users').select('email').where('email', email).orWhere('usernmae', username).then(function(row){
+            knex('users').select('email').where('email', email).then(function(row){
                 if(row.length > 0) {
-                    client.emit('fail', 'Email or Username existed');
+                    client.emit('fail', 'Email existed');
                 } else {
                     knex('users').insert({username: username, email: email, password: password, avatar: avatar}).then(function(){
                         client.emit('success', username, avatar);
@@ -96,8 +76,8 @@ module.exports = function (server, config, knex) {
         client.on('createRoom', function(subtopic, roomname, image, username) {
             knex('users').select('id').where('username', username).then(function(user) {
                 knex('subtopics').select('id').where('name', subtopic).then(function(subtopic){
-                    knex('rooms').insert({ name: roomname, image: image, user_id: user[0].id, subtopic_id: subtopic[0].id }).then(function() {
-                        console.log('succeed insert')
+                    knex('rooms').insert({ name: roomname, image: image, user_id: user[0].id, subtopic_id: subtopic[0].id }).returning('*').then(function(data){
+                        client.emit('roomCreated', data);
                     })
                 })
             })
