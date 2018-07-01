@@ -13,6 +13,7 @@ class Home extends Component {
       featureRooms: [],
       user: {
         username: props.cookies.get('username') || false,
+
         avatar: props.cookies.get('avatar') || false
       }
     }
@@ -45,7 +46,6 @@ class Home extends Component {
     })
 
     this.socket.on('roomCreated', (roomID) => {
-      console.log(roomID)
       this.props.history.push('/room/' + roomID[0].id);
     })
   }

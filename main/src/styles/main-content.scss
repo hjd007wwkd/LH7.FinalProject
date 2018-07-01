@@ -75,15 +75,14 @@
 
 }
 
-.column2  {
-  margin: 0px;
-
-  p{
- text-overflow: ellipsis;
+.ellipsis{
+  text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+}
 
-  }
+.column2 p {
+  margin: 0px;
 }
 
 .message-message {
