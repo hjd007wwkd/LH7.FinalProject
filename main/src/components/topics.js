@@ -16,7 +16,6 @@ class Topics extends Component {
   renderTopics() {
     return (
       this.props.topics.map((data) => {
-        console.log(data)
         const subtopics = this.getSubtopics(data)
         return (
           <li className="dropdown">
@@ -53,6 +52,7 @@ class Topics extends Component {
                 Create New Room
               </button>
             </li>
+            
           </ul>
         </div>
       </div>

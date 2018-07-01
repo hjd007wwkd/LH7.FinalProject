@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Topics from './topics';
-import CreateRoom from './create-room';
 import Login from './login';
 import Register from './register';
+import CreateRoom from './create-room';
+
 
 class NavBar extends Component {
 
@@ -26,7 +27,7 @@ class NavBar extends Component {
           changeTopic={this.props.changeTopic} 
           changeSubtopic={this.props.changeSubtopic}
         />
-        <CreateRoom />
+        <CreateRoom topics={this.getTopics()} topicPool={this.props.topics}/>
         <Login />
         <Register />
 

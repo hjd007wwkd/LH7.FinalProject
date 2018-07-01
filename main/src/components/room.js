@@ -1,8 +1,6 @@
 import React from 'react';
 
 const Room = ({ data, inCarousel }) => {
-  console.log(data)
-  
   const roomLink = '/room/' + data.roomID
 
   return (
@@ -19,14 +17,12 @@ const Room = ({ data, inCarousel }) => {
         </div>
 
         <div className="column2">
-          <div>
+            <p>{data.roomName}</p>
             <p>{data.owner.username}</p>
-            <p>{data.usersOnline} users online</p>
-          </div>
         </div>
 
         <div className="column3">
-          <p>{data.roomName}</p>
+          <p>{data.usersOnline} users online</p>
         </div>
 
       </div>

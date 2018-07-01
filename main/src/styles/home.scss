@@ -52,12 +52,12 @@
 
   .carousel-video {
     margin: auto;
-    width: 450px;
-    height: 220px;
+    width: 400px;
+    height: 200px;
   }
 
   .room-container {
-    margin: auto;
+    margin: 4% auto;
     flex: 1;
   }
 }
@@ -91,11 +91,16 @@
 .roomlist {
   flex: 1;
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   overflow-y: scroll;
   margin: auto;
   height: 100%;
-  // justify-content: start;
+  justify-content: flex-start;
+
+  img {
+    border-radius: 2px;
+  }
 
   &::-webkit-scrollbar {
     width: 8px;
@@ -115,33 +120,41 @@
 
 .room-container{
   margin: 10px;
-
-
+  margin-bottom: 70px;
+  
+  
   .user-container {
     margin-top: 10px;
-
+    
     & > .column2 {
       flex: none;
+      margin: 0px;
+      color: white;
+      
+      p:first-child {
+        font-size: 20px;
+      }
+      
+      p:last-child {
+        font-size: 13px;
+      }
     }
-
+    
     & > .column3 {
       flex: 1;
       margin: 0px;
+      color: white;
       
       & > p {
         padding-left: 10px;
-        color: $text-color-light;
-        font-size: 25px;
+        font-size: 11px;
+        text-align: right;
       }
     }
   }
 }
 
-
-
-
 ///////////////////////
-
 .navbar {
   flex: 1;
   height: $home-nav-height;
