@@ -49,7 +49,7 @@ class Home extends Component {
     return (
       <div className="wrapper">
         <LeftPanel allRooms={this.state.allRooms}/>
-        <RightPanel socket={this.socket} topics={this.state.topics} allRooms={this.state.allRooms}/>
+        <RightPanel socket={this.socket} topics={this.state.topics} allRooms={this.state.allRooms} username={this.state.user.username} />
       </div>
     );
   }

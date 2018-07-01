@@ -12,25 +12,21 @@ class CreateRoom extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  validateForm() {
-    return this.state.email.length > 0 && this.state.password.length > 0;
-  }
-
   handleSubmit(e) {
     e.preventDefault()
-    console.log(e.target.elements.topic.value)
-    console.log(e.target.elements.subtopic.value)
-    console.log(e.target.elements.roomname.value)
+    const subtopic = e.target.elements.subtopic.value.trim();
+    const roomname = e.target.elements.roomname.value.trim();
+    if(subtopic && roomname) {
+      this.socket.emit('createRoom', subtopic, roomname, this.props.username)
+    }
   }
 
   renderTopicsDropdown() {
-    return (
-      this.props.topics.map((data) => {
-        return (
-          <option value={data}>{data}</option>
-        );
-      })
-    );
+    return this.props.topics.map((data) => {
+      return (
+        <option value={data}>{data}</option>
+      );
+    })
   }
 
   renderSubtopicsDropdown() {
@@ -73,9 +69,11 @@ class CreateRoom extends Component {
                     {this.renderTopicsDropdown()}
                   </select>
                   <br />
+
                   <h6>Subtopic:</h6>
                   {this.renderSubtopicsDropdown()}
                   <br />
+
                   <h6>Room Name:</h6>
                   <input type="text" className="form-control" placeholder="Channel Name" name="roomname" required />
 
