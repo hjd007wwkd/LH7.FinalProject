@@ -58,6 +58,7 @@ class CreateRoom extends Component {
       <div className="modal fade" id="myModal">
         <div className="modal-dialog">
           <div className="modal-content">
+            
             <div className="modal-header">
               <h4 className="modal-title">Create New Room</h4>
               <button type="button" className="close" data-dismiss="modal">&times;</button>
@@ -66,7 +67,6 @@ class CreateRoom extends Component {
             <form onSubmit={this.handleSubmit} className="form" role="form" accept-charset="UTF-8">
 
               <div className="modal-body">
-                <div className="dropdown">
 
                   <h6>Topic:</h6>
                   <select className="form-control form-control-sm" onChange={this.changeTopic} name="topic">
@@ -79,7 +79,6 @@ class CreateRoom extends Component {
                   <h6>Room Name:</h6>
                   <input type="text" className="form-control" placeholder="Channel Name" name="roomname" required />
 
-                </div>
               </div>
 
               <div className="modal-footer">

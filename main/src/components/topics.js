@@ -54,8 +54,8 @@ class Topics extends Component {
                 Create New Room
               </button>
             </li>
+            <CreateRoom topics={this.props.topics} topicPool={this.props.topicPool}/>
           </ul>
-          <CreateRoom topics={this.props.topics} topicPool={this.props.topicPool}/>
         </div>
       </div>
     )
