@@ -67,6 +67,8 @@
 }
 
 /////////////
+$video: 350px;
+
 .rightpanel {
   flex: 1;
   display: flex;
@@ -113,7 +115,7 @@
 
   .roomlist-video {
     margin: auto;
-    width: 350px;
+    width: $video;
     height: 190px;
   }
 }
@@ -122,9 +124,11 @@
   margin: 10px;
   margin-bottom: 70px;
   
-  
   .user-container {
     margin-top: 10px;
+    width: $video;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
     
     & > .column2 {
       flex: none;
