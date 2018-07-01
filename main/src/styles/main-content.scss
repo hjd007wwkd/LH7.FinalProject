@@ -35,7 +35,7 @@
   padding: 0px;
   overflow-y: auto;
 
-} 
+}
 
 .username {
   font-weight: bold;
@@ -72,6 +72,13 @@
   flex-direction: column;
   padding-left: 10px;
   color: $text-color-light;
+
+}
+
+.ellipsis{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .column2 p {
@@ -110,11 +117,11 @@
     width: 6px;
     background: transparent;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background: $grey2;
   }
-  
+
 }
 
 #message-typing-status {

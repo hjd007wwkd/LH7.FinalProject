@@ -17,7 +17,7 @@ const Room = ({ data, inCarousel }) => {
         </div>
 
         <div className="column2">
-            <p>{data.roomName}</p>
+            <p className="ellipsis">{data.roomName}</p>
             <p>{data.owner.username}</p>
         </div>
 

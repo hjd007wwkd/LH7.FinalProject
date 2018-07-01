@@ -4,7 +4,6 @@ import Login from './login';
 import Register from './register';
 import CreateRoom from './create-room';
 
-
 class NavBar extends Component {
 
   getTopics() {
@@ -26,11 +25,18 @@ class NavBar extends Component {
           topicPool={this.props.topics} 
           changeTopic={this.props.changeTopic} 
           changeSubtopic={this.props.changeSubtopic}
+          user={this.props.user}
         />
-        <CreateRoom topics={this.getTopics()} topicPool={this.props.topics} socket={this.props.socket} username={this.props.username} />
-        <Login socket={this.props.socket}/>
-        <Register socket={this.props.socket}/>
-
+        {this.props.user.username ?
+          <React.Fragment>
+            <CreateRoom topics={this.getTopics()} topicPool={this.props.topics} socket={this.props.socket} username={this.props.user.username} />
+            <button onClick={this.props.clearCookie}>Log Out</button> 
+          </React.Fragment> :
+          <React.Fragment>
+            <Login socket={this.props.socket}/> 
+            <Register socket={this.props.socket}/>
+          </React.Fragment>
+        }
       </div>
     );
   }
