@@ -9,9 +9,12 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: props.cookies.get('username'),
+      user: {
+        username: props.cookies.get('username'),
+        avatar: props.cookies.get('avatar')
+      },
       roomId: this.props.match.params.id,
-      peers: [],
+      peers: {},
       peersVideo: [],
       activePeersId: [],
       messages: [],
@@ -41,12 +44,12 @@ class App extends Component {
       });
       this.webrtc.on('connectionReady', () => {
         this.webrtc.joinRoom(this.state.roomId);
-        this.webrtc.connection.emit('setUsername', this.state.username);
+        this.webrtc.connection.emit('setUsername', this.state.user.username, this.state.user.avatar);
       });
       this.webrtc.on('readyToCall', () => {
         this.webrtc.leaveRoom(this.state.roomId);
         this.webrtc.joinRoom(this.state.roomId);
-        this.webrtc.connection.emit('setUsername', this.state.username);
+        this.webrtc.connection.emit('setUsername', this.state.user.username, this.state.user.avatar);
       });
       this.webrtc.on('videoAdded', this.addVideo);
       this.webrtc.on('videoRemoved', this.removeVideo);
@@ -56,29 +59,21 @@ class App extends Component {
           this.setState(() => (
             data.payload
           ))
-          console.log(this.state.activePeersId)
         } else if (data.type === 'addMsg') {
           this.setState((prevState) => ({
             messages: [...prevState.messages, data.message.message]
           }))
         } else if (data.type === 'addPeerInfo') {
-          const index = data.peers.indexOf(this.state.username);
-          if (index > -1) {
-            data.peers.splice(index, 1);
-          }
+          delete data.peers[this.state.user.username];
           this.setState(() => (
             {peers: data.peers}
           ))
         } else if (data.type === 'removePeerInfo') {
-          const index = data.peers.indexOf(this.state.username);
-          if (index > -1) {
-            data.peers.splice(index, 1);
-          }
+          delete data.peers[this.state.user.username];
           this.setState(() => (
             {peers: data.peers}
           ))
         } else if (data.type === 'active') {
-          console.log(data);
           const index = data.peers.indexOf(this.webrtc.connection.connection.id);
           if (index > -1) {
             data.peers.splice(index, 1);
@@ -146,11 +141,11 @@ class App extends Component {
   handleMessageAdd(message) {
     var date = new Date();
     var timestamp = date.getTime();
-    const addMessage = {username: this.state.username, content: message, created_at: timestamp}
+    const addMessage = {username: this.state.user.username, avatar: this.state.user.avatar, content: message, created_at: timestamp}
     this.setState((prevState) => ({
       messages: [...prevState.messages, addMessage]
     }))
-    this.webrtc.connection.emit('addMsg', {message: addMessage, roomId: this.state.roomId, username: this.state.username});
+    this.webrtc.connection.emit('addMsg', {message: addMessage, roomId: this.state.roomId, username: this.state.user.username});
   }
  
   disconnect(){
@@ -169,7 +164,7 @@ class App extends Component {
     const styleActive = this.state.activePeersId.length === 2 ? {display: 'none'} : {};
     return  this.props.cookies.get('username') ? (
       <div className="wrapper">
-        <SideBar userList={this.state.peers} username={this.state.username}/>
+        <SideBar userList={this.state.peers} user={this.state.user}/>
         <Main handleMessageAdd = {this.handleMessageAdd} messages = {this.state.messages}/>
         <div id="video-panel">
           <header>

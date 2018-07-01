@@ -1,33 +1,38 @@
 import React from 'react';
 
-const renderUsernames = (userList) => {
-  return userList.length === 0 ? true : 
-  userList.map((user) => {
-    return (
-      <li className="nav-li">
-        <a className="nav-link">
-          <div className="user-container">
-            
-            <div className="column1">
-              <img className="miniavatar" src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/68.png" alt="userrow" />
-            </div>
-
-            <div className="column2">
-              <div>
-                <p>{user}</p>
-                <p><div className="status-light"></div>Online</p>
-              </div>
-            </div>
-              
-            <div className="column3">
-              <i class="fas fa-ellipsis-v"></i>
-            </div>
-
+const renderUser = (user) => {
+  return (
+    <li className="nav-li">
+      <a className="nav-link">
+        <div className="user-container">
+          
+          <div className="column1">
+            <img className="miniavatar" src={user.avatar} alt="userrow" />
           </div>
-        </a>
-      </li>
-    );
-  })
+
+          <div className="column2">
+            <div>
+              <p>{user.username}</p>
+              <p><div className="status-light"></div>Online</p>
+            </div>
+          </div>
+            
+          <div className="column3">
+            <i class="fas fa-ellipsis-v"></i>
+          </div>
+
+        </div>
+      </a>
+    </li>
+  )
+}
+
+const renderUsernames = (userList) => {
+  const users = [];
+  for (var username in userList) {
+    users.push(renderUser(userList[username]))
+  }
+  return users
 }
 
 const SideBar = (props) => {
@@ -49,12 +54,12 @@ const SideBar = (props) => {
 
       <div className="sidebar-userinfo">
         <div className="column1">
-          <img className="miniavatar" src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/male/45.png" alt="userrow" />
+          <img className="miniavatar" src={props.user.avatar} alt="userrow" />
         </div>
 
         <div className="column2">
           <div>
-            <p>{props.username}</p>
+            <p>{props.user.username}</p>
             <p><div className="status-light"></div>Online</p>
           </div>
         </div>

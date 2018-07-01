@@ -8,7 +8,7 @@ class MessageList extends Component {
       return (
         <div className="message-container">
           <div className="column1"> 
-            <img className="miniavatar" src="https://raw.githubusercontent.com/Ashwinvalento/cartoon-avatar/master/lib/images/female/5.png" alt="user" />
+            <img className="miniavatar" src={message.avatar} alt="user" />
           </div>
   
           <div className="column2">

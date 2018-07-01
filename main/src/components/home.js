@@ -11,7 +11,10 @@ class Home extends Component {
       allRooms: [],
       topics: [],
       featureRooms: [],
-      username: false
+      user: {
+        username: false,
+        avatar: false
+      }
     }
     this.socket = io('https://ancient-forest-74575.herokuapp.com/');
   }
@@ -29,10 +32,11 @@ class Home extends Component {
       }))
     })
 
-    this.socket.on('success', (username) => {
+    this.socket.on('success', (username, avatar) => {
       this.props.cookies.set('username', username, { path: '/' });
+      this.props.cookies.set('avatar', avatar, { path: '/' });
       this.setState(() => ({
-        username
+        user: {username, avatar}
       }))
     })
 
