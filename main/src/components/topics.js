@@ -53,8 +53,6 @@ class Topics extends Component {
                   Create New Room
                 </button>
                 </li> : false}
-            
-            
           </ul>
         </div>
       </div>
