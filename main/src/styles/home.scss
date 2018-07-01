@@ -52,8 +52,8 @@
 
   .carousel-video {
     margin: auto;
-    width: 400px;
-    height: 200px;
+    width: 350px;
+    height: 197px;
   }
 
   .room-container {
@@ -67,7 +67,8 @@
 }
 
 /////////////
-$video: 350px;
+$video-w: 250px;
+$video-h: 140px;
 
 .rightpanel {
   flex: 1;
@@ -115,8 +116,8 @@ $video: 350px;
 
   .roomlist-video {
     margin: auto;
-    width: $video;
-    height: 190px;
+    width: $video-w;
+    height: $video-h;
   }
 }
 
@@ -126,7 +127,7 @@ $video: 350px;
   
   .user-container {
     margin-top: 10px;
-    width: $video;
+    width: $video-w;
     overflow-x: hidden;
     text-overflow: ellipsis;
     
