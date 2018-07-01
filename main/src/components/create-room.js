@@ -18,7 +18,8 @@ class CreateRoom extends Component {
     const roomname = e.target.elements.roomname.value.trim();
     const image = e.target.elements.image.value.trim();
     if(subtopic && roomname) {
-      this.socket.emit('createRoom', subtopic, roomname, image, this.props.username)
+      console.log(this.props.username)
+      this.props.socket.emit('createRoom', subtopic, roomname, image, this.props.username)
     }
   }
 
