@@ -19,6 +19,7 @@ class CreateRoom extends Component {
     const image = e.target.elements.image.value.trim();
     if(subtopic && roomname) {
       this.props.socket.emit('createRoom', subtopic, roomname, image, this.props.username)
+      document.getElementsByClassName("modal-backdrop")[0].style.visibility = "hidden";
     }
   }
 

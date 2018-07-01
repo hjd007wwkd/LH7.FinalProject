@@ -45,7 +45,6 @@ class Home extends Component {
     })
 
     this.socket.on('roomCreated', (roomID) => {
-      console.log(roomID)
       this.props.history.push('/room/' + roomID[0].id);
     })
   }
