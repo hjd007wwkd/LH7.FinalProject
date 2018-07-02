@@ -1,4 +1,5 @@
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 const PORT = process.env.PORT || 3001;
 const IP = process.env.IP || '0.0.0.0';
 
@@ -25,5 +26,8 @@ module.exports = {
           ]
         }]
     },
+    plugins: [
+        new Dotenv()
+    ],
     devtool: 'eval'
 };

@@ -20,3 +20,4 @@ new WebpackDevServer(webpack(config), {
     };
     console.log(`Running at http://${IP}:${PORT}`);
 });
+
