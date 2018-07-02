@@ -14,6 +14,7 @@ class App extends Component {
         avatar: props.cookies.get('avatar')
       },
       roomId: this.props.match.params.id,
+      article: false,
       peers: {},
       peersVideo: [],
       activePeersId: [],
@@ -56,12 +57,16 @@ class App extends Component {
 
       this.webrtc.connection.on('message', (data) => {
         if (data.type === 'initMsg') {
-          this.setState(() => (
-            data.payload
-          ))
+          this.setState(() => ({
+            messages: data.messages
+          }))
         } else if (data.type === 'addMsg') {
           this.setState((prevState) => ({
             messages: [...prevState.messages, data.message.message]
+          }))
+        } else if (data.type === 'addArticle'){
+          this.setState(() => ({
+            article: data.article
           }))
         } else if (data.type === 'addPeerInfo') {
           delete data.peers[this.state.user.username];
