@@ -13,7 +13,7 @@ const SearchResults = (props) => {
 
   return (
     <div className="results-container">
-      {renderRoomCards(props.allRooms)}
+      {renderRoomCards(props.roomArray)}
     </div>
   );
 };

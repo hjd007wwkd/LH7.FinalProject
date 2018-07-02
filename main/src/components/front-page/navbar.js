@@ -18,7 +18,6 @@ import {
 export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       loginOpen: false,
       registerOpen: false
@@ -26,12 +25,14 @@ export default class NavBar extends React.Component {
     this.toggleLogin = this.toggleLogin.bind(this);
     this.toggleRegister = this.toggleRegister.bind(this);
   }
+
   toggleLogin(e) {
     e.preventDefault();
     this.setState({
       loginOpen: !this.state.loginOpen
     });
   }
+
   toggleRegister(e) {
     e.preventDefault();
     this.setState({
@@ -45,7 +46,7 @@ export default class NavBar extends React.Component {
         <Navbar color="light" light expand="md">
 
           <NavbarBrand href="/">REDDIT NEWS</NavbarBrand>
-          <Input placeholder="username" style={{width: '300px' }}/>
+          <Input placeholder="Search..." name="searchbar" style={{width: '600px' }} onChange={this.props.handleSearch} />
 
           <Nav className="ml-auto" navbar>
             {!this.props.user.username ?

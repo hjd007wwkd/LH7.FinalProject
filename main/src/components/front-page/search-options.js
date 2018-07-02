@@ -9,7 +9,7 @@ class SearchOptions extends React.Component {
     return (
       <div className="search-option-container">
         <div className="search-message">
-          Around {this.props.results} results
+          Found {this.props.results} results
         </div>
         <div className="spacer"></div>
         <Input type="select" name="select" id="sorting" onChange={(e) => {console.log(e.target.value)}}>

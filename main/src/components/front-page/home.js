@@ -9,7 +9,7 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
+      searchQuery: '',
       allRooms: [],
       user: {
         username: props.cookies.get('username') || false,
@@ -22,9 +22,9 @@ class Home extends React.Component {
   }
   
   searchDatabase(e) {
-    this.setState(() => ({
-      query: e.target.searchbar.value.trim()
-    }))
+    this.setState({
+      searchQuery: e.target.value.trim()
+    })
   }
 
   clearCookie() {
@@ -63,8 +63,18 @@ class Home extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar user={this.state.user} clearCookie={this.clearCookie} socket={this.socket} />
-        <Main socket={this.socket} user={this.state.user} allRooms={this.state.allRooms} />
+        <NavBar 
+          socket={this.socket}
+          user={this.state.user}
+          handleSearch={this.searchDatabase}
+          clearCookie={this.clearCookie} 
+          />
+        <Main 
+          socket={this.socket} 
+          user={this.state.user} 
+          allRooms={this.state.allRooms}
+          searchQuery={this.state.searchQuery} 
+          />
       </React.Fragment>
     );
   }

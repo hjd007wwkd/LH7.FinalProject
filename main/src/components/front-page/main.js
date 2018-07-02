@@ -8,7 +8,8 @@ class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false
+      isOpen: false,
+      results: 0
     }
 
     this.createRoom = this.createRoom.bind(this);
@@ -19,6 +20,30 @@ class Main extends React.Component {
     this.setState(() => ({
       isOpen: !this.state.isOpen
     }))
+  }
+
+  filterRooms(query) {
+    const allRooms = this.props.allRooms;
+    let filtered = [];
+    
+    if(query.startsWith('http')) {
+      filtered = allRooms.filter((room) => {
+        return room.url.includes(query);
+      })
+      return filtered;
+    } else {
+      const lowQuery = query.toLowerCase()
+      const roomArray = allRooms.filter((room) => {
+        return (
+          room.title.toLowerCase().includes(lowQuery) ||
+          room.site.toLowerCase().includes(lowQuery) ||
+          room.tags.filter((tag) => { 
+            return tag.toLowerCase().includes(lowQuery)
+          }).length
+        )
+      })
+      return roomArray || [];
+    }
   }
 
   createRoom(e) {
@@ -49,16 +74,18 @@ class Main extends React.Component {
       console.log("this is not a valid url");
     });
 
-    this.setState({
-      isOpen: !this.state.isOpen
-    })
+    this.toggle()
   }
 
   render() {
+    const query = this.props.searchQuery;
+    let roomArray;
+    query ? roomArray = this.filterRooms(query) : roomArray = this.props.allRooms;
+
     return (
       <div>
-        <SearchOptions results="6"/>
-        <SearchResults allRooms={this.props.allRooms} />
+        <SearchOptions results={roomArray.length} />
+        <SearchResults roomArray={roomArray} />
         <Button color="primary" onClick={this.toggle}>Create Room</Button>
         <CreateRoomModal 
           toggle={this.toggle} 
