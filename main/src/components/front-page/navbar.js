@@ -1,4 +1,7 @@
 import React from 'react';
+import Login from './login';
+import Register from './register';
+
 import {
   Input,
   InputGroup,
@@ -16,16 +19,26 @@ export default class NavBar extends React.Component {
   constructor(props) {
     super(props);
 
-    this.toggle = this.toggle.bind(this);
     this.state = {
-      isOpen: false
+      loginOpen: false,
+      registerOpen: false
     };
+    this.toggleLogin = this.toggleLogin.bind(this);
+    this.toggleRegister = this.toggleRegister.bind(this);
   }
-  toggle() {
+  toggleLogin(e) {
+    e.preventDefault();
     this.setState({
-      isOpen: !this.state.isOpen
+      loginOpen: !this.state.loginOpen
     });
   }
+  toggleRegister(e) {
+    e.preventDefault();
+    this.setState({
+      registerOpen: !this.state.registerOpen
+    });
+  }
+
   render() {
     return (
       <div>
@@ -37,11 +50,11 @@ export default class NavBar extends React.Component {
           <Nav className="ml-auto" navbar>
 
             <NavItem>
-              <NavLink href="/">Components</NavLink>
+              <NavLink onClick={this.toggleLogin} >Login</NavLink>
             </NavItem>
 
             <NavItem>
-              <NavLink href="/">GitHub</NavLink>
+              <NavLink onClick={this.toggleRegister} >Register</NavLink>
             </NavItem>
 
             <UncontrolledDropdown nav inNavbar>
@@ -67,6 +80,8 @@ export default class NavBar extends React.Component {
           </Nav>
 
         </Navbar>
+        <Login isOpen={this.state.loginOpen} toggle={this.toggleLogin} />
+        <Register isOpen={this.state.registerOpen} toggle={this.toggleRegister} />
       </div>
     );
   }

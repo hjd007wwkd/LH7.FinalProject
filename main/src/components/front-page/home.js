@@ -1,7 +1,7 @@
 import React from 'react';
 import io from 'socket.io-client';
 import NavBar from './navbar';
-import SearchResults from './search-results';
+import Main from './main';
 import { withCookies } from 'react-cookie';
 
 
@@ -19,7 +19,7 @@ class Home extends React.Component {
     this.searchDatabase = this.searchDatabase.bind(this);
     this.clearCookie = this.clearCookie.bind(this);
   }
- 
+  
   searchDatabase(e) {
     this.setState(() => ({
       query: e.target.searchbar.value.trim()
@@ -67,8 +67,8 @@ class Home extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <NavBar />
-        <SearchResults />
+        <NavBar socket={this.socket} />
+        <Main />
       </React.Fragment>
     );
   }

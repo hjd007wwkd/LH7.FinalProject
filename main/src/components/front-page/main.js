@@ -1,22 +1,24 @@
 import React from 'react';
 import CreateRoomModal from './create-room';
+import SearchResults from './search-results2';
+import SearchOptions from './search-options';
 import { Button } from 'reactstrap';
 
-class SearchResults extends React.Component {
+class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal: false
-    };
+      isOpen: false
+    }
 
-    this.toggle = this.toggle.bind(this);
     this.createRoom = this.createRoom.bind(this);
+    this.toggle = this.toggle.bind(this);
   }
 
   toggle() {
-    this.setState({
-      modal: !this.state.modal
-    });
+    this.setState(() => ({
+      isOpen: !this.state.isOpen
+    }))
   }
 
   createRoom(e) {
@@ -35,15 +37,17 @@ class SearchResults extends React.Component {
   render() {
     return (
       <div>
+        <SearchOptions results="6"/>
+        <SearchResults />
         <Button color="primary" onClick={this.toggle}>Create Room</Button>
         <CreateRoomModal 
           toggle={this.toggle} 
-          createRoom={this.createRoom} 
-          isOpen={this.state.modal} 
+          createRoom={this.createRoom}
+          isOpen={this.state.isOpen} 
           />
       </div>
     );
   }
 }
 
-export default SearchResults;
+export default Main;
