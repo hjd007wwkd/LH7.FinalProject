@@ -37,6 +37,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     this.socket.on('getRooms', (data) => {
+      console.log(data)
       this.setState(() => ({
         allRooms: data
       }))
@@ -68,7 +69,7 @@ class Home extends React.Component {
     return (
       <React.Fragment>
         <NavBar socket={this.socket} />
-        <Main socket={this.socket} user={this.state.user}/>
+        <Main socket={this.socket} user={this.state.user} allRooms={this.state.allRooms} />
       </React.Fragment>
     );
   }

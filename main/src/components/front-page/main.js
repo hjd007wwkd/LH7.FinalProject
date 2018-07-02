@@ -50,7 +50,7 @@ class Main extends React.Component {
     });
 
     this.setState({
-      modal: !this.state.modal
+      isOpen: !this.state.isOpen
     })
   }
 
@@ -58,7 +58,7 @@ class Main extends React.Component {
     return (
       <div>
         <SearchOptions results="6"/>
-        <SearchResults />
+        <SearchResults allRooms={this.props.allRooms} />
         <Button color="primary" onClick={this.toggle}>Create Room</Button>
         <CreateRoomModal 
           toggle={this.toggle} 

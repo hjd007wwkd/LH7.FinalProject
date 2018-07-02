@@ -5,16 +5,15 @@ import { Card, CardImg, CardText, CardBody,
 
 const SearchResults = (props) => {
 
-  function renderRoomCards() {
-    const n = new Array(20);
-    return n.fill(0, 0, n.length).map(() => {
-      return (<RoomCard />)
+  function renderRoomCards(roomArray) {
+    return roomArray.map((data) => {
+      return (<RoomCard data={data} />)
     })
   }
 
   return (
     <div className="results-container">
-      {renderRoomCards()}
+      {renderRoomCards(props.allRooms)}
     </div>
   );
 };
