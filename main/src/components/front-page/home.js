@@ -43,7 +43,6 @@ class Home extends React.Component {
       }))
     })
 
-
     this.socket.on('success', (username, avatar) => {
       this.props.cookies.set('username', username, { path: '/' });
       this.props.cookies.set('avatar', avatar, { path: '/' });

@@ -45,7 +45,7 @@ export default class NavBar extends React.Component {
       <div>
         <Navbar color="light" light expand="md">
 
-          <NavbarBrand href="/">REDDIT NEWS</NavbarBrand>
+          <NavbarBrand href="/">NEWSWATCH</NavbarBrand>
           <Input placeholder="Search..." name="searchbar" style={{width: '600px' }} onChange={this.props.handleSearch} />
 
           <Nav className="ml-auto" navbar>

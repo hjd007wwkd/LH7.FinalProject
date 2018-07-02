@@ -7,15 +7,16 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const email = event.target.email.value.trim();
-    const password = event.target.password.value.trim();
+  handleSubmit(e) {
+    e.preventDefault();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
     if(email.length > 0 && password.length > 0) {
       this.props.socket.emit('login', email, password)
+      this.props.toggle(e);
     }
-    event.target.email.value = "";
-    event.target.password.value = "";
+    e.target.email.value = "";
+    e.target.password.value = "";
   }
 
   render() {

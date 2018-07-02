@@ -2,23 +2,23 @@ import React from 'react';
 import RoomCard from './room-card';
 import Pagination from './pagination';
 
-const SearchResults = (props) => {
-
-  function renderRoomCards(roomArray) {
-    return roomArray.map((data) => {
-      return (<RoomCard data={data} />)
+class SearchResults extends React.Component {
+  renderRoomCards(roomArray) {
+    return roomArray.map((data, index) => {
+      return <RoomCard key={index} data={data} />;
     })
   }
 
-  return (
-    <React.Fragment>
-      <div className="results-container">
-        {renderRoomCards(props.roomArray)}
-      </div>
-      <Pagination />
-    </React.Fragment>
-    
-  );
+  render() {
+    return (
+      <React.Fragment>
+        <div className="results-container">
+          {this.renderRoomCards(this.props.roomArray)}
+        </div>
+        <Pagination pages={this.props.pages} handleClick={this.props.handleClick} />
+      </React.Fragment>
+    );
+  }
 };
 
 export default SearchResults;

@@ -21,6 +21,10 @@ $relativewidth: 80rem;
 }
 
 
+#main {
+  background: rgba(63, 63, 63, 0.233) url('https://st.depositphotos.com/1032463/1373/i/950/depositphotos_13732950-stock-photo-background-of-old-vintage-newspapers.jpg');
+}
+
 // Results
 .results-container {
   display: flex;
@@ -28,6 +32,7 @@ $relativewidth: 80rem;
   margin-left: $leftmargin;
   width: $relativewidth;
   justify-content: space-between;
+  opacity: 1;
 
   a, a:active, a:hover, a:focus, a:visited {
     color: black;
@@ -39,8 +44,9 @@ $relativewidth: 80rem;
   flex-direction: row;
   width: 600px;
   height: 200px;
-  margin: 10px 10px 10px 0px;
+  margin: 10px 0px 10px 0px;
   border-radius: 0px;
+  border: 0px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -56,4 +62,15 @@ $relativewidth: 80rem;
   padding: 0.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.pagination-container {
+  margin-top: 20px;
+  margin-left: $leftmargin;
+  width: $relativewidth;
+  display: flex;
+
+  .pagination {
+    margin: auto;
+  }
 }

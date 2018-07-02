@@ -7,17 +7,18 @@ class Register extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const username = event.target.username.value.trim();
-    const email = event.target.email.value.trim();
-    const password = event.target.password.value.trim();
+  handleSubmit(e) {
+    e.preventDefault();
+    const username = e.target.username.value.trim();
+    const email = e.target.email.value.trim();
+    const password = e.target.password.value.trim();
     if(username.length > 0 && email.length > 0 && password.length > 0) {
       this.props.socket.emit('register', username, email, password)
+      this.props.toggle(e);
     }
-    event.target.username.value = "";
-    event.target.email.value = "";
-    event.target.password.value = "";
+    e.target.username.value = "";
+    e.target.email.value = "";
+    e.target.password.value = "";
   }
 
   render() {

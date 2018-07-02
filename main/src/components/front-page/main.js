@@ -9,11 +9,14 @@ class Main extends React.Component {
     super(props);
     this.state = {
       isOpen: false,
-      results: 0
+      currentPage: 1,
+      roomsPerPage: 10
     }
 
     this.createRoom = this.createRoom.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
   }
 
   toggle() {
@@ -21,6 +24,15 @@ class Main extends React.Component {
       isOpen: !this.state.isOpen
     }))
   }
+
+  handleClick(e) {
+    this.setState({
+      currentPage: Number(e.target.id)
+    });
+  }
+
+
+
 
   filterRooms(query) {
     const allRooms = this.props.allRooms;
@@ -67,6 +79,7 @@ class Main extends React.Component {
       const contenthtml = data.objects[0].html
       const contenttext = data.objects[0].text
       const username = 'Bob3452'
+      if(date )
       if(title && image && url && site && date && tags && contenthtml && contenttext && username) {
         this.props.socket.emit('createRoom', title, image, url, site, date, tags, contenthtml, contenttext, username)
         this.props.socket.on('roomCreated', (roomID) => {
@@ -87,16 +100,17 @@ class Main extends React.Component {
     let roomArray;
     query ? roomArray = this.filterRooms(query) : roomArray = this.props.allRooms;
 
+    const last = this.state.currentPage * this.state.roomsPerPage;
+    const first = last - this.state.roomsPerPage;
+    const roomsToRender = roomArray.slice(first, last);
+    const pages = Math.ceil(roomArray.length / this.state.roomsPerPage);
+
     return (
-      <div>
-        <SearchOptions results={roomArray.length} />
-        <SearchResults roomArray={roomArray} />
-        <Button color="primary" onClick={this.toggle}>Create Room</Button>
-        <CreateRoomModal 
-          toggle={this.toggle} 
-          createRoom={this.createRoom}
-          isOpen={this.state.isOpen} 
-          />
+      <div id="main">
+        <SearchOptions results={roomArray.length} data={{first: first+1, last: first+roomsToRender.length}} />
+        <SearchResults roomArray={roomsToRender} pages={pages} handleClick={this.handleClick} />
+        {(roomArray.length === 0 && this.props.user.username) ? <Button color="secondary" onClick={this.toggle}>Create Room</Button> : void 0 }
+        <CreateRoomModal toggle={this.toggle} createRoom={this.createRoom} isOpen={this.state.isOpen} />
       </div>
     );
   }
