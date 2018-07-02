@@ -10,6 +10,7 @@ class Home extends React.Component {
     super(props);
     this.state = {
       query: '',
+      allRooms: [],
       user: {
         username: props.cookies.get('username') || false,
         avatar: props.cookies.get('avatar') || false
@@ -35,15 +36,18 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+    this.socket.on('getRooms', (data) => {
+      this.setState(() => ({
+        allRooms: data
+      }))
+    })
+
+    this.socket.on('roomCreated', (roomID) => {
+      this.props.history.push('/room/' + roomID[0].id);
+    })
     // this.socket.on('getNav', (data) => {
     //   this.setState(() => ({
     //     topics: data
-    //   }))
-    // })
-
-    // this.socket.on('getRooms', (data) => {
-    //   this.setState(() => ({
-    //     allRooms: data
     //   }))
     // })
 
@@ -58,17 +62,13 @@ class Home extends React.Component {
     // this.socket.on('fail', (email) => {
     //   console.log('existing email: ', email)
     // })
-
-    // this.socket.on('roomCreated', (roomID) => {
-    //   this.props.history.push('/room/' + roomID[0].id);
-    // })
   }
 
   render() {
     return (
       <React.Fragment>
         <NavBar socket={this.socket} />
-        <Main />
+        <Main socket={this.socket} user={this.state.user}/>
       </React.Fragment>
     );
   }
