@@ -46,29 +46,24 @@ class Home extends React.Component {
     this.socket.on('roomCreated', (roomID) => {
       this.props.history.push('/room/' + roomID[0].id);
     })
-    // this.socket.on('getNav', (data) => {
-    //   this.setState(() => ({
-    //     topics: data
-    //   }))
-    // })
 
-    // this.socket.on('success', (username, avatar) => {
-    //   this.props.cookies.set('username', username, { path: '/' });
-    //   this.props.cookies.set('avatar', avatar, { path: '/' });
-    //   this.setState(() => ({
-    //     user: {username, avatar}
-    //   }))
-    // })
+    this.socket.on('success', (username, avatar) => {
+      this.props.cookies.set('username', username, { path: '/' });
+      this.props.cookies.set('avatar', avatar, { path: '/' });
+      this.setState(() => ({
+        user: {username, avatar}
+      }))
+    })
 
-    // this.socket.on('fail', (email) => {
-    //   console.log('existing email: ', email)
-    // })
+    this.socket.on('fail', (email) => {
+      console.log('existing email: ', email)
+    })
   }
 
   render() {
     return (
       <React.Fragment>
-        <NavBar socket={this.socket} />
+        <NavBar user={this.state.user} clearCookie={this.clearCookie} socket={this.socket} />
         <Main socket={this.socket} user={this.state.user} allRooms={this.state.allRooms} />
       </React.Fragment>
     );
