@@ -7,7 +7,7 @@ class CreateRoomModal extends React.Component {
     return (
       <div>
         <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={this.props.className}>
-          <ModalHeader toggle={this.toggle}>Modal title</ModalHeader>
+          <ModalHeader>Modal title</ModalHeader>
           
           <Form onSubmit={this.props.createRoom} >
             <ModalBody>
