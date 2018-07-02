@@ -24,10 +24,10 @@ class Login extends React.Component {
         <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={this.props.className}>
           <ModalHeader>Modal title</ModalHeader>
           
-          <Form onSubmit={this.props.login} >
+          <Form onSubmit={this.handleSubmit} >
             <ModalBody>
-                <Label for="username">Username:</Label>
-                <Input type="text" name="username" placeholder="Username" />
+                <Label for="email">Username:</Label>
+                <Input type="text" name="email" placeholder="Email" />
                 <Label for="password">Password:</Label>
                 <Input type="text" name="password" placeholder="Password" />
             </ModalBody>

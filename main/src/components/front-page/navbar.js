@@ -48,14 +48,25 @@ export default class NavBar extends React.Component {
           <Input placeholder="username" style={{width: '300px' }}/>
 
           <Nav className="ml-auto" navbar>
+            {!this.props.user.username ?
+              <React.Fragment>
+                <NavItem>
+                  <NavLink onClick={this.toggleLogin} >Login</NavLink>
+                </NavItem>
 
-            <NavItem>
-              <NavLink onClick={this.toggleLogin} >Login</NavLink>
-            </NavItem>
-
-            <NavItem>
-              <NavLink onClick={this.toggleRegister} >Register</NavLink>
-            </NavItem>
+                <NavItem>
+                  <NavLink onClick={this.toggleRegister} >Register</NavLink>
+                </NavItem>
+              </React.Fragment> :
+              <React.Fragment>
+                <NavItem>
+                  <NavLink><img className='user_avatar' src={this.props.user.avatar}/>{this.props.user.username}</NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink onClick={this.props.clearCookie} >Logout</NavLink>
+                </NavItem>
+              </React.Fragment>
+            }
 
             <UncontrolledDropdown nav inNavbar>
 
@@ -80,8 +91,8 @@ export default class NavBar extends React.Component {
           </Nav>
 
         </Navbar>
-        <Login isOpen={this.state.loginOpen} toggle={this.toggleLogin} />
-        <Register isOpen={this.state.registerOpen} toggle={this.toggleRegister} />
+        <Login socket={this.props.socket} isOpen={this.state.loginOpen} toggle={this.toggleLogin} />
+        <Register socket={this.props.socket} isOpen={this.state.registerOpen} toggle={this.toggleRegister} />
       </div>
     );
   }
