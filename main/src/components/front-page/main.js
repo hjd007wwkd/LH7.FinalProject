@@ -63,18 +63,23 @@ class Main extends React.Component {
       const date = data.objects[0].date
       const tags = data.objects[0].tags.map((item) => (
         item.label
-      ))
+      )) || [];
       const contenthtml = data.objects[0].html
       const contenttext = data.objects[0].text
       const username = 'Bob3452'
-      title && image && url && site && date && tags && contenthtml && contenttext && username ? 
-      this.props.socket.emit('createRoom', title, image, url, site, date, tags, contenthtml, contenttext, username) :
-      console.log('invalid information')
-    }).catch(function() {
-      console.log("this is not a valid url");
+      if(title && image && url && site && date && tags && contenthtml && contenttext && username) {
+        this.props.socket.emit('createRoom', title, image, url, site, date, tags, contenthtml, contenttext, username)
+        this.props.socket.on('roomCreated', (roomID) => {
+          this.props.history.push('/room/' + roomID[0].id);
+          this.toggle()
+        })
+      } else {
+        console.log('invalid information')
+      }
+    }).catch(function(err) {
+      console.log("fetch error:");
+      console.log(err);
     });
-
-    this.toggle()
   }
 
   render() {

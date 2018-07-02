@@ -1,7 +1,6 @@
 import React from 'react';
 import RoomCard from './room-card';
-import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle } from 'reactstrap';
+import Pagination from './pagination';
 
 const SearchResults = (props) => {
 
@@ -12,9 +11,13 @@ const SearchResults = (props) => {
   }
 
   return (
-    <div className="results-container">
-      {renderRoomCards(props.roomArray)}
-    </div>
+    <React.Fragment>
+      <div className="results-container">
+        {renderRoomCards(props.roomArray)}
+      </div>
+      <Pagination />
+    </React.Fragment>
+    
   );
 };
 

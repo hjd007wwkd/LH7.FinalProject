@@ -43,9 +43,6 @@ class Home extends React.Component {
       }))
     })
 
-    this.socket.on('roomCreated', (roomID) => {
-      this.props.history.push('/room/' + roomID[0].id);
-    })
 
     this.socket.on('success', (username, avatar) => {
       this.props.cookies.set('username', username, { path: '/' });
@@ -74,6 +71,7 @@ class Home extends React.Component {
           user={this.state.user} 
           allRooms={this.state.allRooms}
           searchQuery={this.state.searchQuery} 
+          history={this.props.history}
           />
       </React.Fragment>
     );

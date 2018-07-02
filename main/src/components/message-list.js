@@ -30,7 +30,6 @@ class MessageList extends Component {
   
   componentDidUpdate() {
     const elem = document.getElementById('autoscrolldiv');
-    console.log('scrollintoview')
     elem.scrollIntoView();
   }
   

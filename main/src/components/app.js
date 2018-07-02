@@ -56,7 +56,6 @@ class App extends Component {
 
       this.webrtc.connection.on('message', (data) => {
         if (data.type === 'initMsg') {
-          console.log('asdsad')
           this.setState(() => (
             data.payload
           ))
