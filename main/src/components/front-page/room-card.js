@@ -13,6 +13,7 @@ const SearchResults = ({ data, history }) => {
           <CardTitle>{data.title}</CardTitle>
           <CardSubtitle>{data.site}</CardSubtitle>
           <CardSubtitle>{data.date}</CardSubtitle>
+          <CardSubtitle>{data.usersOnline} users online</CardSubtitle>
           <CardText>{data.description}</CardText>
         </CardBody>
       </Card>

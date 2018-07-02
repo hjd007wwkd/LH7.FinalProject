@@ -53,41 +53,20 @@ export default class NavBar extends React.Component {
                 <NavItem>
                   <NavLink onClick={this.toggleLogin} >Login</NavLink>
                 </NavItem>
-
                 <NavItem>
                   <NavLink onClick={this.toggleRegister} >Register</NavLink>
                 </NavItem>
               </React.Fragment> :
+              
               <React.Fragment>
                 <NavItem>
-                  <NavLink><img className='user_avatar' src={this.props.user.avatar}/>{this.props.user.username}</NavLink>
+                  <NavLink>{this.props.user.username}</NavLink>
                 </NavItem>
                 <NavItem>
                   <NavLink onClick={this.props.clearCookie} >Logout</NavLink>
                 </NavItem>
               </React.Fragment>
             }
-
-            <UncontrolledDropdown nav inNavbar>
-
-              <DropdownToggle nav caret>
-                Options
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>
-                  Option 1
-                </DropdownItem>
-                <DropdownItem>
-                  Option 2
-                </DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>
-                  Reset
-                </DropdownItem>
-              </DropdownMenu>
-
-            </UncontrolledDropdown>
-
           </Nav>
 
         </Navbar>
