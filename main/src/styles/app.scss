@@ -8,6 +8,8 @@ $chatarea-color: #484c52;
 $border-dark: #212317;
 $border-light: #3e4146;
 
+$user-card-height: 3.55rem;
+
 $home-nav-height: 80px;
 $app-nav-height: 50px;
 
@@ -21,7 +23,6 @@ body {
   display: flex;
   height: 100vh;
 }
-
 
 // user-list and message-list
 .list-group-item {

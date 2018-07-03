@@ -29,7 +29,9 @@ const SideBar = ({ user, userList }) => {
 
       <div className="sidebar-header">
         <div className="mini-logo">
-        <p><i class="fas fa-archway"></i>  NewsWatch</p>
+          <a href="/">
+            <p><i class="fas fa-archway"></i> NewsWatch</p>
+          </a>
         </div>
       </div>
 

@@ -3,7 +3,7 @@ import {Redirect} from "react-router-dom";
 import LioWebRTC from 'liowebrtc';
 import { withCookies } from 'react-cookie';
 import SideBar from './sidebar';
-import Main from './main-content';
+import Main from './main';
 import ArticleView from './article-view';
 
 class App extends Component {
@@ -172,7 +172,7 @@ class App extends Component {
     return  this.props.cookies.get('username') ? (
       <div className="wrapper">
         <SideBar userList={this.state.peers} user={this.state.user}/>
-        <Main handleMessageAdd = {this.handleMessageAdd} messages = {this.state.messages}/>
+        <Main messages={this.state.messages} article={this.state.article} handleMessageAdd={this.handleMessageAdd} />
         <div id="video-panel">
           <header>
             VIDEO HEADER
