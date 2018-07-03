@@ -27,7 +27,16 @@ class ChatBar extends React.Component {
       e.target.value = "";
     }
   }
-
+  
+  // <div>
+  //   <p id="message-typing-status">
+  //     <strong>
+  //       <i class="fas fa-ellipsis-h"></i>
+  //       {typingStatus()}
+  //     </strong> is typing...
+  //   </p>
+  // </div>
+  
   render(){
     return (
       <div id="chat-bar">
@@ -36,14 +45,6 @@ class ChatBar extends React.Component {
           <textarea rows="1" onKeyPress={this.handleSubmit} placeholder="Send a message to [roomname]"></textarea>
         </div>
 
-        <div>
-          <p id="message-typing-status">
-            <strong>
-              <i class="fas fa-ellipsis-h"></i>
-              {typingStatus()}
-            </strong> is typing...
-          </p>
-        </div>
 
       </div>
     );

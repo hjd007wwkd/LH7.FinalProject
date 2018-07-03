@@ -1,29 +1,17 @@
 import React from 'react';
+import { ListGroup, ListGroupItem } from 'reactstrap';
 
 const renderUser = (user) => {
   return (
-    <li className="nav-li">
-      <a className="nav-link">
-        <div className="user-container">
-          
-          <div className="column1">
-            <img className="miniavatar" src={user.avatar} alt="userrow" />
-          </div>
-
-          <div className="column2">
-            <div>
-              <p>{user.username}</p>
-              <p><div className="status-light"></div>Online</p>
-            </div>
-          </div>
-            
-          <div className="column3">
-            <i class="fas fa-ellipsis-v"></i>
-          </div>
-
+    <ListGroupItem>
+      <div className="list-container">
+        <img className="miniavatar column1" src={user.avatar} alt="user" />
+        <div className="column2">
+          <p>{user.username}</p>
+          <p><div className="status-light"></div>online</p>
         </div>
-      </a>
-    </li>
+      </div>
+    </ListGroupItem>
   )
 }
 
@@ -35,36 +23,31 @@ const renderUsernames = (userList) => {
   return users
 }
 
-const SideBar = (props) => {
+const SideBar = ({ user, userList }) => {
   return (
     <div className="sidebar">
 
-      <div className="sidebar-top">
-        <a href="/" className="navbar-brand">
-          <img src="https://www.softexia.com/wp-content/uploads/2013/05/Windows-Live-Messenger.png" alt="msn" />
-        </a>
-         <h3>msn</h3>
-      </div>
-
-      <div className="sidebar-user-list">
-        <ul class="nav nav-pills">
-          {renderUsernames(props.userList)}
-        </ul>
-      </div>
-
-      <div className="sidebar-userinfo">
-        <div className="column1">
-          <img className="miniavatar" src={props.user.avatar} alt="userrow" />
+      <div className="sidebar-header">
+        <div className="mini-logo">
+        <p><i class="fas fa-archway"></i>  NewsWatch</p>
         </div>
+      </div>
 
-        <div className="column2">
-          <div>
-            <p>{props.user.username}</p>
-            <p><div className="status-light"></div>Online</p>
+      <div className="user-list">
+        <ListGroup>
+          {renderUsernames(userList)}
+        </ListGroup>
+      </div>
+
+      <ListGroupItem id="current-user-container">
+        <div className="list-container">
+          <img className="miniavatar column1" src={user.avatar} alt="user" />
+          <div className="column2">
+            <p>{user.username}</p>
+            <p><div className="status-light"></div>online</p>
           </div>
         </div>
-        <div className="column3"></div>
-      </div>
+      </ListGroupItem>
 
     </div>
   );

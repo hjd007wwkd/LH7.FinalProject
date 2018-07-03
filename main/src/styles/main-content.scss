@@ -1,5 +1,5 @@
 .main-content {
-  background: $grey1;
+  background: $grey2;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -7,7 +7,7 @@
 }
 
 .main-topbar {
-  background: $grey1;
+  background: $grey2;
   height: 50px;
   margin: 0px;
   border: 0px;
@@ -47,7 +47,7 @@
 }
 
 #message-list::-webkit-scrollbar-thumb {
-  background: $grey2;
+  background: $grey3;
 }
 
 .message-container {
@@ -57,23 +57,26 @@
   hyphens: auto;
 }
 
-.column1 {
-  padding-left: 10px;
+// .column1 {
+//   padding-left: 10px;
 
-  img {
-    width: 35px;
-    height: 35px;
-  }
-}
+//   img {
+//     width: 35px;
+//     height: 35px;
+//   }
+// }
 
-.column2 {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding-left: 10px;
-  color: $text-color-light;
-
-}
+// .column2 {
+//   flex: 1;
+//   display: flex;
+//   flex-direction: column;
+//   padding-left: 10px;
+//   color: $text-color-light;
+// }
+// 
+// .column2 p {
+//   margin: 0px;
+// }
 
 .ellipsis{
   text-overflow: ellipsis;
@@ -81,9 +84,6 @@
   overflow: hidden;
 }
 
-.column2 p {
-  margin: 0px;
-}
 
 .message-message {
   padding-top: 5px;
@@ -92,7 +92,7 @@
 
 .message-time {
   margin-left: 20px;
-  color: $grey4;
+  color: $grey1;
 }
 
 // BOTTOM CHATBAR
@@ -119,7 +119,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background: $grey2;
+    background: $grey3;
   }
 
 }

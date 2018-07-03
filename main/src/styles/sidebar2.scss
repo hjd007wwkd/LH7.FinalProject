@@ -1,0 +1,145 @@
+.sidebar {
+  background: $grey2;
+  display: flex;
+  flex-direction: column;
+  width: 175px;
+  overflow-x: hidden;
+}
+
+.slidebar-top:hover .sidebar{
+  transition: 1s;
+  display: hidden;
+}
+
+.sidebar-top {
+  background: $grey2;
+  height: 50px;
+  border-bottom: 1px solid $border-dark;
+  color: $text-color-light;
+  display: flex;
+}
+
+.sidebar-top > h3 {
+  margin: 0px;
+  line-height: 50px;
+}
+
+.navbar-brand {
+  margin: 0px;
+  padding: 5px;
+}
+
+.navbar-brand > img {
+  height: 100%;
+  width: 45px;
+}
+
+.sidebar-user-list {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.sidebar-user-list::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+.sidebar-user-list::-webkit-scrollbar-thumb {
+  background: $grey3;
+}
+
+.user-container img {
+  width: 35px;
+  height: 35px;
+}
+
+.nav-li {
+  width: 100%;
+}
+
+.user-container, .sidebar-userinfo {
+  display: flex;
+  width: 100%;
+
+  .column1 {
+    padding: 0px;
+  }
+
+  .column2 {
+    flex: 1;
+    margin: 0px auto;
+
+    div {
+      margin: auto 0px;
+
+      p {
+        line-height: 100%;
+        margin: 0px;
+
+        div {
+          margin-right: 5px;
+        }
+      }
+
+      p:first-child {
+        font-weight: bold;
+        padding-bottom: 2px;
+      }
+
+      p:last-child {
+        font-size: 11px;
+      }
+    }
+  }
+  
+  .column3 {
+    width: 10px;
+    margin: auto;
+    color: $grey1;
+  }
+}
+
+.status-light {
+  display: inline-block;
+  margin-right: 5px;
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: lightgreen;
+}
+
+.nav-stacked > li+li {
+  margin: 0px;
+}
+
+.nav-pills > li > a {
+  color: $text-color-light;
+  margin: 0px;
+  padding: 10px;
+}
+
+.nav-pills > li > a:hover {
+  background: $grey1;
+  .column3 {
+    color: $grey3;
+  }
+}
+
+// USER PROFILE
+.sidebar-userinfo {
+  background: $grey3;
+  height: 80px;
+  padding: 10px;
+
+  .column1 {
+    margin: auto 0px;
+  }
+}
+
+.miniavatar {
+  height: 50px;
+  width: 50px;
+  border: 1px solid $border-dark;
+  border-radius: 2px;
+  margin: auto 0px;
+}

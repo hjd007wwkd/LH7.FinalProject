@@ -1,13 +1,15 @@
-$grey1: #36393f;
-$grey2: #303136;
-$grey3: #212125;
-$grey4: #656565;
+$grey1: #656565;
+$grey2: #36393f;
+$grey3: #303136;
+$grey4: #212125;
+$grey5: #1c1c1c;
 $text-color-light: #b3b4b6;
 $chatarea-color: #484c52;
 $border-dark: #212317;
 $border-light: #3e4146;
 
 $home-nav-height: 80px;
+$app-nav-height: 50px;
 
 
 body {
@@ -18,4 +20,39 @@ body {
 .wrapper {
   display: flex;
   height: 100vh;
+}
+
+
+// user-list and message-list
+.list-group-item {
+  display: flex;
+  padding: 0px;
+  border-radius: 0px;
+
+  &:first-child, &:last-child {
+    border-radius: 0px;
+  }
+}
+
+.list-container {
+  flex: 1;
+  display: flex;
+  margin: 0.5rem;
+
+  .miniavatar {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 2px;
+  }
+
+  .column2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-left: 0.5rem;
+    
+    p {
+      margin: 0px;
+    }
+  }
 }

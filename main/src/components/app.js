@@ -4,6 +4,7 @@ import LioWebRTC from 'liowebrtc';
 import { withCookies } from 'react-cookie';
 import SideBar from './sidebar';
 import Main from './main-content';
+import ArticleView from './article-view';
 
 class App extends Component {
   constructor(props) {
@@ -163,6 +164,7 @@ class App extends Component {
   componentDidUnmount() {
     this.disconnect();
   }
+  // {this.state.article ? <ArticleView article={this.state.article} /> : false }
  
   render() {
     const style = !this.state.start || !this.state.live ? {display: 'none'} : {};
