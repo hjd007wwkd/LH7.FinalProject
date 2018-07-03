@@ -2,9 +2,14 @@ import React from 'react';
 
 const ArticleView = (props) => {
   return (
-    <div className="article-container">
-      <div dangerouslySetInnerHTML={{ __html: props.article[0].content }} />
-    </div>
+    <React.Fragment>
+      <div className="article-title">
+        <h3>{props.articleData.title}</h3>
+        <p>{props.articleData.site}</p>
+        <p>{props.articleData.date}</p>
+      </div>
+      <div dangerouslySetInnerHTML={{ __html: props.articleData.content }} />
+    </React.Fragment>
   );
 }
 

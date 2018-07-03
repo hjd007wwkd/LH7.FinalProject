@@ -168,7 +168,7 @@ class App extends Component {
  
   render() {
     const style = !this.state.start || !this.state.live ? {display: 'none'} : {};
-    const styleActive = this.state.activePeersId.length === 2 ? {display: 'none'} : {};
+    const styleActive = this.state.activePeersId.length === 2 ? {} : {};
     return  this.props.cookies.get('username') ? (
       <div className="wrapper">
         <SideBar userList={this.state.peers} user={this.state.user}/>

@@ -25,14 +25,13 @@
 #main-toggler {
   display: flex;
   flex: 1;
-  padding: 0px 20px 0px 20px;
+  padding: 0rem;
   overflow: hidden;
-  
 }
 
 #article-container {
   flex: 1;
-  padding-right: 20px;
+  padding: 0rem 1rem 0rem 1rem;
   color: $text-color-light;
   text-align: justify;
   line-height: 1.5rem;
@@ -74,29 +73,13 @@
   aside, video {
     display: none;
   }
-
-  &::-webkit-scrollbar {
-    width: 6px;
-    background: transparent;
-  }
-  
-  &::-webkit-scrollbar-thumb {
-    background: $grey3;
-  }
 }
-
-
-
-
-
-
-
 
 .message-container.show {
   display: flex;
   flex-direction: column;
   flex: 1;
-  padding: 0px 15px 0px 15px;
+  padding: 0rem 1rem 0rem 1rem;
 }
 
 // MESSAGE LIST
@@ -104,67 +87,38 @@
   flex: 1;
   padding: 0px;
   overflow-y: auto;
+  word-break: break-all;
+  color: $text-color-light;
+
+  .list-group-item {
+    background: $grey2;
+    border: 0px;
+    border-bottom: 2px solid $border-light;
+
+    .message-header {
+      display: flex;
+      margin-bottom: 0.45rem;
+      
+      .username {
+        font-weight: bold;
+      }
+      
+      .time {
+        font-size: 12px;
+        margin: 0.1rem 0rem 0rem 2rem;
+      }
+    }
+    
+    .message-content {
+      flex: 1;
+      margin-bottom: 1rem;
+      line-height: 1.5rem;
+
+    }
+  }
 }
 
-.username {
-  font-weight: bold;
-}
-
-#message-list::-webkit-scrollbar {
-  width: 6px;
-  background: transparent;
-}
-
-#message-list::-webkit-scrollbar-thumb {
-  background: $grey3;
-}
-
-.message-container {
-  display: flex;
-  border-top: 1px solid $border-light;
-  padding: 15px 0px 15px 0px;
-  hyphens: auto;
-}
-
-// .column1 {
-//   padding-left: 10px;
-
-//   img {
-//     width: 35px;
-//     height: 35px;
-//   }
-// }
-
-// .column2 {
-//   flex: 1;
-//   display: flex;
-//   flex-direction: column;
-//   padding-left: 10px;
-//   color: $text-color-light;
-// }
-// 
-// .column2 p {
-//   margin: 0px;
-// }
-
-.ellipsis{
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-
-.message-message {
-  padding-top: 5px;
-  max-width: 100%;
-}
-
-.message-time {
-  margin-left: 20px;
-  color: $grey1;
-}
-
-// BOTTOM CHATBAR
+// CHATBAR
 .chat-bar {
   border-top: 1px solid $border-light;
   height: $user-card-height;
@@ -190,7 +144,6 @@
   &::-webkit-scrollbar-thumb {
     background: $grey3;
   }
-
 }
 
 #message-typing-status {
@@ -199,3 +152,11 @@
   margin: 0px;
 }
 
+::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $grey3;
+}

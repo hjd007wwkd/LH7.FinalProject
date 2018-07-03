@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, Collapse} from 'reactstrap';
+import ArticleView from './article-view';
 import MessageList from './message-list';
 import ChatBar from './chat-bar';
 
@@ -35,12 +36,7 @@ class Main extends React.Component {
 
         <div id="main-toggler">
           <Collapse id="article-container" isOpen={this.state.toggleArticle}>
-            <div className="article-title">
-              <h3>{articleData.title}</h3>
-              <p>{articleData.site}</p>
-              <p>{articleData.date}</p>
-            </div>
-            <div dangerouslySetInnerHTML={{ __html: articleData.content }} />
+            <ArticleView articleData={articleData} />
           </Collapse>
 
           <Collapse className="message-container" isOpen={this.state.toggleMessageList}>
