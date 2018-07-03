@@ -8,8 +8,8 @@ class Main extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
-      toggleArticle: false,
-      toggleMessageList: false
+      toggleArticle: true,
+      toggleMessageList: true
      };
     this.toggle = this.toggle.bind(this);
   }
