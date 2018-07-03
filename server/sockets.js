@@ -45,7 +45,6 @@ module.exports = function (server, config, knex) {
 
         client.on('register', function(username, email, password) {
             const avatar = toonavatar.generate_avatar();
-            console.log(avatar);
             knex('users').select('email').where('email', email).then(function(row){
                 if(row.length > 0) {
                     client.emit('fail', 'Email existed');
@@ -147,6 +146,7 @@ module.exports = function (server, config, knex) {
                     client.leave(client.room);
                     client.room = undefined;
                     client.username = undefined;
+                    client.avatar = undefined;
                 }
             }
         }
