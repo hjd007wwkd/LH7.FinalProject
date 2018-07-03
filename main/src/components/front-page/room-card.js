@@ -4,7 +4,6 @@ import { Card, CardImg, CardText, CardBody,
 
 const SearchResults = ({ data, history }) => {
   const roomLink = '/room/' + data.roomID;
-
   return (
     <a href={roomLink}>
       <Card>
@@ -14,7 +13,7 @@ const SearchResults = ({ data, history }) => {
           <CardSubtitle>{data.site}</CardSubtitle>
           <CardSubtitle>{data.date}</CardSubtitle>
           <CardSubtitle>{data.usersOnline} users online</CardSubtitle>
-          <CardText>{data.description}</CardText>
+          <CardText>{data.description.slice(0, 150) + '...'}</CardText>
         </CardBody>
       </Card>
     </a>

@@ -20,9 +20,8 @@ $relativewidth: 80rem;
 
 }
 
-
 #main {
-  background: rgba(63, 63, 63, 0.233) url('https://st.depositphotos.com/1032463/1373/i/950/depositphotos_13732950-stock-photo-background-of-old-vintage-newspapers.jpg');
+  background: rgba(63, 63, 63, 0.233) url('../../public/images/newspaper1.png');
 }
 
 // Results
@@ -48,6 +47,20 @@ $relativewidth: 80rem;
   border-radius: 0px;
   border: 0px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  // Jin
+  opacity: 0.9;
+  border-bottom: 2px solid #54fb85;
+  border-right: 5px solid #353a40;
+  overflow: hidden;
+  border-radius: 10px;
+  background: url('../../public/images/paper_texture1.jpg');
+  color: #353a40;
+}
+
+// Jin
+.card:hover {
+  opacity: 1;
+  color: black;
 }
 
 .card-img-top {
