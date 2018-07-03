@@ -20,6 +20,7 @@ class App extends Component {
       peersVideo: [],
       activePeersId: [],
       messages: [],
+      whoIsTyping: [],
       start: false,
       live: false
     };
@@ -31,6 +32,8 @@ class App extends Component {
     this.disconnect = this.disconnect.bind(this);
     this.handleVideoToggle = this.handleVideoToggle.bind(this);
     this.handleMessageAdd = this.handleMessageAdd.bind(this);
+    this.handleTypingStatus = this.handleTypingStatus.bind(this);
+    this.receiveTypingStatus = this.receiveTypingStatus.bind(this);
   }
  
   componentDidMount() {
@@ -62,6 +65,7 @@ class App extends Component {
             messages: data.messages
           }))
         } else if (data.type === 'addMsg') {
+          console.log('msg received')
           this.setState((prevState) => ({
             messages: [...prevState.messages, data.message.message]
           }))
@@ -91,10 +95,32 @@ class App extends Component {
           this.setState(() => (
             {activePeersId: data.peers}
           ))
+        } else if (data.type === 'typing') {
+          console.log('received typing')
+          this.receiveTypingStatus(data);
         }
       })
     }
   }
+
+  receiveTypingStatus(data) {
+    const username = data.username;
+    const typingArray = this.state.whoIsTyping
+    console.log('running')
+    if(data.isTyping && !typingArray.includes(username)) {
+      console.log(username + ' is typing')
+      this.setState((prevState) => ({
+        whoIsTyping: [...prevState.whoIsTyping, username]
+      }))
+    } else if (!isTyping) {
+      console.log(username + ' stopped typing')
+      typingArray.splice(typingArray.indexOf(username), 1)
+      this.setState(() => ({
+        whoIsTyping: typingArray 
+      }))
+    }
+  }
+
 
   addVideo(stream, peer){
     this.setState({ peersVideo: [...this.state.peersVideo, peer] }, () => {
@@ -145,13 +171,20 @@ class App extends Component {
   })};
 
   handleMessageAdd(message) {
-    var date = new Date();
-    var timestamp = date.getTime();
+    const date = new Date();
+    const timestamp = date.getTime();
     const addMessage = {username: this.state.user.username, avatar: this.state.user.avatar, content: message, created_at: timestamp}
     this.setState((prevState) => ({
       messages: [...prevState.messages, addMessage]
     }))
     this.webrtc.connection.emit('addMsg', {message: addMessage, roomId: this.state.roomId, username: this.state.user.username});
+  }
+
+  handleTypingStatus(isTyping) {
+    console.log('emitting typing status: ' + isTyping)
+    this.webrtc.connection.emit('typing', { username: this.state.user.username, isTyping: isTyping }, () => {
+      console.log('sent')
+    })
   }
  
   disconnect(){
@@ -172,7 +205,7 @@ class App extends Component {
     return  this.props.cookies.get('username') ? (
       <div className="wrapper">
         <SideBar userList={this.state.peers} user={this.state.user}/>
-        <Main messages={this.state.messages} article={this.state.article} handleMessageAdd={this.handleMessageAdd} />
+        <Main messages={this.state.messages} article={this.state.article} handleMessageAdd={this.handleMessageAdd} handleTypingStatus={this.handleTypingStatus} />
         <div id="video-panel">
           <header>
             VIDEO HEADER

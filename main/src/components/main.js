@@ -41,7 +41,7 @@ class Main extends React.Component {
 
           <Collapse className="message-container" isOpen={this.state.toggleMessageList}>
             <MessageList messages={this.props.messages}/>
-            <ChatBar handleMessageAdd={this.props.handleMessageAdd}/>
+            <ChatBar handleMessageAdd={this.props.handleMessageAdd} handleTypingStatus={this.props.handleTypingStatus} />
           </Collapse>
         </div>
       </div> 
