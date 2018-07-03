@@ -34,7 +34,7 @@ class Register extends React.Component {
                 <Label for="email">Email:</Label>
                 <Input type="text" name="email" placeholder="Email" />
                 <Label for="password">Password:</Label>
-                <Input type="text" name="password" placeholder="Password" />
+                <Input type="password" name="password" placeholder="Password" />
             </ModalBody>
             <ModalFooter>
               <Button type="submit">Register</Button>
