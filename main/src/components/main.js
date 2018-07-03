@@ -8,8 +8,8 @@ class Main extends React.Component {
   constructor(props) {
     super(props)
     this.state = { 
-      toggleArticle: false,
-      toggleMessageList: false
+      toggleArticle: true,
+      toggleMessageList: true
      };
     this.toggle = this.toggle.bind(this);
   }
@@ -41,7 +41,7 @@ class Main extends React.Component {
 
           <Collapse className="message-container" isOpen={this.state.toggleMessageList}>
             <MessageList messages={this.props.messages}/>
-            <ChatBar handleMessageAdd={this.props.handleMessageAdd}/>
+            <ChatBar handleMessageAdd={this.props.handleMessageAdd} handleTypingStatus={this.props.handleTypingStatus} />
           </Collapse>
         </div>
       </div> 

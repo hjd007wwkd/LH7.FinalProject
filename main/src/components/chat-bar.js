@@ -1,11 +1,7 @@
 import React from 'react';
 
-const userArray = [
-  'Bob', 'James', 'Sarah'
-]
-
 // handle SINGLE user, MULTI user, is/are, etc.
-const typingStatus = () => {
+const typingStatus = (userArray) => {
   const last = userArray.length - 1;
   userArray[last] = '& ' + userArray[last]
   return userArray.join(', ');
@@ -14,6 +10,10 @@ const typingStatus = () => {
 class ChatBar extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      typingTimer: ''
+
+    }
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
@@ -25,27 +25,28 @@ class ChatBar extends React.Component {
         this.props.handleMessageAdd(content);
       }
       e.target.value = "";
+    } else {
+      this.props.handleTypingStatus(true);
+      clearTimeout(this.state.typingTimer)
+      this.state.typingTimer = setTimeout(() => { this.props.handleTypingStatus(false) }, 1000);
     }
   }
-  
-  // <div>
-  //   <p id="message-typing-status">
-  //     <strong>
-  //       <i class="fas fa-ellipsis-h"></i>
-  //       {typingStatus()}
-  //     </strong> is typing...
-  //   </p>
-  // </div>
   
   render(){
     return (
       <div className="chat-bar">
-
         <div className="chat-area">
           <textarea rows="1" onKeyPress={this.handleSubmit} placeholder="Send a message to [roomname]"></textarea>
         </div>
 
-
+        <div>
+          <p id="message-typing-status">
+            <strong>
+              <i class="fas fa-ellipsis-h"></i>
+              {typingStatus(['bob','jane','sarah'])}
+            </strong> typing...
+          </p>
+        </div>
       </div>
     );
   }

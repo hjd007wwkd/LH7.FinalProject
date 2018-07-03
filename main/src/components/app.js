@@ -4,7 +4,8 @@ import LioWebRTC from 'liowebrtc';
 import { withCookies } from 'react-cookie';
 import SideBar from './sidebar';
 import Main from './main';
-import ArticleView from './article-view';
+import { Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 class App extends Component {
   constructor(props) {
@@ -20,6 +21,9 @@ class App extends Component {
       peersVideo: [],
       activePeersId: [],
       messages: [],
+      whoIsTyping: [],
+      videoPanelClass: true,
+      videoSize: true,
       start: false,
       live: false
     };
@@ -31,6 +35,9 @@ class App extends Component {
     this.disconnect = this.disconnect.bind(this);
     this.handleVideoToggle = this.handleVideoToggle.bind(this);
     this.handleMessageAdd = this.handleMessageAdd.bind(this);
+    this.handleTypingStatus = this.handleTypingStatus.bind(this);
+    this.receiveTypingStatus = this.receiveTypingStatus.bind(this);
+    this.handleResizeVideo = this.handleResizeVideo.bind(this);
   }
  
   componentDidMount() {
@@ -91,10 +98,28 @@ class App extends Component {
           this.setState(() => (
             {activePeersId: data.peers}
           ))
+        } else if (data.type === 'typing') {
+          this.receiveTypingStatus(data);
         }
       })
     }
   }
+
+  receiveTypingStatus(data) {
+    const username = data.username;
+    const typingArray = this.state.whoIsTyping
+    if(data.isTyping && !typingArray.includes(username)) {
+      this.setState((prevState) => ({
+        whoIsTyping: [...prevState.whoIsTyping, username]
+      }))
+    } else if (!isTyping) {
+      typingArray.splice(typingArray.indexOf(username), 1)
+      this.setState(() => ({
+        whoIsTyping: typingArray 
+      }))
+    }
+  }
+
 
   addVideo(stream, peer){
     this.setState({ peersVideo: [...this.state.peersVideo, peer] }, () => {
@@ -134,24 +159,36 @@ class App extends Component {
   generateRemotes(){
     return this.state.peersVideo.map((p) => {
       const style = this.state.activePeersId.includes(p.id) ? {} : {display: 'none'};
-      return <div key={p.id} id={`container_${this.webrtc.getContainerId(p)}`} className='video' style={style}>
+      return <Col md={this.state.videoSize ? "12" : "6"} key={p.id} id={`container_${this.webrtc.getContainerId(p)}`} className='video' style={style}>
           <video
             key={this.webrtc.getId(p)}
             // Important: The video element needs both an id and ref
             id={this.webrtc.getId(p)}
             ref={(v) => this.remoteVideos[p.id] = v}
             />
-        </div>
+        </Col>
   })};
 
   handleMessageAdd(message) {
-    var date = new Date();
-    var timestamp = date.getTime();
+    const date = new Date();
+    const timestamp = date.getTime();
     const addMessage = {username: this.state.user.username, avatar: this.state.user.avatar, content: message, created_at: timestamp}
     this.setState((prevState) => ({
       messages: [...prevState.messages, addMessage]
     }))
     this.webrtc.connection.emit('addMsg', {message: addMessage, roomId: this.state.roomId, username: this.state.user.username});
+  }
+
+  handleTypingStatus(isTyping) {
+    console.log('emitting ' + this.state.user.username + ' typing status: ' + isTyping)
+    this.webrtc.connection.emit('typing', { username: this.state.user.username, isTyping: isTyping })
+  }
+
+  handleResizeVideo() {
+    this.setState({
+      videoPanelClass: !this.state.videoPanelClass,
+      videoSize: !this.state.videoSize
+    })
   }
  
   disconnect(){
@@ -172,22 +209,28 @@ class App extends Component {
     return  this.props.cookies.get('username') ? (
       <div className="wrapper">
         <SideBar userList={this.state.peers} user={this.state.user}/>
-        <Main messages={this.state.messages} article={this.state.article} handleMessageAdd={this.handleMessageAdd} />
-        <div id="video-panel">
+        <Main messages={this.state.messages} article={this.state.article} handleMessageAdd={this.handleMessageAdd} handleTypingStatus={this.handleTypingStatus} />
+        
+        <div className={this.state.videoPanelClass ? "video-panel not-expanded" : "video-panel expanded"}>
           <header>
-            VIDEO HEADER
-          <button onClick={this.handleVideoToggle} style={styleActive}>On</button>
+            <Button color="secondary" onClick={this.handleVideoToggle} style={styleActive}>
+              <i class="fas fa-video"></i>
+            </Button>
+            <Button color="secondary" onClick={this.handleResizeVideo} style={styleActive}>
+              <i class="fas fa-exchange-alt"></i>
+            </Button>
           </header>
-          <div ref = "videos" id="video-container">
-            <div className="video" style={style}>
-              <video
-                ref={(vid) => { this.localVid = vid; }}
-              >
-              </video>
-            </div>
-            {this.generateRemotes()}
-          </div>
+          <Container ref = "videos" id="video-container">
+            <Row>
+              <Col md={this.state.videoSize ? "12" : "6"} className="video" style={style}>
+                <video ref={(vid) => { this.localVid = vid; }}>
+                </video>
+              </Col>
+              {this.generateRemotes()}
+            </Row>
+          </Container>
         </div>
+
       </div>
     ) : (<Redirect
       to={{
