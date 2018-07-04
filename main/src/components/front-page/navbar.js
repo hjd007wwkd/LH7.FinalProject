@@ -42,7 +42,7 @@ export default class NavBar extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="nav-container">
         <Navbar color="dark" inverse expand="md">
 
           <NavbarBrand href="/">NEWSWATCH</NavbarBrand>

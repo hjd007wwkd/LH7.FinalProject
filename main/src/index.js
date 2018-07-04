@@ -12,12 +12,10 @@ const AppRouter = () => {
   return (
     <CookiesProvider>
       <BrowserRouter>
-        <div>
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/room/:id' component={App} />
-          </Switch>
-        </div>
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route exact path='/room/:id' component={App} />
+        </Switch>
       </BrowserRouter>
     </CookiesProvider>
   );

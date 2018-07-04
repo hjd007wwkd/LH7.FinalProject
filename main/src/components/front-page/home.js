@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import NavBar from './navbar';
 import Main from './main';
 import { withCookies } from 'react-cookie';
+import bgImage from '../../../public/images/newspaper1.png';
 
 
 class Home extends React.Component {
@@ -36,6 +37,9 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
+
+    document.body.style.backgroundImage = `url("${bgImage}")`;
+
     this.socket.on('getRooms', (data) => {
       console.log(data)
       this.setState(() => ({

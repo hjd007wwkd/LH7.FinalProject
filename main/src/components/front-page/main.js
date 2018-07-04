@@ -2,26 +2,36 @@ import React from 'react';
 import CreateRoomModal from './create-room';
 import SearchResults from './search-results';
 import SearchOptions from './search-options';
-import { Button } from 'reactstrap';
+import { Button, Jumbotron, ListGroupItem } from 'reactstrap';
+import noResultsImg from '../../../public/images/no-results-found.png';
 
 class Main extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isOpen: false,
+      toggleModal: false,
+      apiLoading: false,
+      apiTimer: '',
       currentPage: 1,
       roomsPerPage: 10
     }
 
     this.createRoom = this.createRoom.bind(this);
     this.toggle = this.toggle.bind(this);
+    this.toggleLoading = this.toggleLoading.bind(this);
     this.handleClick = this.handleClick.bind(this);
 
   }
 
   toggle() {
     this.setState(() => ({
-      isOpen: !this.state.isOpen
+      toggleModal: !this.state.toggleModal
+    }))
+  }
+
+  toggleLoading() {
+    this.setState(() => ({
+      apiLoading: !this.state.apiLoading
     }))
   }
 
@@ -30,9 +40,6 @@ class Main extends React.Component {
       currentPage: Number(e.target.id)
     });
   }
-
-
-
 
   filterRooms(query) {
     const allRooms = this.props.allRooms;
@@ -64,6 +71,13 @@ class Main extends React.Component {
     const articleURL = encodeURIComponent(e.target.articleURL.value);
     let requestURL = 'https://api.diffbot.com/v3/article?token=' + diffBotKey + '&url=' + articleURL;
     
+    this.toggleLoading()
+    this.state.apiTimer = setTimeout(() => {
+      console.log('API failed')
+      this.toggleLoading()
+      // flash error
+    }, 5000);
+    
     fetch(requestURL)
     .then(result => {
       return result.json();
@@ -78,18 +92,23 @@ class Main extends React.Component {
       )) || [];
       const contenthtml = data.objects[0].html
       const contenttext = data.objects[0].text
-      const username = 'Bob3452'
-      if(date )
+      const username = this.props.user.username
+      
       if(title && image && url && site && date && tags && contenthtml && contenttext && username) {
         this.props.socket.emit('createRoom', title, image, url, site, date, tags, contenthtml, contenttext, username)
         this.props.socket.on('roomCreated', (roomID) => {
           this.props.history.push('/room/' + roomID[0].id);
-          this.toggle()
         })
       } else {
+        // flash error
+        clearTimeout(this.state.apiTimer)
+        this.toggleLoading()
         console.log('invalid information')
       }
     }).catch(function(err) {
+      // flash error
+      clearTimeout(this.state.apiTimer)
+      this.toggleLoading()
       console.log("fetch error:");
       console.log(err);
     });
@@ -109,8 +128,25 @@ class Main extends React.Component {
       <div id="main">
         <SearchOptions results={roomArray.length} data={{first: first+1, last: first+roomsToRender.length}} />
         <SearchResults roomArray={roomsToRender} pages={pages} handleClick={this.handleClick} />
-        {(roomArray.length === 0 && this.props.user.username) ? <Button color="secondary" onClick={this.toggle}>Create Room</Button> : void 0 }
-        <CreateRoomModal toggle={this.toggle} createRoom={this.createRoom} isOpen={this.state.isOpen} />
+        {(roomArray.length === 0 && query) ? (
+          <Jumbotron>
+            <ListGroupItem>
+              <img className="column1" src={noResultsImg} alt="nothing"/>
+              <div className="column2">
+                <div>
+                  <h2>No results found...</h2>
+                  {this.props.user.username ? (
+                  <React.Fragment>
+                    <p>Do you want to create a new room?</p>
+                    <Button color="secondary" onClick={this.toggle}>Create New Room</Button> 
+                  </React.Fragment>
+                  ) : false }
+                </div>
+              </div>
+            </ListGroupItem>
+          </Jumbotron>
+          ) : false }
+        <CreateRoomModal toggle={this.toggle} createRoom={this.createRoom} isOpen={this.state.toggleModal} isLoading={this.state.apiLoading} />
       </div>
     );
   }

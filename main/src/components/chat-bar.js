@@ -12,7 +12,6 @@ class ChatBar extends React.Component {
     super(props)
     this.state = {
       typingTimer: ''
-
     }
     this.handleSubmit = this.handleSubmit.bind(this);
   }

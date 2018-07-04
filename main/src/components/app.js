@@ -47,6 +47,8 @@ class App extends Component {
         localVideoEl: this.localVid,
         // Immediately request camera access
         autoRequestMedia: false,
+        adjustPeerVolume: true,
+        peerVolumeWhenSpeaking: 0,
         // The url for your signaling server
         url: 'https://ancient-forest-74575.herokuapp.com/',
         debug: true
@@ -205,7 +207,7 @@ class App extends Component {
  
   render() {
     const style = !this.state.start || !this.state.live ? {display: 'none'} : {};
-    const styleActive = this.state.activePeersId.length === 2 ? {} : {};
+    const styleActive = this.state.activePeersId.length === 4 ? {display: 'none'} : {};
     return  this.props.cookies.get('username') ? (
       <div className="wrapper">
         <SideBar userList={this.state.peers} user={this.state.user}/>
@@ -216,7 +218,7 @@ class App extends Component {
             <Button color="secondary" onClick={this.handleVideoToggle} style={styleActive}>
               <i class="fas fa-video"></i>
             </Button>
-            <Button color="secondary" onClick={this.handleResizeVideo} style={styleActive}>
+            <Button color="secondary" onClick={this.handleResizeVideo}>
               <i class="fas fa-exchange-alt"></i>
             </Button>
           </header>
