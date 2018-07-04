@@ -47,6 +47,8 @@ class App extends Component {
         localVideoEl: this.localVid,
         // Immediately request camera access
         autoRequestMedia: false,
+        adjustPeerVolume: true,
+        peerVolumeWhenSpeaking: 0,
         // The url for your signaling server
         url: 'https://ancient-forest-74575.herokuapp.com/',
         debug: true

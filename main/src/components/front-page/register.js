@@ -24,21 +24,14 @@ class Register extends React.Component {
   render() {
     return (
       <div>
-        <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={this.props.className}>
-          <ModalHeader>Modal title</ModalHeader>
-          
+        <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={`${this.props.className} register`}>
           <Form onSubmit={this.handleSubmit} >
             <ModalBody>
-                <Label for="username">Username:</Label>
                 <Input type="text" name="username" placeholder="Username" />
-                <Label for="email">Email:</Label>
                 <Input type="text" name="email" placeholder="Email" />
-                <Label for="password">Password:</Label>
                 <Input type="password" name="password" placeholder="Password" />
+                <Button type="submit">Register</Button>
             </ModalBody>
-            <ModalFooter>
-              <Button type="submit">Register</Button>
-            </ModalFooter>
           </Form>
 
         </Modal>
