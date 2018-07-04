@@ -19,23 +19,6 @@ html, body, #root, {
   }
 } 
 
-// Search Options
-.search-option-container {
-  display: flex;
-  width: $relativewidth;
-  margin-left: $leftmargin;
-  padding: 1rem;
-  border-bottom: 1px solid #dedede;
-
-  .spacer {
-    flex: 1;
-  }
-
-  select {
-    width: 10rem;
-  }
-}
-
 // rgba(63, 63, 63, 0.233)
 #main {
   background: transparent;
@@ -137,6 +120,7 @@ html, body, #root, {
 
   .card-text {
     margin: 0px;
+    text-align: justify;
   }
 
   .card-subtitle {

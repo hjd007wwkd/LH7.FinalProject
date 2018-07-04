@@ -1,7 +1,6 @@
 import React from 'react';
 import CreateRoomModal from './create-room';
 import SearchResults from './search-results';
-import SearchOptions from './search-options';
 import { Button, Jumbotron, ListGroupItem } from 'reactstrap';
 
 class Main extends React.Component {
