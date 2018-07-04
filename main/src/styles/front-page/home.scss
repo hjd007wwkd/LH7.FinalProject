@@ -41,13 +41,16 @@ html, body, #root, {
 .jumbotron {
   margin-left: $leftmargin;
   width: $relativewidth;
-  background: white;
+  background: rgba(53, 58, 64, 0.7);
 
   .list-group-item {
     border: 0px;
-    
-    img {
-      height: 14rem;
+    background: transparent;
+    color: white;
+
+    .fa-question {
+      font-size: 14rem;
+      color: #76b852;
     }
   
     .column2 {
@@ -60,6 +63,7 @@ html, body, #root, {
   
         button {
           margin: auto;
+          background: #76b852;
         }
       }
     }
