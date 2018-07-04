@@ -13,7 +13,7 @@ class Main extends React.Component {
       apiLoading: false,
       apiTimer: '',
       currentPage: 1,
-      roomsPerPage: 10
+      roomsPerPage: 14
     }
 
     this.createRoom = this.createRoom.bind(this);
@@ -126,7 +126,6 @@ class Main extends React.Component {
 
     return (
       <div id="main">
-        <SearchOptions results={roomArray.length} data={{first: first+1, last: first+roomsToRender.length}} />
         <SearchResults roomArray={roomsToRender} pages={pages} handleClick={this.handleClick} />
         {(roomArray.length === 0 && query) ? (
           <Jumbotron>
