@@ -1,11 +1,11 @@
+$sidebar-width: 11.5rem;
+
 .sidebar {
   background: $grey3;
   display: flex;
   flex-direction: column;
-  width: 11.5rem;
+  width: $sidebar-width;
   overflow-x: hidden;
-
-
 
   .list-group-item {
     background: #3e4146;
@@ -14,17 +14,42 @@
     border-width: 0px 0px 1px 0px;
     height: $user-card-height;
     margin-top: 1px;
-
+    
     .column2 {
+      flex: 1;
       margin: auto 0.5rem;
+      overflow: hidden;
       
       p {
         margin: 0.1rem;
       }
-
+      
       p:last-child {
         font-size: 12px;
       }
+    }
+
+    .column3 {
+      display: flex;
+
+      button {
+        margin: auto;
+        padding: 0px;
+        outline: none;
+
+        i:hover {
+          color: $green;
+        }
+
+        &:hover, &:active, &:focus {
+          color: $green;
+          background: transparent;
+          border-color: transparent;
+          outline: none;
+
+        }
+      }
+
     }
   }
   
@@ -41,6 +66,7 @@
 .user-list {
   flex: 1;
   overflow-y: scroll;
+  overflow-x: hidden;
   
   &::-webkit-scrollbar {
     width: 6px;

@@ -7,16 +7,20 @@
   
   .navbar {
 
-    p {
+    .title-container {
       flex: 1;
-      text-align: center;
-      margin: 0px;
-      color: white;
+      white-space: nowrap;
+      overflow: hidden;
+      font-family: 'Rubik', sans-serif;
+
+      p {
+        text-align: center;
+        margin: 0px;
+        color: $card-white;
+        font-size: 1.25rem;
+      }
     }
-
   } 
-  
-
 }
 
 #main-toggler {
@@ -39,6 +43,7 @@
     margin-bottom: 30px;
     border-bottom: 1px solid $border-light;
     text-align: left;
+    font-family: 'Rubik', sans-serif;
 
     p {
       margin: 0px;
@@ -116,7 +121,7 @@
       flex: 1;
       margin-bottom: 1rem;
       line-height: 1.5rem;
-      color: $message-content-text;
+      color: #8e949478;
 
     }
   }

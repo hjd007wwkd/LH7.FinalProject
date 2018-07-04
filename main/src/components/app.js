@@ -92,19 +92,17 @@ class App extends Component {
             {peers: data.peers}
           ))
         } else if (data.type === 'active') {
-          const index = data.peers.indexOf(this.webrtc.connection.connection.id);
-          if (index > -1) {
-            data.peers.splice(index, 1);
-          }
+          delete data.peers[this.webrtc.connection.connection.id];
           this.setState(() => (
-            {activePeersId: data.peers}
+            {activePeers: data.peers}
           ))
         } else if (data.type === 'disabled') {
           this.setState(() => (
             {activePeersId: data.peers}
           ))
         } else if (data.type === 'typing') {
-          this.receiveTypingStatus(data);
+          console.log('in typing receiver')
+          this.receiveTypingStatus(data.peer);
         }
       })
     }
@@ -148,8 +146,20 @@ class App extends Component {
   // Show fellow peers in the room
   generateRemotes(){
     return this.state.peersVideo.map((p) => {
+      console.log('in remote')
+      console.log(p);
       const style = this.state.activePeersId.includes(p.id) ? {} : {display: 'none'};
-      return <Col md={this.state.videoPanelExpanded ? "6" : "12"} key={p.id} id={`container_${this.webrtc.getContainerId(p)}`} className='video' style={style}>
+      return (
+        <Col 
+          md={this.state.videoPanelExpanded ? "6" : "12"} 
+          key={p.id} 
+          id={`container_${this.webrtc.getContainerId(p)}`} 
+          className='video' 
+          style={style}
+          >
+          <div className="video-overlay">
+            
+          </div>
           <video
             key={this.webrtc.getId(p)}
             // Important: The video element needs both an id and ref
@@ -157,6 +167,7 @@ class App extends Component {
             ref={(v) => this.remoteVideos[p.id] = v}
             />
         </Col>
+      );
   })};
 
   handleMessageAdd(message) {
@@ -208,7 +219,7 @@ class App extends Component {
       this.setState((prevState) => ({
         whoIsTyping: [...prevState.whoIsTyping, username]
       }))
-    } else if (!isTyping) {
+    } else if (!data.isTyping) {
       typingArray.splice(typingArray.indexOf(username), 1)
       this.setState(() => ({
         whoIsTyping: typingArray 
@@ -247,6 +258,7 @@ class App extends Component {
           handleMessageAdd={this.handleMessageAdd} 
           handleToggle={this.handleMainToggle} 
           handleTypingStatus={this.handleTypingStatus} 
+          whoIsTyping={this.state.whoIsTyping}
         /> 
         ) : false }
         

@@ -1,12 +1,5 @@
 import React from 'react';
 
-// handle SINGLE user, MULTI user, is/are, etc.
-const typingStatus = (userArray) => {
-  const last = userArray.length - 1;
-  userArray[last] = '& ' + userArray[last]
-  return userArray.join(', ');
-}
-
 class ChatBar extends React.Component {
   constructor(props) {
     super(props)
@@ -14,6 +7,31 @@ class ChatBar extends React.Component {
       typingTimer: ''
     }
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderTypingStatus = this.renderTypingStatus.bind(this);
+  }
+
+  renderTypingStatus(userArray) {
+    const length = userArray.length;
+    const last = userArray.length - 1;
+    let verb = ' are ';
+    console.log(userArray)
+
+    if(!length) {
+      return '';
+    } else if(length === 1) {
+      verb = ' is ';
+    } else if (length < 5) {
+      userArray[last] = '& ' + userArray[last]
+    } else if (length >= 5) {
+      userArray.push(' & others ')
+    }
+    
+    return (
+      <React.Fragment>
+        <i class="fas fa-ellipsis-h"></i> 
+        {userArray.join(', ') + verb + 'typing...'}
+      </React.Fragment>
+    );
   }
 
   handleSubmit(e){
@@ -41,9 +59,8 @@ class ChatBar extends React.Component {
         <div>
           <p id="message-typing-status">
             <strong>
-              <i class="fas fa-ellipsis-h"></i>
-              {typingStatus(['bob','jane','sarah'])}
-            </strong> typing...
+              {this.renderTypingStatus(this.props.whoIsTyping)}
+            </strong> 
           </p>
         </div>
       </div>

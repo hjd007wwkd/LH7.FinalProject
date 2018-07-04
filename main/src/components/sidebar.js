@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, ListGroupItem, Navbar, NavbarBrand } from 'reactstrap';
+import { Button, ListGroup, ListGroupItem, Navbar, NavbarBrand } from 'reactstrap';
 
 const renderUser = (user) => {
   return (
@@ -9,6 +9,11 @@ const renderUser = (user) => {
         <div className="column2">
           <p>{user.username}</p>
           <p><div className="status-light"></div>online</p>
+        </div>
+        <div className="column3">
+          <Button>
+            <i class="fas fa-thumbs-up"></i>
+          </Button>
         </div>
       </div>
     </ListGroupItem>
@@ -44,6 +49,7 @@ const SideBar = ({ user, userList }) => {
             <p>{user.username}</p>
             <p><div className="status-light"></div>online</p>
           </div>
+
         </div>
       </ListGroupItem>
 

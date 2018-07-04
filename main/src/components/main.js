@@ -29,7 +29,7 @@ class Main extends React.Component {
       <div className="main-content">
         <Navbar color="dark" inverse expand="md">
           <Button id="toggleArticle" color="secondary" onClick={this.props.handleToggle}><i class="far fa-newspaper"></i></Button>
-          <p>{articleData.title}</p>
+          <div className="title-container"><p>{articleData.title}</p></div>
           <Button id="toggleMessageList" color="secondary" onClick={this.props.handleToggle}><i class="fas fa-comments"></i></Button>
         </Navbar>
 
@@ -40,14 +40,14 @@ class Main extends React.Component {
 
           <Collapse className="message-container" isOpen={this.props.isOpen.message}>
             <MessageList messages={this.props.messages}/>
-            <ChatBar handleMessageAdd={this.props.handleMessageAdd} handleTypingStatus={this.props.handleTypingStatus} />
+            <ChatBar whoIsTyping={this.props.whoIsTyping} handleMessageAdd={this.props.handleMessageAdd} handleTypingStatus={this.props.handleTypingStatus} />
           </Collapse>
         </div>
       </div> 
       ) : (
       <div className="main-content">
         <Navbar color="dark" inverse expand="md">
-          <p><PulseLoader color={'#ffffff'} /></p>
+          <div className="title-container"><p><PulseLoader color={'#ffffff'} /></p></div>
         </Navbar>
       </div> 
       )

@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { ListGroup, ListGroupItem } from 'reactstrap';
 
 class MessageList extends Component {
+  transformDate(date) {
+    const newDate = new Date(date);
+    return newDate.toTimeString().slice(0, 8);
+  }
 
   renderMessages(messages) {
     return messages.length === 0 ? true :
@@ -13,7 +17,7 @@ class MessageList extends Component {
             <div className="column2">
               <div className="message-header">
                 <p class="username">{message.username}</p>
-                <p class="time">{message.created_at}</p>
+                <p class="time">{this.transformDate(message.created_at)}</p>
               </div>
               <div className="message-content">
                 <p>{message.content}</p>
