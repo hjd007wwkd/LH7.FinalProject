@@ -22,21 +22,14 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={this.props.className}>
-          <ModalHeader>Modal title</ModalHeader>
-          
+        <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={`${this.props.className} login`}>
           <Form onSubmit={this.handleSubmit} >
             <ModalBody>
-                <Label for="email">Email:</Label>
                 <Input type="text" name="email" placeholder="Email" />
-                <Label for="password">Password:</Label>
                 <Input type="password" name="password" placeholder="Password" />
+                <Button type="submit">Login</Button>
             </ModalBody>
-            <ModalFooter>
-              <Button type="submit">Login</Button>
-            </ModalFooter>
           </Form>
-
         </Modal>
       </div>
     );

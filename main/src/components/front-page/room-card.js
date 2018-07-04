@@ -4,16 +4,16 @@ import { Card, CardImg, CardText, CardBody,
 
 const SearchResults = ({ data, history }) => {
   const roomLink = '/room/' + data.roomID;
+  const date = new Date(data.date);
   return (
     <a href={roomLink}>
       <Card>
         <CardImg top src={data.image || "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"} alt="Card image cap" />
         <CardBody>
-          <CardTitle>{data.title}</CardTitle>
-          <CardSubtitle>{data.site}</CardSubtitle>
-          <CardSubtitle>{data.date}</CardSubtitle>
-          <CardSubtitle>{data.usersOnline} users online</CardSubtitle>
-          <CardText>{data.description.slice(0, 150) + '...'}</CardText>
+          <CardTitle>{data.title.length > 40 ? `${data.title.slice(0, 60)}...` : data.title.slice(0, 40)}</CardTitle>
+          <CardSubtitle>{`${data.site} - ${date.toDateString()}`}</CardSubtitle>
+          <CardText>{data.description.length > 140 ? `${data.description.slice(0, 140)}...` : data.description.slice(0, 100)}</CardText>
+          <CardSubtitle className='user_online'>{data.usersOnline} users online</CardSubtitle>
         </CardBody>
       </Card>
     </a>

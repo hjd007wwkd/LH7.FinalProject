@@ -41,9 +41,10 @@ class Home extends React.Component {
     document.body.style.backgroundImage = `url("${bgImage}")`;
 
     this.socket.on('getRooms', (data) => {
-      console.log(data)
       this.setState(() => ({
-        allRooms: data
+        allRooms: [...data].sort((a, b) => (
+          new Date(b.date) - new Date(a.date)
+        ))
       }))
     })
 

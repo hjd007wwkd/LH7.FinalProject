@@ -87,16 +87,14 @@ html, body, #root, {
   width: 600px;
   height: 200px;
   margin: 10px 0px 10px 0px;
-  border-radius: 0px;
-  border: 0px;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 4px;
+  border: 1px solid rgb(75, 72, 72);
+  box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   // Jin
   opacity: 0.9;
-  border-bottom: 2px solid #54fb85;
-  border-right: 5px solid #353a40;
+  border-right: 5px solid #76b852;
   overflow: hidden;
-  border-radius: 10px;
-  background: white;
+  background: #fefdfb;
   color: #353a40;
 }
 
@@ -118,6 +116,18 @@ html, body, #root, {
   padding: 0.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: 'Rubik', sans-serif;
+  .card-title {
+    font-weight: bold;
+  }
+
+  .card-subtitle {
+    padding: 2%
+  }
+
+  .user_online {
+    float: right;
+  }
 }
 
 .pagination-container {
