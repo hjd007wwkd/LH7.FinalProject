@@ -7,12 +7,10 @@ class CreateRoomModal extends React.Component {
   render() {
     return (
       <div>
-        <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={this.props.className}>
-          <ModalHeader>Modal title</ModalHeader>
-          
+        <Modal isOpen={this.props.isOpen} className={`${this.props.className} create_room`}>
           <Form onSubmit={this.props.createRoom} >
+            <ModalHeader>Create Room</ModalHeader>
             <ModalBody>
-                <Label for="articleURL">Article URL:</Label>
                 <Input type="text" name="articleURL" id="articleURL" placeholder="https://" />
             </ModalBody>
             {this.props.isLoading ? (

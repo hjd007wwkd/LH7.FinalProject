@@ -2,7 +2,6 @@ import React from 'react';
 import CreateRoomModal from './create-room';
 import SearchResults from './search-results';
 import { Button, Jumbotron, ListGroupItem } from 'reactstrap';
-import noResultsImg from '../../../public/images/no-results-found.png';
 
 class Main extends React.Component {
   constructor(props) {
@@ -104,7 +103,7 @@ class Main extends React.Component {
         this.toggleLoading()
         console.log('invalid information')
       }
-    }).catch(function(err) {
+    }).catch((err) => {
       // flash error
       clearTimeout(this.state.apiTimer)
       this.toggleLoading()
@@ -129,7 +128,7 @@ class Main extends React.Component {
         {(roomArray.length === 0 && query) ? (
           <Jumbotron>
             <ListGroupItem>
-              <img className="column1" src={noResultsImg} alt="nothing"/>
+              <i class="fas fa-question"></i>
               <div className="column2">
                 <div>
                   <h2>No results found...</h2>
