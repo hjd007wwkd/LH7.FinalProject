@@ -3,7 +3,7 @@ $grey2: #36393f;
 $grey3: #303136;
 $grey4: #212125;
 $grey5: #1c1c1c;
-$orange: #f3bc38;
+$green: #76b852;
 $text-color-light: #cacaca;
 $text-color-dark: #353a40;
 $chatarea-color: #484c52;
@@ -14,6 +14,7 @@ $user-card-height: 4rem;
 $message-content-text: #949494;
 
 $app-nav-height: 54px;
+$nav-color: #343a40;
 
 
 body {
@@ -30,6 +31,26 @@ body {
   .navbar {
     height: $app-nav-height;
     border-bottom: 1px solid $border-dark;
+  }
+
+  .btn-secondary {
+    border-radius: 0px;
+    background-color: transparent;
+    border: 0px;
+    border-bottom: 2px solid transparent;
+    height: 32px;
+    opacity: 0.7;
+
+    &:hover {
+      // color: $green;
+      opacity: 1;
+      border-bottom: 2px solid $green;
+    }
+
+    &:focus, &:active {
+      outline: none;
+      box-shadow: none;
+    }
   }
 }
 

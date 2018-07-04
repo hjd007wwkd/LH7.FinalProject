@@ -4,8 +4,9 @@ import LioWebRTC from 'liowebrtc';
 import { withCookies } from 'react-cookie';
 import SideBar from './sidebar';
 import Main from './main';
-import { Button } from 'reactstrap';
-import {  Col, Container, Navbar, Row } from 'reactstrap';
+import {  Button, Col, Container, Navbar, Row } from 'reactstrap';
+import { PulseLoader } from 'react-spinners';
+
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +31,6 @@ class App extends Component {
       live: false
     };
     this.remoteVideos = {};
-
     this.generateRemotes = this.generateRemotes.bind(this);
     this.addVideo = this.addVideo.bind(this);
     this.removeVideo = this.removeVideo.bind(this);
@@ -217,8 +217,9 @@ class App extends Component {
   }
 
   handleMainToggle(e) {
-    const targetID = e.target.id;
-    console.log(this.state.mainToggler)
+    const targetID = e.target.id || e.target.parentElement.id;
+    console.log('toggling')
+    console.log(targetID)
     this.setState(() => ({
       [targetID]: !this.state[targetID] 
     }), () => {

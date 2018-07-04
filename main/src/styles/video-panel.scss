@@ -4,9 +4,10 @@
   display: flex;
   flex-direction: column;
   
-  header {
+  .navbar {
     height: $app-nav-height;
     border-bottom: 1px solid #212327;
+    justify-content: flex-end;
   }
   
   #video-container {
@@ -53,16 +54,6 @@
   object-fit: cover;
   padding: 0px;
 }
-
-// .video > img {
-//   flex: 1;
-//   margin: auto;
-// }
-
-// .video > p {
-//   margin: 0px auto;
-//   color: white;
-// }
 
 video {
   width: 100%;

@@ -3,6 +3,7 @@ import {Button, Collapse, Navbar } from 'reactstrap';
 import ArticleView from './article-view';
 import MessageList from './message-list';
 import ChatBar from './chat-bar';
+import { PulseLoader } from 'react-spinners';
 
 class Main extends React.Component {
   // constructor(props) {
@@ -27,9 +28,9 @@ class Main extends React.Component {
       articleData ? (
       <div className="main-content">
         <Navbar color="dark" inverse expand="md">
-          <Button id="toggleArticle" color="secondary" onClick={this.props.handleToggle}>Article</Button>
+          <Button id="toggleArticle" color="secondary" onClick={this.props.handleToggle}><i class="far fa-newspaper"></i></Button>
           <p>{articleData.title}</p>
-          <Button id="toggleMessageList" color="secondary" onClick={this.props.handleToggle}>Message</Button>
+          <Button id="toggleMessageList" color="secondary" onClick={this.props.handleToggle}><i class="fas fa-comments"></i></Button>
         </Navbar>
 
         <div id="main-toggler">
@@ -45,9 +46,9 @@ class Main extends React.Component {
       </div> 
       ) : (
       <div className="main-content">
-        <div className="main-header">
-          <p>Loading...</p>
-        </div>        
+        <Navbar color="dark" inverse expand="md">
+          <p><PulseLoader color={'#ffffff'} /></p>
+        </Navbar>
       </div> 
       )
     );
