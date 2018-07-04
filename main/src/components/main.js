@@ -1,26 +1,24 @@
 import React from 'react';
-import {Button, Collapse} from 'reactstrap';
+import {Button, Collapse, Navbar } from 'reactstrap';
 import ArticleView from './article-view';
 import MessageList from './message-list';
 import ChatBar from './chat-bar';
 
 class Main extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = { 
-      toggleArticle: true,
-      toggleMessageList: true
-     };
-    this.toggle = this.toggle.bind(this);
-  }
+  // constructor(props) {
+  //   super(props)
+  //   this.state = { 
+  //     toggleArticle: true,
+  //     toggleMessageList: true
+  //    };
+  //   this.toggle = this.toggle.bind(this);
+  // }
   
-  toggle(e) {
-    const targetID = e.target.id;
-    console.log(this.state)
-    this.setState({ [targetID]: !this.state[targetID] });
-  }
-
-
+  // toggle(e) {
+  //   const targetID = e.target.id;
+  //   console.log(this.state)
+  //   this.setState({ [targetID]: !this.state[targetID] });
+  // }
 
   render() {
     const articleData = this.props.article[0];
@@ -28,18 +26,18 @@ class Main extends React.Component {
     return (
       articleData ? (
       <div className="main-content">
-        <div className="main-header">
-          <Button id="toggleArticle" color="secondary" onClick={this.toggle}>Article</Button>
+        <Navbar color="dark" inverse expand="md">
+          <Button id="toggleArticle" color="secondary" onClick={this.props.handleToggle}>Article</Button>
           <p>{articleData.title}</p>
-          <Button id="toggleMessageList" color="secondary" onClick={this.toggle}>Message</Button>
-        </div>
+          <Button id="toggleMessageList" color="secondary" onClick={this.props.handleToggle}>Message</Button>
+        </Navbar>
 
         <div id="main-toggler">
-          <Collapse id="article-container" isOpen={this.state.toggleArticle}>
+          <Collapse id="article-container" isOpen={this.props.isOpen.article}>
             <ArticleView articleData={articleData} />
           </Collapse>
 
-          <Collapse className="message-container" isOpen={this.state.toggleMessageList}>
+          <Collapse className="message-container" isOpen={this.props.isOpen.message}>
             <MessageList messages={this.props.messages}/>
             <ChatBar handleMessageAdd={this.props.handleMessageAdd} handleTypingStatus={this.props.handleTypingStatus} />
           </Collapse>

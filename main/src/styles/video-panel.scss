@@ -19,6 +19,7 @@
   }
 }
 
+
 .not-expanded {
   .video {
     height: 14rem;
@@ -37,6 +38,10 @@
   .video {
     height: 23rem;
   }
+}
+
+.fullview {
+  flex: 1;
 }
 
 .video {

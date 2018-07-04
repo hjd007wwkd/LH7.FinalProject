@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, ListGroupItem } from 'reactstrap';
+import { ListGroup, ListGroupItem, Navbar, NavbarBrand } from 'reactstrap';
 
 const renderUser = (user) => {
   return (
@@ -27,13 +27,9 @@ const SideBar = ({ user, userList }) => {
   return (
     <div className="sidebar">
 
-      <div className="sidebar-header">
-        <div className="mini-logo">
-          <a href="/">
-            <p><i class="fas fa-archway"></i> NewsWatch</p>
-          </a>
-        </div>
-      </div>
+      <Navbar color="dark" inverse expand="md">
+        <NavbarBrand href="/">NEWSWATCH</NavbarBrand>
+      </Navbar>
 
       <div className="user-list">
         <ListGroup>

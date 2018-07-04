@@ -13,7 +13,7 @@ $border-light: #43464c;
 $user-card-height: 4rem;
 $message-content-text: #949494;
 
-$app-nav-height: 50px;
+$app-nav-height: 54px;
 
 
 body {
@@ -24,6 +24,13 @@ body {
 .wrapper {
   display: flex;
   height: 100vh;
+}
+
+.chatroom {
+  .navbar {
+    height: $app-nav-height;
+    border-bottom: 1px solid $border-dark;
+  }
 }
 
 // user-list and message-list

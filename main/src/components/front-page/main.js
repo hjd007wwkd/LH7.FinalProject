@@ -18,7 +18,6 @@ class Main extends React.Component {
     this.toggle = this.toggle.bind(this);
     this.toggleLoading = this.toggleLoading.bind(this);
     this.handleClick = this.handleClick.bind(this);
-
   }
 
   toggle() {
@@ -74,7 +73,7 @@ class Main extends React.Component {
       console.log('API failed')
       this.toggleLoading()
       // flash error
-    }, 5000);
+    }, 10000);
     
     fetch(requestURL)
     .then(result => {
