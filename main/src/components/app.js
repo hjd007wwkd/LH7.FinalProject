@@ -20,7 +20,7 @@ class App extends Component {
       article: false,
       peers: {},
       peersVideo: [],
-      activePeersId: [],
+      activePeers: {},
       messages: [],
       whoIsTyping: [],
       videoPanelExpanded: false,
@@ -28,7 +28,9 @@ class App extends Component {
       toggleMessageList: true,
       fullVideo: false,
       start: false,
-      live: false
+      live: false,
+      mute: false,
+      banned: 0
     };
     this.remoteVideos = {};
     this.generateRemotes = this.generateRemotes.bind(this);
@@ -41,6 +43,7 @@ class App extends Component {
     this.receiveTypingStatus = this.receiveTypingStatus.bind(this);
     this.handleResizeVideo = this.handleResizeVideo.bind(this);
     this.handleMainToggle = this.handleMainToggle.bind(this);
+    this.handleMuteToggle = this.handleMuteToggle.bind(this);
   }
  
   componentDidMount() {
@@ -92,19 +95,30 @@ class App extends Component {
             {peers: data.peers}
           ))
         } else if (data.type === 'active') {
-          const index = data.peers.indexOf(this.webrtc.connection.connection.id);
-          if (index > -1) {
-            data.peers.splice(index, 1);
-          }
+          delete data.peers[this.webrtc.connection.connection.id];
           this.setState(() => (
-            {activePeersId: data.peers}
+            {activePeers: data.peers}
           ))
         } else if (data.type === 'disabled') {
+          delete data.peers[this.webrtc.connection.connection.id];
           this.setState(() => (
-            {activePeersId: data.peers}
+            {activePeers: data.peers}
           ))
         } else if (data.type === 'typing') {
-          this.receiveTypingStatus(data);
+          this.receiveTypingStatus(data.peer);
+        } else if (data.type === 'addBanned') {
+            if(this.state.banned + 1 >= this.state.peers.length/4){
+              //remove button
+              this.webrtc.pause()
+              this.setState(()=>(
+                {live: false, mute: true}
+              ))
+              this.webrtc.connection.emit('disabledUser')
+            } else {
+              this.setState((prevState) => (
+                {banned: prevState.banned + 1}
+              ))
+            }
         }
       })
     }
@@ -127,28 +141,42 @@ class App extends Component {
     if(!this.state.start){
       this.webrtc.startLocalVideo()
       this.setState(()=>(
-        {start: true, live: true}
+        {start: true, live: true, mute: false}
       ))
       this.webrtc.connection.emit('activeUser')
     } else if (!this.state.live) {
       this.webrtc.resume()
       this.setState(()=>(
-        {live: true}
+        {live: true, mute: false}
       ))
       this.webrtc.connection.emit('activeUser')
     } else if (this.state.live) {
       this.webrtc.pause()
       this.setState(()=>(
-        {live: false}
+        {live: false, mute: true}
       ))
       this.webrtc.connection.emit('disabledUser')
+    }
+  }
+
+  handleMuteToggle() {
+    if(this.state.mute){
+      this.webrtc.unmute()
+      this.setState(() => ({
+        mute: false
+      }))
+    } else {
+      this.webrtc.mute()
+      this.setState(() => ({
+        mute: true
+      }))
     }
   }
 
   // Show fellow peers in the room
   generateRemotes(){
     return this.state.peersVideo.map((p) => {
-      const style = this.state.activePeersId.includes(p.id) ? {} : {display: 'none'};
+      const style = this.state.activePeers[p.id] ? {} : {display: 'none'};
       return <Col md={this.state.videoPanelExpanded ? "6" : "12"} key={p.id} id={`container_${this.webrtc.getContainerId(p)}`} className='video' style={style}>
           <video
             key={this.webrtc.getId(p)}
@@ -234,7 +262,7 @@ class App extends Component {
 
   render() {
     const style = !this.state.start || !this.state.live ? {display: 'none'} : {};
-    const styleActive = this.state.activePeersId.length === 4 ? {display: 'none'} : {};
+    const styleActive = Object.keys(this.state.activePeers).length === 4 ? {display: 'none'} : {};
     return  this.props.cookies.get('username') ? (
       <div className="wrapper chatroom">
         <SideBar userList={this.state.peers} user={this.state.user}/>
@@ -257,6 +285,9 @@ class App extends Component {
             </Button>
             <Button color="secondary" onClick={this.handleResizeVideo}>
               <i class="fas fa-exchange-alt"></i>
+            </Button>
+            <Button color="secondary" onClick={this.handleMuteToggle}>
+              <i class="fas fa-microphone"></i>
             </Button>
           </Navbar>
           <Container ref = "videos" id="video-container">
