@@ -2,6 +2,7 @@ import React from 'react';
 import io from 'socket.io-client';
 import NavBar from './navbar';
 import Main from './main';
+import Dashboard from './dashboard';
 import { withCookies } from 'react-cookie';
 import bgImage from '../../../public/images/newspaper1.png';
 
@@ -15,11 +16,13 @@ class Home extends React.Component {
       user: {
         username: props.cookies.get('username') || false,
         avatar: props.cookies.get('avatar') || false
-      }
+      },
+      dashboard: true
     };
     this.socket = io('https://ancient-forest-74575.herokuapp.com/');
     this.searchDatabase = this.searchDatabase.bind(this);
     this.clearCookie = this.clearCookie.bind(this);
+    this.handleDashboard = this.handleDashboard.bind(this);
   }
   
   searchDatabase(e) {
@@ -33,6 +36,12 @@ class Home extends React.Component {
     this.props.cookies.remove('avatar')
     this.setState(() => ({
       user: { username: false, avatar: false }
+    }))
+  }
+
+  handleDashboard(searchQuery) {
+    this.setState(() => ({
+      dashboard: false, searchQuery
     }))
   }
 
@@ -63,6 +72,7 @@ class Home extends React.Component {
 
   render() {
     return (
+      this.state.dashboard ? <Dashboard handleDashboard={this.handleDashboard}/> :
       <React.Fragment>
         <NavBar 
           socket={this.socket}
