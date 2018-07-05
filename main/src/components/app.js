@@ -30,7 +30,8 @@ class App extends Component {
       start: false,
       live: false,
       mute: false,
-      banned: 0
+      banned: 0,
+      like: 0,
     };
     this.remoteVideos = {};
     this.generateRemotes = this.generateRemotes.bind(this);
@@ -44,6 +45,7 @@ class App extends Component {
     this.handleResizeVideo = this.handleResizeVideo.bind(this);
     this.handleMainToggle = this.handleMainToggle.bind(this);
     this.handleMuteToggle = this.handleMuteToggle.bind(this);
+    this.handleLikeToggle = this.handleLikeToggle.bind(this);
   }
  
   componentDidMount() {
@@ -85,9 +87,10 @@ class App extends Component {
             article: data.article
           }))
         } else if (data.type === 'addPeerInfo') {
+          const like = data.peers[this.state.user.username].like
           delete data.peers[this.state.user.username];
           this.setState(() => (
-            {peers: data.peers}
+            {peers: data.peers, like: like}
           ))
         } else if (data.type === 'removePeerInfo') {
           delete data.peers[this.state.user.username];
@@ -260,12 +263,16 @@ class App extends Component {
     })
   }
 
+  handleLikeToggle(username) {
+    this.webrtc.connection.emit('like', username)
+  }
+
   render() {
     const style = !this.state.start || !this.state.live ? {display: 'none'} : {};
     const styleActive = Object.keys(this.state.activePeers).length === 4 ? {display: 'none'} : {};
     return  this.props.cookies.get('username') ? (
       <div className="wrapper chatroom">
-        <SideBar userList={this.state.peers} user={this.state.user}/>
+        <SideBar userList={this.state.peers} user={this.state.user} handleLikeToggle={this.handleLikeToggle} like={this.state.like}/>
 
         {(!this.state.fullVideo) ? (
         <Main 

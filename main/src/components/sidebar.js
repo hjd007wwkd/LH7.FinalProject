@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, ListGroup, ListGroupItem, Navbar, NavbarBrand } from 'reactstrap';
 
-const renderUser = (user) => {
+const renderUser = (user, handleLikeToggle) => {
   return (
     <ListGroupItem>
       <div className="list-container">
@@ -11,7 +11,8 @@ const renderUser = (user) => {
           <p><div className="status-light"></div>online</p>
         </div>
         <div className="column3">
-          <Button>
+          <span>{user.like}</span>
+          <Button onClick={() => {handleLikeToggle(user.username)}}>
             <i class="fas fa-thumbs-up"></i>
           </Button>
         </div>
@@ -20,15 +21,15 @@ const renderUser = (user) => {
   )
 }
 
-const renderUsernames = (userList) => {
+const renderUsernames = (userList, handleLikeToggle) => {
   const users = [];
   for (var username in userList) {
-    users.push(renderUser(userList[username]))
+    users.push(renderUser(userList[username], handleLikeToggle))
   }
   return users
 }
 
-const SideBar = ({ user, userList }) => {
+const SideBar = ({ user, userList, handleLikeToggle, like }) => {
   return (
     <div className="sidebar">
 
@@ -38,7 +39,7 @@ const SideBar = ({ user, userList }) => {
 
       <div className="user-list">
         <ListGroup>
-          {renderUsernames(userList)}
+          {renderUsernames(userList, handleLikeToggle)}
         </ListGroup>
       </div>
 
@@ -48,6 +49,8 @@ const SideBar = ({ user, userList }) => {
           <div className="column2">
             <p>{user.username}</p>
             <p><div className="status-light"></div>online</p>
+            <span>{like}</span>
+            <i class="fas fa-thumbs-up"></i>
           </div>
 
         </div>
