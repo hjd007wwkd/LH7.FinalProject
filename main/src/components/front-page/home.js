@@ -78,7 +78,8 @@ class Home extends React.Component {
           socket={this.socket}
           user={this.state.user}
           handleSearch={this.searchDatabase}
-          clearCookie={this.clearCookie} 
+          clearCookie={this.clearCookie}
+          searchQuery={this.state.searchQuery}
           />
         <Main 
           socket={this.socket} 
