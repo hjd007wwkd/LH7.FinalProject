@@ -29,8 +29,7 @@ class App extends Component {
       start: false,
       live: false,
       mute: false,
-      bannedTo: [],
-      bannedBy: 0,
+      bannedBy: [],
       like: 0,
     };
     this.remoteVideos = {};
@@ -112,8 +111,7 @@ class App extends Component {
         } else if (data.type === 'typing') {
           this.receiveTypingStatus(data.peer);
         } else if (data.type === 'addBanned') {
-          console.log('asdasd')
-            if(this.state.bannedBy + 1 >= Object.key(this.state.peers).length/4){
+            if(this.state.bannedBy.length + 1 >= Object.keys(this.state.peers).length/4){
               //remove button
               this.webrtc.pause()
               this.setState(()=>(
@@ -121,9 +119,11 @@ class App extends Component {
               ))
               this.webrtc.connection.emit('disabledUser')
             } else {
-              this.setState((prevState) => (
-                {banned: prevState.bannedBy + 1}
-              ))
+              if(!this.state.bannedBy.includes(data.peers)) {
+                this.setState((prevState) => (
+                  {bannedBy: [...prevState.bannedBy, data.peers]}
+                ))
+              }
             }
         }
       })
@@ -191,10 +191,7 @@ class App extends Component {
             ref={(v) => this.remoteVideos[p.id] = v}
             />
           <div className="video-overlay">
-            { !this.state.bannedTo.includes(p.id) ? 
-              <i class="fas fa-ban" onClick={() => { this.handleBannedToggle(p.id)}}></i> :
-              false
-            }
+            <i class="fas fa-ban" onClick={() => { this.handleBannedToggle(p.id)}}></i>
             <p>{this.state.activePeers[p.id] ? this.state.activePeers[p.id].username : false}</p>
           </div>
         </Col>
@@ -279,9 +276,6 @@ class App extends Component {
 
   handleBannedToggle(id) {
     this.webrtc.connection.emit('banned', id)
-    this.setState((prevState) => ({
-      bannedTo: [...prevState.bannedTo, id]
-    }))
   }
 
   render() {
