@@ -88,6 +88,7 @@ class App extends Component {
         } else if (data.type === 'addPeerInfo') {
           const like = data.peers[this.state.user.username].like
           delete data.peers[this.state.user.username];
+          console.log(data.peers)
           this.setState(() => (
             {peers: data.peers, like: like}
           ))
@@ -109,7 +110,8 @@ class App extends Component {
         } else if (data.type === 'typing') {
           this.receiveTypingStatus(data.peer);
         } else if (data.type === 'addBanned') {
-            if(this.state.banned + 1 >= this.state.peers.length/4){
+          console.log('in banned')
+          if(this.state.banned + 1 >= Object.keys(this.state.peers).length/4){
               //remove button
               this.webrtc.pause()
               this.setState(()=>(
@@ -188,7 +190,7 @@ class App extends Component {
             />
           <div className="video-overlay">
             <i class="fas fa-ban" onClick={() => { console.log('BANNED')}}></i>
-            <p>{this.state.activePeers[p.id].username}</p>
+            <p>{this.state.activePeers[p.id] ? this.state.activePeers[p.id].username : false }</p>
           </div>
         </Col>
   })};
@@ -275,7 +277,7 @@ class App extends Component {
     const styleActive = Object.keys(this.state.activePeers).length === 4 ? {display: 'none'} : {};
     return  this.props.cookies.get('username') ? (
       <div className="wrapper chatroom">
-        <SideBar userList={this.state.peers} user={this.state.user} handleLikeToggle={this.handleLikeToggle} like={this.state.like}/>
+        <SideBar peers={this.state.peers} user={this.state.user} handleLikeToggle={this.handleLikeToggle} like={this.state.like}/>
 
         {(!this.state.fullVideo) ? (
         <Main 

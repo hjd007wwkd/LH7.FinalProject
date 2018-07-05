@@ -1,19 +1,19 @@
 import React from 'react';
 import { Button, ListGroup, ListGroupItem, Navbar, NavbarBrand } from 'reactstrap';
 
-const renderUser = (user, handleLikeToggle) => {
+const renderUser = (peerInfo, handleLikeToggle, currUser) => {
   return (
     <ListGroupItem>
       <div className="list-container">
-        <img className="miniavatar column1" src={user.avatar} alt="user" />
+        <img className="miniavatar column1" src={peerInfo.avatar} alt="user" />
         <div className="column2">
-          <p>{user.username}</p>
+          <p>{peerInfo.username}</p>
           <p><div className="status-light"></div>online</p>
         </div>
         <div className="column3">
-          <span>{user.like}</span>
-          <Button onClick={() => {handleLikeToggle(user.username)}}>
-            <i class="fas fa-thumbs-up"></i>
+          <span>{peerInfo.like}</span>
+          <Button onClick={() => {handleLikeToggle(peerInfo.username)}}>
+            <i class={peerInfo.userList.includes(currUser) ? "fas fa-thumbs-up liked" : "fas fa-thumbs-up"}></i>
           </Button>
         </div>
       </div>
@@ -21,15 +21,15 @@ const renderUser = (user, handleLikeToggle) => {
   )
 }
 
-const renderUsernames = (userList, handleLikeToggle) => {
+const renderUsernames = (peers, handleLikeToggle, currUser) => {
   const users = [];
-  for (var username in userList) {
-    users.push(renderUser(userList[username], handleLikeToggle))
+  for (var username in peers) {
+    users.push(renderUser(peers[username], handleLikeToggle, currUser))
   }
   return users
 }
 
-const SideBar = ({ user, userList, handleLikeToggle, like }) => {
+const SideBar = ({ user, peers, handleLikeToggle, like }) => {
   return (
     <div className="sidebar">
 
@@ -39,7 +39,7 @@ const SideBar = ({ user, userList, handleLikeToggle, like }) => {
 
       <div className="user-list">
         <ListGroup>
-          {renderUsernames(userList, handleLikeToggle)}
+          {renderUsernames(peers, handleLikeToggle, user.username)}
         </ListGroup>
       </div>
 
@@ -49,10 +49,11 @@ const SideBar = ({ user, userList, handleLikeToggle, like }) => {
           <div className="column2">
             <p>{user.username}</p>
             <p><div className="status-light"></div>online</p>
+          </div>
+          <div className="column3">
             <span>{like}</span>
             <i class="fas fa-thumbs-up"></i>
           </div>
-
         </div>
       </ListGroupItem>
 

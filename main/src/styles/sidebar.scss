@@ -29,28 +29,6 @@ $sidebar-width: 11.5rem;
       }
     }
 
-    .column3 {
-      display: flex;
-
-      button {
-        margin: auto;
-        padding: 0px;
-        outline: none;
-
-        i:hover {
-          color: $green;
-        }
-
-        &:hover, &:active, &:focus {
-          color: $green;
-          background: transparent;
-          border-color: transparent;
-          outline: none;
-
-        }
-      }
-
-    }
   }
   
   .status-light {
@@ -61,6 +39,41 @@ $sidebar-width: 11.5rem;
     border-radius: 999px;
     margin-right: 0.3rem;
   }
+}
+
+.column3 {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    margin: auto;
+  }
+
+  .btn-secondary {
+    margin: auto;
+    padding: 0px;
+    outline: none;
+    border-color: transparent;
+    
+    i:focus {
+      color: $green;
+
+    }
+
+    i:hover, i.liked {
+      color: $green;
+      opacity: 1;
+      border-color: transparent;
+    }
+
+    &:hover, &:active, &:focus {
+      color: $green;
+      background: transparent;
+      border-color: transparent;
+      outline: none;
+    }
+  }
+
 }
 
 .user-list {
@@ -74,7 +87,7 @@ $sidebar-width: 11.5rem;
   }
   
   &::-webkit-scrollbar-thumb {
-    background: white;
+    background: $grey3;
   }
 }
 
@@ -84,6 +97,10 @@ $sidebar-width: 11.5rem;
 
   img {
     margin: auto;
+  }
+
+  .column3 {
+    margin-bottom: 0.4rem;
   }
 }
 
