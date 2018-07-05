@@ -70,6 +70,10 @@ module.exports = function (server, config, knex) {
             })
         })
 
+        client.on('typing', function(data) {
+            client.to(client.room).emit('message', {type: 'typing', peer: data})
+        })
+
         client.on('createRoom', function(title, image, url, site, date, tags, contenthtml, contenttext, username) {
             knex('users').select('id').where('username', username).then(function(user) {
                 knex('rooms').insert({title: title, image: image, url: url, site: site, date: date, tags: tags, contenthtml: contenthtml, contenttext:contenttext, user_id: user[0].id}).returning('*').then(function(data){
@@ -94,23 +98,37 @@ module.exports = function (server, config, knex) {
                 clients[client.room] = {}
             }
 
-            clients[client.room][client.username] = {username: client.username, avatar: client.avatar};
+            clients[client.room][client.username] = {username: client.username, avatar: client.avatar, like: 0, userList: []};
             io.in(client.room).emit('message', {type: 'addPeerInfo', peers: clients[client.room]})
+        })
+
+        client.on('like', function(username){
+            if(clients[client.room][username].userList.includes(client.username)){
+                var index = clients[client.room][username].userList.indexOf(client.username);
+                clients[client.room][username].userList.splice(index, 1);
+                clients[client.room][username].like -= 1;
+                io.in(client.room).emit('message', {type: 'addPeerInfo', peers: clients[client.room]})
+            } else {
+                clients[client.room][username].like += 1;
+                clients[client.room][username].userList.push(client.username)
+                io.in(client.room).emit('message', {type: 'addPeerInfo', peers: clients[client.room]})
+            }
+        })
+
+        client.on('banned', function(userId){
+            client.to(userId).emit('message', {type: 'addBanned', peers: userId})
         })
 
         client.on('activeUser', function(){
             if(!activeClients[client.room]){
-                activeClients[client.room] = []
+                activeClients[client.room] = {}
             }
-            activeClients[client.room].push(client.id);
+            activeClients[client.room][client.id] = {id: client.id, username: client.username};
             client.to(client.room).emit('message', {type: 'active', peers: activeClients[client.room]})
         })
 
         client.on('disabledUser', function(){
-            var index = activeClients[client.room].indexOf(client.id);
-            if (index > -1) {
-              activeClients[client.room].splice(index, 1);
-            }
+            delete activeClients[client.room][client.id];
             client.to(client.room).emit('message', {type: 'disabled', peers: activeClients[client.room]})
         })
 
@@ -166,7 +184,7 @@ module.exports = function (server, config, knex) {
             client.join(name);
             client.room = name;
             if(!activeClients[client.room]){
-                activeClients[client.room] = []
+                activeClients[client.room] = {}
             }
             client.emit('message', {type: 'active', peers: activeClients[client.room]})
 
@@ -207,12 +225,11 @@ module.exports = function (server, config, knex) {
         // event type string of "socket end" gets passed too.
         client.on('disconnect', function () {
             if(!activeClients[client.room]){
-                activeClients[client.room] = []
+                activeClients[client.room] = {}
             }
-            var index = activeClients[client.room].indexOf(client.id);
-            if (index > -1) {
-              activeClients[client.room].splice(index, 1);
-              client.to(client.room).emit('message', {type: 'disabled', peers: activeClients[client.room]})
+            if(activeClients[client.room][client.id]) {
+                delete activeClients[client.room][client.id];
+                client.to(client.room).emit('message', {type: 'disabled', peers: activeClients[client.room]})
             }
             siginalLost();
             removeFeed();
