@@ -5,7 +5,6 @@ import { withCookies } from 'react-cookie';
 import SideBar from './sidebar';
 import Main from './main';
 import {  Button, Col, Container, Navbar, Row } from 'reactstrap';
-import { PulseLoader } from 'react-spinners';
 
 
 class App extends Component {
@@ -184,6 +183,10 @@ class App extends Component {
             id={this.webrtc.getId(p)}
             ref={(v) => this.remoteVideos[p.id] = v}
             />
+          <div className="video-overlay">
+            <i class="fas fa-ban" onClick={() => { console.log('BANNED')}}></i>
+            <p>{this.state.activePeers[p.id].username}</p>
+          </div>
         </Col>
   })};
 
@@ -197,10 +200,6 @@ class App extends Component {
     this.webrtc.connection.emit('addMsg', {message: addMessage, roomId: this.state.roomId, username: this.state.user.username});
   }
 
-  handleTypingStatus(isTyping) {
-    console.log('emitting ' + this.state.user.username + ' typing status: ' + isTyping)
-    this.webrtc.connection.emit('typing', { username: this.state.user.username, isTyping: isTyping })
-  }
 
   handleResizeVideo() {
     if(this.state.fullVideo) {
@@ -227,7 +226,11 @@ class App extends Component {
   componentDidUnmount() {
     this.disconnect();
   }
-  // {this.state.article ? <ArticleView article={this.state.article} /> : false }
+
+  handleTypingStatus(isTyping) {
+    console.log('emitting ' + this.state.user.username + ' typing status: ' + isTyping)
+    this.webrtc.connection.emit('typing', { username: this.state.user.username, isTyping: isTyping })
+  }
 
   receiveTypingStatus(data) {
     const username = data.username;
@@ -281,14 +284,14 @@ class App extends Component {
         
         <div className={"video-panel " + (this.state.fullVideo ? "fullview" : (this.state.videoPanelExpanded ? "expanded" : "not-expanded"))}>
           <Navbar color="dark" inverse expand="md">
+            <Button color="secondary" onClick={this.handleMuteToggle}>
+              {this.state.live ? (this.state.mute ? <i class="fas fa-microphone-slash"></i> : <i class="fas fa-microphone"></i>) : false}
+            </Button>
             <Button color="secondary" onClick={this.handleVideoToggle} style={styleActive}>
-              <i class="fas fa-video"></i>
+              {this.state.live ? <i class="fas fa-video"></i> : <i class="fas fa-video-slash"></i>}
             </Button>
             <Button color="secondary" onClick={this.handleResizeVideo}>
               <i class="fas fa-exchange-alt"></i>
-            </Button>
-            <Button color="secondary" onClick={this.handleMuteToggle}>
-              <i class="fas fa-microphone"></i>
             </Button>
           </Navbar>
           <Container ref = "videos" id="video-container">

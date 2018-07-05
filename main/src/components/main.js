@@ -47,7 +47,7 @@ class Main extends React.Component {
       ) : (
       <div className="main-content">
         <Navbar color="dark" inverse expand="md">
-          <div className="title-container"><p><PulseLoader color={'#ffffff'} /></p></div>
+          <div className="title-container"><p><PulseLoader color={'#76b852'} /></p></div>
         </Navbar>
       </div> 
       )
