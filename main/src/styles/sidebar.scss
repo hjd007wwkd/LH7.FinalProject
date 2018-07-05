@@ -53,11 +53,11 @@ $sidebar-width: 11.5rem;
     margin: auto;
     padding: 0px;
     outline: none;
+    background: transparent;
     border-color: transparent;
     
     i:focus {
       color: $green;
-
     }
 
     i:hover, i.liked {
@@ -67,7 +67,6 @@ $sidebar-width: 11.5rem;
     }
 
     &:hover, &:active, &:focus {
-      color: $green;
       background: transparent;
       border-color: transparent;
       outline: none;

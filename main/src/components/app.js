@@ -112,19 +112,16 @@ class App extends Component {
         } else if (data.type === 'typing') {
           this.receiveTypingStatus(data.peer);
         } else if (data.type === 'addBanned') {
-          console.log('asdasd')
-            if(this.state.bannedBy + 1 >= Object.key(this.state.peers).length/4){
-              //remove button
-              this.webrtc.pause()
-              this.setState(()=>(
-                {live: false, mute: true}
-              ))
-              this.webrtc.connection.emit('disabledUser')
-            } else {
-              this.setState((prevState) => (
-                {banned: prevState.bannedBy + 1}
-              ))
-            }
+          if(this.state.bannedBy + 1 >= Object.keys(this.state.peers).length/4){
+            this.webrtc.pause()
+            this.setState(()=>(
+              {live: false, mute: true}
+            ))
+            this.webrtc.connection.emit('disabledUser')
+          }
+          this.setState((prevState) => (
+            {banned: prevState.bannedBy + 1}
+          ))
         }
       })
     }
@@ -305,12 +302,16 @@ class App extends Component {
         
         <div className={"video-panel " + (this.state.fullVideo ? "fullview" : (this.state.videoPanelExpanded ? "expanded" : "not-expanded"))}>
           <Navbar color="dark" inverse expand="md">
-            <Button color="secondary" onClick={this.handleMuteToggle}>
-              {this.state.live ? (this.state.mute ? <i class="fas fa-microphone-slash"></i> : <i class="fas fa-microphone"></i>) : false}
-            </Button>
-            <Button color="secondary" onClick={this.handleVideoToggle} style={styleActive}>
-              {this.state.live ? <i class="fas fa-video"></i> : <i class="fas fa-video-slash"></i>}
-            </Button>
+            {this.state.live ? 
+              <Button color="secondary" onClick={this.handleMuteToggle}>
+                {this.state.mute ? <i class="fas fa-microphone-slash"></i> : <i class="fas fa-microphone"></i>}
+              </Button>
+            : false}
+            {this.state.bannedBy < Object.keys(this.state.peers).length/4 ? 
+              <Button color="secondary" onClick={this.handleVideoToggle} style={styleActive}>
+                {this.state.live ? <i class="fas fa-video-slash"></i> : <i class="fas fa-video"></i>}
+              </Button>
+            : false}
             <Button color="secondary" onClick={this.handleResizeVideo}>
               <i class="fas fa-exchange-alt"></i>
             </Button>
