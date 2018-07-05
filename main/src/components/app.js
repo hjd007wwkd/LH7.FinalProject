@@ -302,7 +302,7 @@ class App extends Component {
                 {this.state.mute ? <i class="fas fa-microphone-slash"></i> : <i class="fas fa-microphone"></i>}
               </Button>
             : false}
-            {this.state.bannedBy < Object.keys(this.state.peers).length/4 ? 
+            {this.state.bannedBy.length <= Object.keys(this.state.peers).length/4 ? 
               <Button color="secondary" onClick={this.handleVideoToggle} style={styleActive}>
                 {this.state.live ? <i class="fas fa-video-slash"></i> : <i class="fas fa-video"></i>}
               </Button>
