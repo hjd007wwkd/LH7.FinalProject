@@ -14,36 +14,33 @@ class ChatBar extends React.Component {
     const length = userArray.length;
     const last = userArray.length - 1;
     let verb = ' are ';
-    console.log(userArray)
-
+    
     if(!length) {
-      return '';
-    } else if(length === 1) {
+      return false;
+    } else if(length < 2) {
       verb = ' is ';
-    } else if (length < 5) {
-      userArray[last] = '& ' + userArray[last]
-    } else if (length >= 5) {
-      userArray.push(' & others ')
     }
+    
+    const returnString = [userArray.slice(0, -1).join(', '), userArray.slice(-1)[0]].join(userArray.length < 2 ? '' : ' & ') + verb + ' typing...';
     
     return (
       <React.Fragment>
-        <i class="fas fa-ellipsis-h"></i> 
-        {userArray.join(', ') + verb + 'typing...'}
+        <i class="fas fa-ellipsis-h"></i>{'  '} 
+        {returnString}
       </React.Fragment>
     );
   }
 
   handleSubmit(e){
     if (e.key === 'Enter'){
-      e.preventDefault();
+      e.preventDefault()
       let content = e.target.value;
       if(content.trim().length !== 0){
-        this.props.handleMessageAdd(content);
+        this.props.handleMessageAdd(content)
       }
       e.target.value = "";
     } else {
-      this.props.handleTypingStatus(true);
+      this.props.handleTypingStatus(true)
       clearTimeout(this.state.typingTimer)
       this.state.typingTimer = setTimeout(() => { this.props.handleTypingStatus(false) }, 1000);
     }
