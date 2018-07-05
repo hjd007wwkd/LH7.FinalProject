@@ -16,8 +16,10 @@
       p {
         text-align: center;
         margin: 0px;
-        color: $card-white;
+        color: #dcdcdc;
         font-size: 1.25rem;
+        font-weight: bold;
+        line-height: 1.5;
       }
     }
   } 
@@ -133,6 +135,9 @@
 .chat-bar {
   height: $user-card-height;
   padding: 2px 0px 0px 0px;
+
+
+
 }
 
 .chat-area > textarea {
@@ -144,6 +149,10 @@
   padding: 0.65rem 1.5rem 0.65rem 1rem;
   color: $text-color-light;
   overflow: auto;
+
+  &:focus {
+    outline: none;
+  }
 }
 
 #message-typing-status {

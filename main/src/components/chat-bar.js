@@ -53,7 +53,7 @@ class ChatBar extends React.Component {
     return (
       <div className="chat-bar">
         <div className="chat-area">
-          <textarea rows="1" onKeyPress={this.handleSubmit} placeholder="Send a message to [roomname]"></textarea>
+          <textarea rows="1" onKeyPress={this.handleSubmit} placeholder="Send a message to the channel..."></textarea>
         </div>
 
         <div>
