@@ -29,7 +29,8 @@ class App extends Component {
       start: false,
       live: false,
       mute: false,
-      banned: 0,
+      bannedTo: [],
+      bannedBy: 0,
       like: 0,
     };
     this.remoteVideos = {};
@@ -45,6 +46,7 @@ class App extends Component {
     this.handleMainToggle = this.handleMainToggle.bind(this);
     this.handleMuteToggle = this.handleMuteToggle.bind(this);
     this.handleLikeToggle = this.handleLikeToggle.bind(this);
+    this.handleBannedToggle = this.handleBannedToggle.bind(this);
   }
  
   componentDidMount() {
@@ -110,8 +112,8 @@ class App extends Component {
         } else if (data.type === 'typing') {
           this.receiveTypingStatus(data.peer);
         } else if (data.type === 'addBanned') {
-          console.log('in banned')
-          if(this.state.banned + 1 >= Object.keys(this.state.peers).length/4){
+          console.log('asdasd')
+            if(this.state.bannedBy + 1 >= Object.key(this.state.peers).length/4){
               //remove button
               this.webrtc.pause()
               this.setState(()=>(
@@ -120,7 +122,7 @@ class App extends Component {
               this.webrtc.connection.emit('disabledUser')
             } else {
               this.setState((prevState) => (
-                {banned: prevState.banned + 1}
+                {banned: prevState.bannedBy + 1}
               ))
             }
         }
@@ -189,8 +191,11 @@ class App extends Component {
             ref={(v) => this.remoteVideos[p.id] = v}
             />
           <div className="video-overlay">
-            <i class="fas fa-ban" onClick={() => { console.log('BANNED')}}></i>
-            <p>{this.state.activePeers[p.id] ? this.state.activePeers[p.id].username : false }</p>
+            { !this.state.bannedTo.includes(p.id) ? 
+              <i class="fas fa-ban" onClick={() => { this.handleBannedToggle(p.id)}}></i> :
+              false
+            }
+            <p>{this.state.activePeers[p.id] ? this.state.activePeers[p.id].username : false}</p>
           </div>
         </Col>
   })};
@@ -270,6 +275,13 @@ class App extends Component {
 
   handleLikeToggle(username) {
     this.webrtc.connection.emit('like', username)
+  }
+
+  handleBannedToggle(id) {
+    this.webrtc.connection.emit('banned', id)
+    this.setState((prevState) => ({
+      bannedTo: [...prevState.bannedTo, id]
+    }))
   }
 
   render() {
