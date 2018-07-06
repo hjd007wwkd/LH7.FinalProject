@@ -6,17 +6,16 @@ import Dashboard from './dashboard';
 import { withCookies } from 'react-cookie';
 import bgImage from '../../../public/images/newspaper1.png';
 
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: '',
-      allRooms: [],
       user: {
         username: props.cookies.get('username') || false,
         avatar: props.cookies.get('avatar') || false
       },
+      searchQuery: '',
+      allRooms: [],
       dashboard: true
     };
     this.socket = io('https://ancient-forest-74575.herokuapp.com/');
@@ -24,37 +23,15 @@ class Home extends React.Component {
     this.clearCookie = this.clearCookie.bind(this);
     this.handleDashboard = this.handleDashboard.bind(this);
   }
-  
-  searchDatabase(e) {
-    this.setState({
-      searchQuery: e.target.value.trim()
-    })
-  }
-
-  clearCookie() {
-    this.props.cookies.remove('username')
-    this.props.cookies.remove('avatar')
-    this.setState(() => ({
-      user: { username: false, avatar: false }
-    }))
-  }
-
-  handleDashboard(searchQuery) {
-    this.setState(() => ({
-      dashboard: false, searchQuery
-    }))
-  }
 
   componentDidMount() {
-
     document.body.style.backgroundImage = `url("${bgImage}")`;
-
     this.socket.on('getRooms', (data) => {
       this.setState(() => ({
         allRooms: [...data].sort((a, b) => (
           new Date(b.date) - new Date(a.date)
         ))
-      }))
+      }));
     })
 
     this.socket.on('success', (username, avatar) => {
@@ -62,12 +39,32 @@ class Home extends React.Component {
       this.props.cookies.set('avatar', avatar, { path: '/' });
       this.setState(() => ({
         user: {username, avatar}
-      }))
+      }));
     })
 
     this.socket.on('fail', (email) => {
-      console.log('existing email: ', email)
-    })
+      console.log('existing email: ', email);
+    });
+  }
+  
+  searchDatabase(e) {
+    this.setState({
+      searchQuery: e.target.value.trim()
+    });
+  }
+
+  clearCookie() {
+    this.props.cookies.remove('username');
+    this.props.cookies.remove('avatar');
+    this.setState(() => ({
+      user: { username: false, avatar: false }
+    }));
+  }
+
+  handleDashboard(searchQuery) {
+    this.setState(() => ({
+      dashboard: false, searchQuery
+    }));
   }
 
   render() {
@@ -78,7 +75,8 @@ class Home extends React.Component {
           socket={this.socket}
           user={this.state.user}
           handleSearch={this.searchDatabase}
-          clearCookie={this.clearCookie} 
+          clearCookie={this.clearCookie}
+          searchQuery={this.state.searchQuery}
           />
         <Main 
           socket={this.socket} 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Input, Label, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import { Button, Form, Input, Modal, ModalBody } from 'reactstrap';
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,22 +12,26 @@ class Login extends React.Component {
     const email = e.target.email.value.trim();
     const password = e.target.password.value.trim();
     if(email.length > 0 && password.length > 0) {
-      this.props.socket.emit('login', email, password)
+      this.props.socket.emit('login', email, password);
       this.props.toggle(e);
     }
-    e.target.email.value = "";
-    e.target.password.value = "";
+    e.target.email.value = '';
+    e.target.password.value = '';
   }
 
   render() {
     return (
       <div>
-        <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={`${this.props.className} login`}>
+        <Modal 
+          isOpen={this.props.isOpen} 
+          toggle={this.props.toggle} 
+          className={`${this.props.className} login`}
+          >
           <Form onSubmit={this.handleSubmit} >
             <ModalBody>
-                <Input type="text" name="email" placeholder="Email" />
-                <Input type="password" name="password" placeholder="Password" />
-                <Button type="submit">Login</Button>
+              <Input type="text" name="email" placeholder="Email" />
+              <Input type="password" name="password" placeholder="Password" />
+              <Button type="submit">Login</Button>
             </ModalBody>
           </Form>
         </Modal>

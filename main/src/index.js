@@ -2,7 +2,7 @@ import React from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import { CookiesProvider } from 'react-cookie';
-import App from './components/app';
+import App from './components/chatroom/app';
 import Home from './components/front-page/home';
 import 'bootstrap';
 import './styles/styles.scss';

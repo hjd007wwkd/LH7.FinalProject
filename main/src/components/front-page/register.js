@@ -13,12 +13,12 @@ class Register extends React.Component {
     const email = e.target.email.value.trim();
     const password = e.target.password.value.trim();
     if(username.length > 0 && email.length > 0 && password.length > 0) {
-      this.props.socket.emit('register', username, email, password)
+      this.props.socket.emit('register', username, email, password);
       this.props.toggle(e);
     }
-    e.target.username.value = "";
-    e.target.email.value = "";
-    e.target.password.value = "";
+    e.target.username.value = '';
+    e.target.email.value = '';
+    e.target.password.value = '';
   }
 
   render() {
@@ -27,13 +27,12 @@ class Register extends React.Component {
         <Modal isOpen={this.props.isOpen} toggle={this.props.toggle} className={`${this.props.className} register`}>
           <Form onSubmit={this.handleSubmit} >
             <ModalBody>
-                <Input type="text" name="username" placeholder="Username" />
-                <Input type="text" name="email" placeholder="Email" />
-                <Input type="password" name="password" placeholder="Password" />
-                <Button type="submit">Register</Button>
+              <Input type="text" name="username" placeholder="Username" />
+              <Input type="text" name="email" placeholder="Email" />
+              <Input type="password" name="password" placeholder="Password" />
+              <Button type="submit">Register</Button>
             </ModalBody>
           </Form>
-
         </Modal>
       </div>
     );

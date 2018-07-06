@@ -1,19 +1,7 @@
 import React from 'react';
 import Login from './login';
 import Register from './register';
-
-import {
-  Input,
-  InputGroup,
-  Navbar,
-  NavbarBrand,
-  Nav,
-  NavItem,
-  NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem } from 'reactstrap';
+import { Input, Nav, Navbar, NavbarBrand, NavItem, NavLink } from 'reactstrap';
 
 export default class NavBar extends React.Component {
   constructor(props) {
@@ -44,35 +32,44 @@ export default class NavBar extends React.Component {
     return (
       <div className="nav-container">
         <Navbar color="dark" inverse expand="md">
-
           <NavbarBrand href="/">NEWSWATCH</NavbarBrand>
-          <Input placeholder="Search..." name="searchbar" style={{width: '600px' }} onChange={this.props.handleSearch} />
-
+          <Input 
+            placeholder="Search..." 
+            name="searchbar" 
+            value={this.props.searchQuery} 
+            onChange={this.props.handleSearch} 
+            style={{width: '600px' }} 
+            />
           <Nav className="ml-auto" navbar>
             {!this.props.user.username ?
-              <React.Fragment>
-                <NavItem>
-                  <NavLink onClick={this.toggleLogin} >Login</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink onClick={this.toggleRegister} >Register</NavLink>
-                </NavItem>
-              </React.Fragment> :
-              
-              <React.Fragment>
-                <NavItem>
-                  <NavLink>{this.props.user.username}</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink onClick={this.props.clearCookie} >Logout</NavLink>
-                </NavItem>
-              </React.Fragment>
-            }
+            <React.Fragment>
+              <NavItem>
+                <NavLink onClick={this.toggleLogin}>Login</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink onClick={this.toggleRegister}>Register</NavLink>
+              </NavItem>
+            </React.Fragment> :
+            <React.Fragment>
+              <NavItem>
+                <NavLink>{this.props.user.username}</NavLink>
+              </NavItem>
+              <NavItem>
+                <NavLink onClick={this.props.clearCookie}>Logout</NavLink>
+              </NavItem>
+            </React.Fragment>}
           </Nav>
-
         </Navbar>
-        <Login socket={this.props.socket} isOpen={this.state.loginOpen} toggle={this.toggleLogin} />
-        <Register socket={this.props.socket} isOpen={this.state.registerOpen} toggle={this.toggleRegister} />
+        <Login 
+          socket={this.props.socket} 
+          isOpen={this.state.loginOpen} 
+          toggle={this.toggleLogin} 
+          />
+        <Register 
+          socket={this.props.socket} 
+          isOpen={this.state.registerOpen} 
+          toggle={this.toggleRegister} 
+          />
       </div>
     );
   }
