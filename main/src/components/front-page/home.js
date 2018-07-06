@@ -26,7 +26,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     document.body.style.backgroundImage = `url("${bgImage}")`;
-    document.body.style.backgroundSize = 'cover';
+    document.body.style.backgroundSize = '150%';
     this.socket.on('getRooms', (data) => {
       this.setState(() => ({
         allRooms: [...data].sort((a, b) => (
