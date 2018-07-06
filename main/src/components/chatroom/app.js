@@ -137,7 +137,7 @@ class App extends Component {
   generateRemotes(){
     return this.state.peersVideo.map((p) => {
       const style = this.state.activePeers[p.id] ? {} : {display: 'none'};
-      return <Col md={this.state.videoPanelExpanded ? "6" : "12"} key={p.id} id={`container_${this.webrtc.getContainerId(p)}`} className='video' style={style}>
+      return <div key={p.id} id={`container_${this.webrtc.getContainerId(p)}`} className='video' style={style}>
           <video
             key={this.webrtc.getId(p)}
             // Important: The video element needs both an id and ref
@@ -145,10 +145,12 @@ class App extends Component {
             ref={(v) => this.remoteVideos[p.id] = v}
             />
           <div className="video-overlay">
-            <i class="fas fa-ban" onClick={() => { this.handleBannedToggle(p.id)}}></i>
-            <p>{this.state.activePeers[p.id] ? this.state.activePeers[p.id].username : false}</p>
+            <div>
+              <i class="fas fa-ban" onClick={() => { this.handleBannedToggle(p.id)}}></i>
+              <p>{this.state.activePeers[p.id] ? this.state.activePeers[p.id].username : false}</p>
+            </div>
           </div>
-        </Col>
+        </div>
     })
   }
 
@@ -309,14 +311,12 @@ class App extends Component {
               <i class="fas fa-exchange-alt"></i>
             </Button>
           </Navbar>
-          <Container ref="videos" id="video-container">
-            <Row>
-              <Col md={this.state.videoPanelExpanded ? "6" : "12"} className="video" style={style}>
+          <div ref="videos" id="video-container">
+              <div className="video" style={style}>
                 <video ref={(vid) => { this.localVid = vid; }}></video>
-              </Col>
+              </div>
               {this.generateRemotes()}
-            </Row>
-          </Container>
+          </div>
         </div>
       </div>
     ) : (<Redirect to={{ pathname: "/" }}/>);
