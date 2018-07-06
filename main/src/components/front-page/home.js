@@ -4,7 +4,6 @@ import NavBar from './navbar';
 import Main from './main';
 import Dashboard from './dashboard';
 import { withCookies } from 'react-cookie';
-import bgImage from '../../../public/images/newspaper1.png';
 
 class Home extends React.Component {
   constructor(props) {
@@ -25,8 +24,6 @@ class Home extends React.Component {
   }
 
   componentDidMount() {
-    document.body.style.backgroundImage = `url("${bgImage}")`;
-    document.body.style.backgroundSize = 'cover';
     this.socket.on('getRooms', (data) => {
       this.setState(() => ({
         allRooms: [...data].sort((a, b) => (

@@ -10,6 +10,10 @@ const UserList = ({ peers, handleLikeToggle, currUser }) => {
     );
   }
 
+  users.sort((a, b) => {
+    return b.props.peerInfo.like - a.props.peerInfo.like
+  })
+
   return (
     <ListGroup>
       {users}

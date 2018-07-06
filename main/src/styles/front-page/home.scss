@@ -20,14 +20,14 @@ html, body, #root, {
 } 
 
 body {
-  background: linear-gradient(270deg, #ffffff, #a9a9a9, #353535);
-  background-size: 600% 600%;
-  animation: AnimationName 10s ease infinite;
+  background: linear-gradient(270deg, #2c2c2c, #90959b);
+  background-size: 400% 400%;
+  animation: AnimationName 15s ease infinite;
 }
 
 @keyframes AnimationName { 
   0%{background-position:0% 50%}
-  50%{background-position:100% 51%}
+  50%{background-position:100% 50%}
   100%{background-position:0% 50%}
 }
 
@@ -94,7 +94,7 @@ body {
   flex-direction: row;
   width: 600px;
   height: 200px;
-  margin: 10px 0px 10px 0px;
+  margin: 15px 0px 15px 0px;
   border-radius: 4px;
   border: 1px solid rgb(75, 72, 72);
   box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
