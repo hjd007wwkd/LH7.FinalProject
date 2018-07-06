@@ -17,13 +17,16 @@
     justify-content: space-evenly;
     overflow: hidden;
     padding: 10px;
+    margin: 0px;
+    height: 100%;
+    width: 100%;
   }
 }
 
 
 .not-expanded {
   .video {
-    height: 14rem;
+
   }
 }
 
@@ -37,13 +40,40 @@
   }
 
   .video {
-    height: 23rem;
   }
 }
 
 .fullview {
   flex: 1;
 }
+
+///
+
+@media (min-width: 1200px){
+  .container {
+      max-width: 2000px;
+  }
+}
+
+@media (min-width: 992px){
+  .container {
+      max-width: 2000px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+      max-width: 2000px;
+  }
+}
+
+@media (min-width: 576px) {
+  .container {
+      max-width: 2000px;
+  }
+}
+
+///
 
 .video {
   background: #2b2b31;

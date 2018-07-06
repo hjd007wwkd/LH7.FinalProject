@@ -309,7 +309,7 @@ class App extends Component {
               <i class="fas fa-exchange-alt"></i>
             </Button>
           </Navbar>
-          <Container ref = "videos" id="video-container">
+          <Container ref="videos" id="video-container">
             <Row>
               <Col md={this.state.videoPanelExpanded ? "6" : "12"} className="video" style={style}>
                 <video ref={(vid) => { this.localVid = vid; }}></video>
