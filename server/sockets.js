@@ -129,7 +129,7 @@ module.exports = function (server, config, knex) {
 
         client.on('disabledUser', function(){
             delete activeClients[client.room][client.id];
-            client.to(client.room).emit('message', {type: 'disabled', peers: activeClients[client.room]})
+            client.to(client.room).emit('message', {type: 'active', peers: activeClients[client.room]})
         })
 
         // pass a message to another id
@@ -162,40 +162,38 @@ module.exports = function (server, config, knex) {
                 });
                 if (!type) {
                     client.leave(client.room);
-                    client.room = undefined;
-                    client.username = undefined;
-                    client.avatar = undefined;
                 }
             }
         }
 
-        function join(name, cb) {
+        function join(roomId, cb) {
             // sanity check
-            if (typeof name !== 'string') return;
+            if (typeof roomId !== 'string') return;
             // check if maximum number of clients reached
             if (config.rooms && config.rooms.maxClients > 0 &&
-                clientsInRoom(name) >= config.rooms.maxClients) {
+                clientsInRoom(roomId) >= config.rooms.maxClients) {
                 safeCb(cb)('full');
                 return;
             }
             // leave any existing rooms
             removeFeed();
-            safeCb(cb)(null, describeRoom(name));
-            client.join(name);
-            client.room = name;
+            safeCb(cb)(null, describeRoom(roomId));
+
+            client.join(roomId);
+            client.room = roomId;
             if(!activeClients[client.room]){
                 activeClients[client.room] = {}
             }
             client.emit('message', {type: 'active', peers: activeClients[client.room]})
 
             knex('messages').join('users', 'messages.user_id', 'users.id').join('rooms', 'messages.room_id', 'rooms.id')
-            .select('messages.content', 'messages.created_at', 'users.username', 'users.avatar').where('rooms.id', name).then(function(rows) {
+            .select('messages.content', 'messages.created_at', 'users.username', 'users.avatar').where('rooms.id', roomId).then(function(rows) {
                 client.emit('message', {type: 'initMsg', messages: rows});
             })
 
             knex('rooms').select({roomID: 'rooms.id'}, {title: 'rooms.title'}, {image: 'rooms.image'},
                 {date: 'rooms.date'}, {site: 'rooms.site'}, {tags: 'rooms.tags'},
-                {description: 'rooms.contenttext'}, {url: 'rooms.url'}, {content: 'rooms.contenthtml'}).where('rooms.id', name)
+                {description: 'rooms.contenttext'}, {url: 'rooms.url'}, {content: 'rooms.contenthtml'}).where('rooms.id', roomId)
                 .then(function(rows){
                     client.emit('message', {type: 'addArticle' , article: rows.map((item) => {
                       return {
@@ -229,13 +227,12 @@ module.exports = function (server, config, knex) {
             }
             if(activeClients[client.room][client.id]) {
                 delete activeClients[client.room][client.id];
-                client.to(client.room).emit('message', {type: 'disabled', peers: activeClients[client.room]})
+                client.to(client.room).emit('message', {type: 'active', peers: activeClients[client.room]})
             }
             siginalLost();
             removeFeed();
         });
         client.on('leave', function () {
-            siginalLost();
             removeFeed();
         });
 

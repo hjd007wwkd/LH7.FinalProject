@@ -68,7 +68,6 @@ class App extends Component {
       this.webrtc.on('readyToCall', () => {
         this.webrtc.leaveRoom(this.state.roomId);
         this.webrtc.joinRoom(this.state.roomId);
-        this.webrtc.connection.emit('setUsername', this.state.user.username, this.state.user.avatar);
       });
       this.webrtc.on('videoAdded', this.addVideo);
       this.webrtc.on('videoRemoved', this.removeVideo);
@@ -89,7 +88,6 @@ class App extends Component {
         } else if (data.type === 'addPeerInfo') {
           const like = data.peers[this.state.user.username].like
           delete data.peers[this.state.user.username];
-          console.log(data.peers)
           this.setState(() => (
             {peers: data.peers, like: like}
           ))
@@ -99,11 +97,6 @@ class App extends Component {
             {peers: data.peers}
           ))
         } else if (data.type === 'active') {
-          delete data.peers[this.webrtc.connection.connection.id];
-          this.setState(() => (
-            {activePeers: data.peers}
-          ))
-        } else if (data.type === 'disabled') {
           delete data.peers[this.webrtc.connection.connection.id];
           this.setState(() => (
             {activePeers: data.peers}
