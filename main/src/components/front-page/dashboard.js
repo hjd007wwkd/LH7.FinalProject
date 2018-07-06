@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Dashboard extends React.Component {
   constructor(props) {
@@ -14,12 +15,16 @@ class Dashboard extends React.Component {
 
   render() {
     return (
-      <div className="dashboard-container">
-        <div className="dashboard">
-          <h1><span className='first-letter'>N</span>ews<span className='second-letter'>W</span>atch</h1>
-          <input type="text" onKeyPress={this.handleSearchBar} />
+      <ReactCSSTransitionGroup
+        transitionName="fade"
+        transitionAppear={true}>
+        <div className="dashboard-container">
+            <div className="dashboard">
+              <h1><span className='capital_title'>N</span>ews<span className='capital_title'>W</span>atch</h1>
+              <input type="text" onKeyPress={this.handleSearchBar} />
+            </div>
         </div>
-      </div>
+      </ReactCSSTransitionGroup>
     );
   }
 }

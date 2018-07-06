@@ -15,9 +15,6 @@
             border-bottom: 5px solid $green;
             border-right: 5px solid $green;
             text-shadow: 0px 0px 20px $green, 5px 5px rgba(0, 0, 0, 0.5);
-            .first-letter, .second-letter {
-                color: $green;
-            }
         }
         input {
             margin: 50px auto 0;
@@ -29,4 +26,17 @@
             }
         }
     }
+}
+
+.capital_title{
+    color: $green;
+}
+
+.fade-appear{
+    opacity: 0.01;
+}
+
+.fade-appear.fade-appear-active {
+    opacity: 1;
+    transition: opacity 1.5s ease-in;
 }

@@ -6,7 +6,7 @@ const SideBar = ({ user, peers, handleLikeToggle, like }) => {
   return (
     <div className="sidebar">
       <Navbar color="dark" inverse expand="md">
-        <NavbarBrand href="/">NEWSWATCH</NavbarBrand>
+        <NavbarBrand href="/"><span className='capital_title'>N</span>ews<span className='capital_title'>W</span>atch</NavbarBrand>
       </Navbar>
       <div className="user-list">
         <UserList peers={peers} handleLikeToggle={handleLikeToggle} username={user.username} />

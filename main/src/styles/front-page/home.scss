@@ -19,6 +19,20 @@ html, body, #root, {
   }
 } 
 
+body {
+  background: linear-gradient(270deg, #ffffff, #a9a9a9, #353535);
+  background-size: 600% 600%;
+  animation: AnimationName 10s ease infinite;
+}
+
+@keyframes AnimationName { 
+  0%{background-position:0% 50%}
+  50%{background-position:100% 51%}
+  100%{background-position:0% 50%}
+}
+
+
+
 // rgba(63, 63, 63, 0.233)
 #main {
   background: transparent;

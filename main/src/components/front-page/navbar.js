@@ -32,7 +32,7 @@ export default class NavBar extends React.Component {
     return (
       <div className="nav-container">
         <Navbar color="dark" inverse expand="md">
-          <NavbarBrand href="/">NEWSWATCH</NavbarBrand>
+          <NavbarBrand href="/"><span className='capital_title'>N</span>ews<span className='capital_title'>W</span>atch</NavbarBrand>
           <Input 
             placeholder="Search..." 
             name="searchbar" 
