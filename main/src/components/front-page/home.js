@@ -6,7 +6,6 @@ import Dashboard from './dashboard';
 import { withCookies } from 'react-cookie';
 import bgImage from '../../../public/images/newspaper1.png';
 
-
 class Home extends React.Component {
   constructor(props) {
     super(props);
