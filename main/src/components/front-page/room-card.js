@@ -1,12 +1,12 @@
 import React from 'react';
-import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle } from 'reactstrap';
+import { Link } from 'react-router';
+import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
 
 const SearchResults = ({ data, history }) => {
   const roomLink = '/room/' + data.roomID;
   const date = new Date(data.date);
   return (
-    <a href={roomLink}>
+    <Link href={roomLink}>
       <Card>
         <CardImg top src={data.image || "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"} alt="Card image cap" />
         <CardBody>
@@ -16,7 +16,7 @@ const SearchResults = ({ data, history }) => {
           <CardSubtitle className='user_online'>{data.usersOnline} users online</CardSubtitle>
         </CardBody>
       </Card>
-    </a>
+    </Link>
   );
 };
 

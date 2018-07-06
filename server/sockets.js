@@ -1,13 +1,13 @@
-var socketIO = require('socket.io'),
+const socketIO = require('socket.io'),
     uuid = require('node-uuid'),
     crypto = require('crypto'),
     toonavatar = require('cartoon-avatar');;
 
-var clients = {};
-var activeClients = {};
+const clients = {};
+const activeClients = {};
 
 module.exports = function (server, config, knex) {
-    var io = socketIO.listen(server);
+    const io = socketIO.listen(server);
 
     io.sockets.on('connection', function (client) {
         client.resources = {
@@ -23,7 +23,7 @@ module.exports = function (server, config, knex) {
           {username: 'users.username'}, {avatar: 'users.avatar'})
             .then(function(rows){
             client.emit('getRooms', rows.map((item) => {
-              var online = clients[item.roomID] ? Object.keys(clients[item.roomID]).length : 0
+              const online = clients[item.roomID] ? Object.keys(clients[item.roomID]).length : 0
               return {
                 roomID: item.roomID,
                 title: item.title,
