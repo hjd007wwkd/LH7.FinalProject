@@ -9,17 +9,28 @@
 
     .title-container {
       flex: 1;
+      display: flex;
       white-space: nowrap;
       overflow: hidden;
       font-family: 'Rubik', sans-serif;
 
-      p {
-        text-align: center;
-        margin: 0px;
-        color: #dcdcdc;
-        font-size: 1.25rem;
-        font-weight: bold;
-        line-height: 1.5;
+      div {
+        margin: auto;
+
+        a, a:hover {
+          text-align: center;
+          margin: 0px;
+          color: #dcdcdc;
+          font-size: 1.25rem;
+          font-weight: bold;
+          line-height: 1.5;
+          text-decoration: none;
+          
+          &:hover {
+            color: #c4c4c4;
+
+          }
+        }
       }
     }
   } 

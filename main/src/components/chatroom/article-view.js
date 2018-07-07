@@ -6,7 +6,7 @@ const ArticleView = ({ articleData }) => {
       <div className="article-title">
         <h3>{articleData.title}</h3>
         <p>{articleData.site}</p>
-        <p>{articleData.date}</p>
+        <p>{new Date(articleData.date).toDateString()}</p>
       </div>
       <div dangerouslySetInnerHTML={{ __html: articleData.content }} />
     </React.Fragment>

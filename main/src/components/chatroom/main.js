@@ -3,7 +3,7 @@ import {Button, Collapse, Navbar } from 'reactstrap';
 import ArticleView from './article-view';
 import MessageList from './message-list';
 import ChatBar from './chat-bar';
-import { PulseLoader } from 'react-spinners';
+import { BarLoader } from 'react-spinners';
 
 const Main = (props) => {
   const articleData = props.article[0];
@@ -16,7 +16,7 @@ const Main = (props) => {
           <i class="far fa-newspaper"></i>
         </Button>
         <div className="title-container">
-          <p>{articleData.title}</p>
+          <div><a href={articleData.url} target="_blank" style={{display: "table-cell"}}>{articleData.title}</a></div>
         </div>
         <Button id="toggleMessageList" color="secondary" onClick={props.handleToggle}>
           <i class="fas fa-comments"></i>
@@ -38,7 +38,7 @@ const Main = (props) => {
     <div className="main-content">
       <Navbar color="dark" inverse expand="md">
         <div className="title-container">
-          <p><PulseLoader color={'#76b852'} /></p>
+          <div><BarLoader color={'#76b852'} height={8} width={200}/></div>
         </div>
       </Navbar>
     </div> 
