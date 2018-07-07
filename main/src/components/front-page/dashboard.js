@@ -1,4 +1,5 @@
 import React from 'react';
+import Background from '../../../public/images/newspaper6.jpg';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Dashboard extends React.Component {
@@ -18,7 +19,7 @@ class Dashboard extends React.Component {
       <ReactCSSTransitionGroup
         transitionName="fade"
         transitionAppear={true}>
-        <div className="dashboard-container">
+        <div className="dashboard-container" style={{'backgroundImage': `url('${Background}')`}}>
             <div className="dashboard">
               <h1><span className='capital_title'>N</span>ews<span className='capital_title'>W</span>atch</h1>
               <input type="text" onKeyPress={this.handleSearchBar} />

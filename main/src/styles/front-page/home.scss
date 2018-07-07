@@ -19,23 +19,11 @@ html, body, #root, {
   }
 } 
 
-body {
-  background: linear-gradient(270deg, #2c2c2c, #90959b);
-  background-size: 400% 400%;
-  animation: AnimationName 15s ease infinite;
-}
-
-@keyframes AnimationName { 
-  0%{background-position:0% 50%}
-  50%{background-position:100% 50%}
-  100%{background-position:0% 50%}
-}
-
 
 
 // rgba(63, 63, 63, 0.233)
 #main {
-  background: transparent;
+  background-size: cover;
   height: 100%;
   padding-top: $home-nav-height;
   padding-bottom: $home-nav-height;

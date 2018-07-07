@@ -1,8 +1,16 @@
 .dashboard-container {
-    background-image: url('../../public/images/newspaper1.png');
+    animation: AnimationDash 10s ease;
     background-size: cover;
     display: flex;
     height: 100%;
+
+    @keyframes AnimationDash {
+        0%{background-size: 300%;}
+        50%{background-size: 200%;} 
+        100%{background-size: 100%;}
+        
+    }
+
     .dashboard {
         width: 500px;
         margin: auto;

@@ -45,9 +45,9 @@ module.exports = function (server, config, knex) {
 
         client.on('register', function(username, email, password) {
             const avatar = toonavatar.generate_avatar();
-            knex('users').select('email').where('email', email).then(function(row){
+            knex('users').select('email', 'username').where('email', email).orWhere('username', username).then(function(row){
                 if(row.length > 0) {
-                    client.emit('fail', 'Email existed');
+                    client.emit('fail', 'Email or Username already exists');
                 } else {
                     knex('users').insert({username: username, email: email, password: password, avatar: avatar}).then(function(){
                         client.emit('success', username, avatar);
@@ -62,10 +62,10 @@ module.exports = function (server, config, knex) {
                     if(row[0].password.toString() === password.toString()) {
                         client.emit('success', row[0].username, row[0].avatar);
                     } else {
-                        client.emit('fail', 'Password Incorrect');
+                        client.emit('fail', 'Incorrect Password');
                     }
                 } else {
-                    client.emit('fail', 'No email existed');
+                    client.emit('fail', 'Email does not exist');
                 }
             })
         })
@@ -104,7 +104,7 @@ module.exports = function (server, config, knex) {
 
         client.on('like', function(username){
             if(clients[client.room][username].userList.includes(client.username)){
-                var index = clients[client.room][username].userList.indexOf(client.username);
+                const index = clients[client.room][username].userList.indexOf(client.username);
                 clients[client.room][username].userList.splice(index, 1);
                 clients[client.room][username].like -= 1;
                 io.in(client.room).emit('message', {type: 'addPeerInfo', peers: clients[client.room]})
@@ -136,7 +136,7 @@ module.exports = function (server, config, knex) {
         client.on('message', function (details) {
             if (!details) return;
 
-            var otherClient = io.to(details.to);
+            const otherClient = io.to(details.to);
             if (!otherClient) return;
 
             details.from = client.id;
@@ -245,7 +245,7 @@ module.exports = function (server, config, knex) {
                 name = uuid();
             }
             // check if exists
-            var room = io.nsps['/'].adapter.rooms[name];
+            const room = io.nsps['/'].adapter.rooms[name];
             if (room && room.length) {
                 safeCb(cb)('taken');
             } else {

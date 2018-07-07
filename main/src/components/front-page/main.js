@@ -2,6 +2,7 @@ import React from 'react';
 import CreateRoomModal from './create-room';
 import SearchResults from './search-results';
 import { Button, Jumbotron, ListGroupItem } from 'reactstrap';
+import Background from '../../../public/images/newspaper6.jpg';
 
 class Main extends React.Component {
   constructor(props) {
@@ -119,7 +120,7 @@ class Main extends React.Component {
     const pages = Math.ceil(roomArray.length / this.state.roomsPerPage);
 
     return (
-      <div id="main">
+      <div id="main" style={{'backgroundImage': `url('${Background}')`}}>
         <SearchResults roomArray={roomsToRender} pages={pages} handleClick={this.handleClick} />
         {(roomArray.length === 0 && query) ? (
           <Jumbotron>
