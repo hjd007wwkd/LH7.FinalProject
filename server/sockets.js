@@ -62,7 +62,7 @@ module.exports = function (server, config, knex) {
                     if(row[0].password.toString() === password.toString()) {
                         client.emit('success', row[0].username, row[0].avatar);
                     } else {
-                        client.emit('fail', 'Incorrect password');
+                        client.emit('fail', 'Incorrect Password');
                     }
                 } else {
                     client.emit('fail', 'Email does not exist');
