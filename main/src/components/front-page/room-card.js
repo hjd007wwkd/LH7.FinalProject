@@ -1,12 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import { withAlert } from 'react-alert';
 
-const RoomCard = ({ data }) => {
-  const roomLink = '/room/' + data.roomID;
+const RoomCard = ({ alert, data, user }) => {
+  const roomLink = user.username ? '/room/' + data.roomID : '' ;
   const date = new Date(data.date);
   return (
-    <Link to={roomLink}>
+    <Link to={roomLink} onClick={() => { user.username ? '' : alert.error('Please login first.', {timeout: 1000})}} >
       <Card>
         <CardImg top src={data.image || "https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180"} alt="Card image cap" />
         <CardBody>
@@ -20,4 +21,4 @@ const RoomCard = ({ data }) => {
   );
 };
 
-export default RoomCard;
+export default withAlert(RoomCard);
