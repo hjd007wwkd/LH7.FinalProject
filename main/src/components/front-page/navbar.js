@@ -38,7 +38,8 @@ export default class NavBar extends React.Component {
             name="searchbar" 
             value={this.props.searchQuery} 
             onChange={this.props.handleSearch} 
-            style={{width: '600px' }} 
+            style={{width: '600px' }}
+            autofocus
             />
           <Nav className="ml-auto" navbar>
             {!this.props.user.username ?

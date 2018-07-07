@@ -1,10 +1,10 @@
 @import '~bootstrap/scss/bootstrap';
-@import './app.scss';
 @import './front-page/home.scss';
 @import './front-page/navbar.scss';
 @import './front-page/modal.scss';
 @import './front-page/dashboard.scss';
-@import './sidebar.scss';
-@import './main-content.scss';
-@import './message-area.scss';
-@import './video-panel.scss';
+@import './chatroom/app.scss';
+@import './chatroom/sidebar.scss';
+@import './chatroom/main-content.scss';
+@import './chatroom/message-area.scss';
+@import './chatroom/video-panel.scss';

@@ -1,0 +1,75 @@
+#message-list {
+  flex: 1;
+  padding: 0px;
+  overflow-y: auto;
+  word-break: break-all;
+  color: $text-color-light;
+
+  .list-group-item {
+    background: $grey2;
+    border: 0px;
+    border-bottom: 2px solid $border-light;
+
+    .message-header {
+      display: flex;
+      margin-bottom: 0.2rem;
+      
+      .username {
+        font-weight: bold;
+      }
+      
+      .time {
+        font-size: 12px;
+        margin: 0.1rem 0rem 0rem 2rem;
+        color: #8e949478;
+      }
+    }
+    
+    .message-content {
+      flex: 1;
+      margin-bottom: 1rem;
+      line-height: 1.5rem;
+
+    }
+  }
+}
+
+
+// CHATBAR
+.chat-bar {
+  height: $user-card-height;
+  padding: 2px 0px 0px 0px;
+}
+
+.chat-area > textarea {
+  resize: none;
+  background: $chatarea-color;
+  width: 100%;
+  border: 0px;
+  border-radius: 3px;
+  padding: 0.65rem 1.5rem 0.65rem 1rem;
+  color: $text-color-light;
+  overflow: auto;
+  margin-bottom: 0.2rem;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+#message-typing-status {
+  color: $text-color-light;
+  font-size: 12px;
+  margin: 0px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: $grey3;
+}

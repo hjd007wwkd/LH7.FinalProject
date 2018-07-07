@@ -22,7 +22,7 @@ class Dashboard extends React.Component {
         <div className="dashboard-container" style={{'backgroundImage': `url('${Background}')`}}>
             <div className="dashboard">
               <h1><span className='capital_title'>N</span>ews<span className='capital_title'>W</span>atch</h1>
-              <input type="text" onKeyPress={this.handleSearchBar} />
+              <input type="text" onKeyPress={this.handleSearchBar} autofocus/>
             </div>
         </div>
       </ReactCSSTransitionGroup>
