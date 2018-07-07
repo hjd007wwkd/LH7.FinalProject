@@ -2,7 +2,7 @@ import React from 'react';
 import CreateRoomModal from './create-room';
 import SearchResults from './search-results';
 import { Button, Jumbotron, ListGroupItem } from 'reactstrap';
-import Background from '../../../public/images/newspaper6.jpg';
+import Background from '../../../public/images/newspaper.jpg';
 import { withAlert } from 'react-alert';
 
 class Main extends React.Component {

@@ -1,5 +1,5 @@
 import React from 'react';
-import Background from '../../../public/images/newspaper6.jpg';
+import Background from '../../../public/images/newspaper.jpg';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 class Dashboard extends React.Component {
