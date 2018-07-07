@@ -3,6 +3,7 @@ import CreateRoomModal from './create-room';
 import SearchResults from './search-results';
 import { Button, Jumbotron, ListGroupItem } from 'reactstrap';
 import Background from '../../../public/images/newspaper6.jpg';
+import { withAlert } from 'react-alert';
 
 class Main extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ class Main extends React.Component {
     this.state.apiTimer = setTimeout(() => {
       console.log('API failed');
       this.toggleLoading();
-      // flash error
+      this.props.alert.error('Error retrieving data from the source.', { timeout: 2000 })
     }, 10000);
     
     fetch(requestURL)
@@ -69,18 +70,17 @@ class Main extends React.Component {
         this.props.socket.emit('createRoom', title, image, url, site, date, tags, contenthtml, contenttext, username);
         this.props.socket.on('roomCreated', (roomID) => {
           this.props.history.push('/room/' + roomID[0].id);
+          this.props.alert.success('Room created!', { timeout: 4000 })
         });
       } else {
-        // flash error
+        this.props.alert.error('Error retrieving data from the source.', { timeout: 4000 })
         clearTimeout(this.state.apiTimer);
         this.toggleLoading();
-        console.log('invalid information');
       }
     }).catch((err) => {
-      // flash error
+      this.props.alert.error('DiffBot encountered an error.', { timeout: 4000 })
       clearTimeout(this.state.apiTimer);
       this.toggleLoading();
-      console.log("fetch error:");
       console.log(err);
     });
   }
@@ -88,7 +88,6 @@ class Main extends React.Component {
   filterRooms(query) {
     const allRooms = this.props.allRooms;
     let filtered = [];
-    
     if(query.startsWith('http')) {
       filtered = allRooms.filter((room) => {
         return room.url.includes(query);
@@ -121,7 +120,7 @@ class Main extends React.Component {
 
     return (
       <div id="main" style={{'backgroundImage': `url('${Background}')`}}>
-        <SearchResults roomArray={roomsToRender} pages={pages} handleClick={this.handleClick} />
+        <SearchResults roomArray={roomsToRender} pages={pages} handleClick={this.handleClick} user={this.props.user}/>
         {(roomArray.length === 0 && query) ? (
           <Jumbotron>
             <ListGroupItem>
@@ -145,6 +144,7 @@ class Main extends React.Component {
         <CreateRoomModal 
           isOpen={this.state.toggleModal} 
           isLoading={this.state.apiLoading} 
+          searchQuery={this.state.searchQuery}
           toggle={this.toggle} 
           createRoom={this.createRoom} 
           />
@@ -153,4 +153,4 @@ class Main extends React.Component {
   }
 }
 
-export default Main;
+export default withAlert(Main);

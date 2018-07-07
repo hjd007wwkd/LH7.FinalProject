@@ -9,7 +9,9 @@ const CreateRoomModal = (props) => {
         <Form onSubmit={props.createRoom} >
           <ModalHeader>Create Room</ModalHeader>
           <ModalBody>
-              <Input type="text" name="articleURL" id="articleURL" placeholder="https://" />
+              {(props.searchQuery && props.searchQuery.startsWith('http')) ? 
+              <Input id="articleURL" name="articleURL" value={props.searchQuery} type="text" placeholder="https://" /> :
+              <Input id="articleURL" name="articleURL" type="text" placeholder="https://" />}
           </ModalBody>
           {props.isLoading ? (
           <ModalFooter>

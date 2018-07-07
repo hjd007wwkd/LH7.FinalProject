@@ -5,6 +5,7 @@ import { withCookies } from 'react-cookie';
 import SideBar from './sidebar';
 import Main from './main';
 import {  Button, Col, Container, Navbar, Row } from 'reactstrap';
+import { withAlert } from 'react-alert';
 
 class App extends Component {
   constructor(props) {
@@ -270,8 +271,9 @@ class App extends Component {
   render() {
     const style = !this.state.start || !this.state.live ? {display: 'none'} : {};
     const styleActive = Object.keys(this.state.activePeers).length === 4 ? {display: 'none'} : {};
-    
-    return  this.props.cookies.get('username') ? (
+    this.props.cookies.get('username') ? true : this.props.alert.error('Please login before joining a room.');
+
+    return (
       <div className="wrapper chatroom">
         <SideBar 
           peers={this.state.peers} 
@@ -319,8 +321,8 @@ class App extends Component {
           </div>
         </div>
       </div>
-    ) : (<Redirect to={{ pathname: "/" }}/>);
+    );
   }
 }
 
-export default withCookies(App);
+export default withAlert(withCookies(App));

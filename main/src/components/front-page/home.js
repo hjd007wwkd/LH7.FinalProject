@@ -4,6 +4,7 @@ import NavBar from './navbar';
 import Main from './main';
 import Dashboard from './dashboard';
 import { withCookies } from 'react-cookie';
+import { withAlert } from 'react-alert';
 
 class Home extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ class Home extends React.Component {
     })
 
     this.socket.on('success', (username, avatar) => {
+      this.props.alert.success('Logged in', { timeout: 1000 })
       this.props.cookies.set('username', username, { path: '/' });
       this.props.cookies.set('avatar', avatar, { path: '/' });
       this.setState(() => ({
@@ -40,8 +42,8 @@ class Home extends React.Component {
       }));
     })
 
-    this.socket.on('fail', (email) => {
-      console.log('existing email: ', email);
+    this.socket.on('fail', (msg) => {
+      this.props.alert.error(msg, { timeout: 4000 })
     });
   }
   
@@ -88,4 +90,4 @@ class Home extends React.Component {
   }
 }
 
-export default withCookies(Home);
+export default withAlert(withCookies(Home));
