@@ -1,0 +1,166 @@
+html, body, #root, {
+  height: 100%;
+
+  .nav-container {
+    position: fixed;
+    width: 100%;
+    z-index: 2;
+    
+    input {
+      border-radius: 1px;
+      box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.07), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+  }
+} 
+
+#main {
+  background-size: cover;
+  height: 100%;
+  padding-top: $home-nav-height;
+  padding-bottom: $home-nav-height;
+  overflow-y: auto;
+}
+
+.jumbotron {
+  margin-left: $leftmargin;
+  width: $relativewidth;
+  background: rgba(53, 58, 64, 0.7);
+
+  .list-group-item {
+    border: 0px;
+    background: transparent;
+    color: white;
+
+    .fa-question {
+      font-size: 14rem;
+      color: #76b852;
+    }
+  
+    .column2 {
+      display: flex;
+      flex-direction: column;
+  
+      div {
+        margin: auto;
+        padding-left: 3rem;
+  
+        button {
+          margin: auto;
+          background: #76b852;
+        }
+      }
+    }
+  }
+}
+
+// Results
+.results-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  width: $relativewidth;
+  justify-content: space-between;
+  opacity: 1;
+
+  a, a:active, a:hover, a:focus, a:visited {
+    color: black;
+    text-decoration: none;
+    z-index: 1;
+  }
+}
+
+.card {
+  flex-direction: row;
+  width: 600px;
+  height: 200px;
+  margin: 15px 0px 15px 0px;
+  border-radius: 4px;
+  border: 1px solid rgb(75, 72, 72);
+  box-shadow: 0 10px 18px 0 rgba(0, 0, 0, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  // Jin
+  opacity: 0.9;
+  border-right: 0.45rem solid $green;
+  overflow: hidden;
+  background: $card-white;
+  color: $text-color-dark;
+
+}
+
+// Jin
+.card:hover {
+  opacity: 1;
+  color: black;
+}
+
+.card-img-top {
+  width: 200px;
+  height: 200px;
+  border-radius: 0px;
+  object-fit: cover;
+}
+
+.card-body {
+  flex: 1;
+  padding: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: 'Rubik', sans-serif;
+
+  .card-title {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+  }
+
+  .card-text {
+    margin: 0px;
+    text-align: justify;
+  }
+
+  .card-subtitle {
+    padding: 2.5%;
+  }
+
+  .news-site {
+    font-style: italic;
+  }
+
+  .user_online {
+    float: right;
+    padding-top: 0.8rem;
+  }
+}
+
+.pagination-container {
+  margin: auto;
+  margin-top: 4rem;
+  width: $relativewidth;
+  display: flex;
+
+  .pagination {
+    margin: auto;
+    
+    .page-item {
+
+      &:first-child, &:last-child {
+        .page-link {
+          border-radius: 2px;
+        }
+      }
+    }
+    .page-link {
+      background: $card-white;
+      color: $text-color-dark;
+      font-weight: bold;
+      opacity: 0.9;
+
+      &:hover, &:focus {
+        box-sizing: border-box;
+        opacity: 1;
+        border-bottom: 0.3rem solid $green;
+        padding-bottom: 0.2rem;
+        box-shadow: none;
+      }
+    }
+
+  }
+}

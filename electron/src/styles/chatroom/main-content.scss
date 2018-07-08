@@ -1,0 +1,104 @@
+.main-content {
+  background: $grey2;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+  
+  .navbar {
+
+    .title-container {
+      flex: 1;
+      display: flex;
+      white-space: nowrap;
+      overflow: hidden;
+      font-family: 'Rubik', sans-serif;
+
+      div {
+        margin: auto;
+
+        a, a:hover {
+          text-align: center;
+          margin: 0px;
+          color: #dcdcdc;
+          font-size: 1.25rem;
+          font-weight: bold;
+          line-height: 1.5;
+          text-decoration: none;
+          
+          &:hover {
+            color: #c4c4c4;
+
+          }
+        }
+      }
+    }
+  } 
+}
+
+#main-toggler {
+  display: flex;
+  flex: 1;
+  padding: 0rem;
+  overflow: hidden;
+}
+
+#article-container {
+  flex: 1;
+  padding: 0rem 1rem 0rem 1rem;
+  color: $text-color-light;
+  text-align: justify;
+  line-height: 1.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  .article-title {
+    padding-bottom: 10px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid $border-light;
+    text-align: left;
+    font-family: 'Rubik', sans-serif;
+
+    p {
+      margin: 0px;
+    }
+  }
+
+  figure {
+    display: flex;
+    flex-direction: column;
+
+    img {
+      margin: auto;
+      max-width: 25rem;
+      max-height: 17rem;
+    }
+
+    a {
+      margin: auto;
+    }
+
+    figcaption {
+      margin: auto;
+    }
+  }
+
+  pre {
+    color: white;
+  }
+
+  aside, video {
+    display: none;
+  }
+}
+
+.message-container.show {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0rem 1rem 0rem 1rem;
+}
+
+.collapsing {
+  display:none;
+}

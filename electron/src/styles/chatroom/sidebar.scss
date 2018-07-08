@@ -1,0 +1,108 @@
+$sidebar-width: 11.5rem;
+
+.sidebar {
+  background: $grey3;
+  display: flex;
+  flex-direction: column;
+  width: $sidebar-width;
+  overflow-x: hidden;
+
+  .list-group-item {
+    background: #3e4146;
+    color: $text-color-light;
+    border: 0px solid $grey3;
+    border-width: 0px 0px 1px 0px;
+    height: $user-card-height;
+    margin-top: 1px;
+    
+    img {
+      margin: auto;
+    }
+
+    .column2 {
+      flex: 1;
+      margin: auto 0.5rem;
+      overflow: hidden;
+      
+      p {
+        margin: 0.1rem;
+      }
+      
+      p:last-child {
+        font-size: 12px;
+      }
+    }
+  }
+  
+  .status-light {
+    display: inline-block;
+    background: rgb(0, 255, 0);
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 999px;
+    margin-right: 0.3rem;
+  }
+}
+
+.column3 {
+  display: flex;
+  flex-direction: column;
+
+  span {
+    margin: auto;
+  }
+
+  .btn-secondary {
+    margin: auto;
+    padding: 0px;
+    outline: none;
+    background: transparent;
+    border-color: transparent;
+    
+    i:focus {
+      color: $green;
+    }
+
+    i:hover, i.liked {
+      color: $green;
+      opacity: 1;
+      border-color: transparent;
+    }
+
+    &:hover, &:active, &:focus {
+      background: transparent;
+      border-color: transparent;
+      outline: none;
+    }
+  }
+}
+
+.user-list {
+  flex: 1;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  
+  &::-webkit-scrollbar {
+    width: 6px;
+    background: transparent;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background: $grey3;
+  }
+}
+
+#current-user-container {
+  background: $grey5;
+  border: none;
+
+  img {
+    margin: auto;
+  }
+
+  .column3 {
+    margin-bottom: 0.4rem;
+  }
+}
+
+

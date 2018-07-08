@@ -1,0 +1,33 @@
+$grey1: #656565;
+$grey2: #36393f;
+$grey3: #303136;
+$grey4: #212125;
+$grey5: #1c1c1c;
+$green: #76b852;
+$text-color-light: #cacaca;
+$text-color-dark: #353a40;
+$chatarea-color: #484c52;
+$border-dark: #212317;
+$border-light: #43464c;
+
+$user-card-height: 4rem;
+$message-content-text: #949494;
+
+$app-nav-height: 54px;
+$nav-color: #343a40;
+
+$leftmargin: 100px;
+$relativewidth: 80rem;
+$home-nav-height: 3.5rem;
+$card-white: #fefdfb;
+
+@import '~bootstrap/scss/bootstrap';
+@import './front-page/home.scss';
+@import './front-page/navbar.scss';
+@import './front-page/modal.scss';
+@import './front-page/dashboard.scss';
+@import './chatroom/app.scss';
+@import './chatroom/sidebar.scss';
+@import './chatroom/main-content.scss';
+@import './chatroom/message-area.scss';
+@import './chatroom/video-panel.scss';
