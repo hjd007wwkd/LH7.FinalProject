@@ -44,18 +44,19 @@ class Main extends React.Component {
     const diffBotKey = process.env.DIFFBOT_KEY;
     const articleURL = encodeURIComponent(e.target.articleURL.value);
     let requestURL = 'https://api.diffbot.com/v3/article?token=' + diffBotKey + '&url=' + articleURL;
-    
+
     this.toggleLoading()
     this.state.apiTimer = setTimeout(() => {
       console.log('API failed');
       this.toggleLoading();
       this.props.alert.error('Error retrieving data from the source.', { timeout: 2000 })
     }, 10000);
-    
+
     fetch(requestURL)
     .then(result => {
       return result.json();
     }).then(data => {
+      clearTimeout(this.state.apiTimer);
       const title = data.objects[0].title;
       const image = data.objects[0].images[0].url || 'http://www.saesteel.com/wp-content/uploads/2016/12/Marketplace-Lending-News.jpg';
       const url = data.objects[0].pageUrl;
@@ -74,12 +75,11 @@ class Main extends React.Component {
         });
       } else {
         this.props.alert.error('Error retrieving data from the source.', { timeout: 4000 })
-        clearTimeout(this.state.apiTimer);
         this.toggleLoading();
       }
     }).catch((err) => {
-      this.props.alert.error('DiffBot encountered an error.', { timeout: 4000 })
       clearTimeout(this.state.apiTimer);
+      this.props.alert.error('DiffBot encountered an error.', { timeout: 4000 })
       this.toggleLoading();
       console.log(err);
     });
@@ -99,7 +99,7 @@ class Main extends React.Component {
         return (
           room.title.toLowerCase().includes(lowQuery) ||
           room.site.toLowerCase().includes(lowQuery) ||
-          room.tags.filter((tag) => { 
+          room.tags.filter((tag) => {
             return tag.toLowerCase().includes(lowQuery)
           }).length
         );
@@ -132,21 +132,21 @@ class Main extends React.Component {
                   {this.props.user.username ? (
                   <React.Fragment>
                     <p>Do you want to create a new room?</p>
-                    <Button color="secondary" onClick={this.toggle}>Create New Room</Button> 
+                    <Button color="secondary" onClick={this.toggle}>Create New Room</Button>
                   </React.Fragment>
                   ) : false }
-                  
+
                 </div>
               </div>
             </ListGroupItem>
           </Jumbotron>
           ) : false }
-        <CreateRoomModal 
-          isOpen={this.state.toggleModal} 
-          isLoading={this.state.apiLoading} 
+        <CreateRoomModal
+          isOpen={this.state.toggleModal}
+          isLoading={this.state.apiLoading}
           searchQuery={this.state.searchQuery}
-          toggle={this.toggle} 
-          createRoom={this.createRoom} 
+          toggle={this.toggle}
+          createRoom={this.createRoom}
           />
       </div>
     );

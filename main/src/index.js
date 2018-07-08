@@ -9,13 +9,6 @@ import Home from './components/front-page/home';
 import 'bootstrap';
 import './styles/styles.scss';
 
-const options = {
-  position: 'top center',
-  timeout: 4000,
-  offset: '30px',
-  transition: 'scale'
-}
-
 const AppRouter = () => {
   return (
     <AlertProvider template={AlertTemplate} >
