@@ -6,10 +6,10 @@ app was made available with webrtc and that is live streaming between registered
 
 ## Final Product
 
-!['This is the front page.']
-!['This is the login page.]
-!['This is the main page.]
-!['This is the card game room.]
+!['This is the front page.'](./img/front_page.png)
+!['This is the contents page filled with all the topics.'](./img/contents.png)
+!['This is the discussion page after selecting a topic.'](./img/discussion1.png)
+!['This is the discussion page after selecting a topic and after resizing.'](./img/discussion2.png)
 
 ## Dependencies
 
