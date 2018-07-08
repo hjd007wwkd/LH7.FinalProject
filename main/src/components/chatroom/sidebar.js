@@ -9,7 +9,7 @@ const SideBar = ({ user, peers, handleLikeToggle, like }) => {
         <NavbarBrand href="/"><span className='capital_title'>N</span>ews<span className='capital_title'>W</span>atch</NavbarBrand>
       </Navbar>
       <div className="user-list">
-        <UserList peers={peers} handleLikeToggle={handleLikeToggle} username={user.username} />
+        <UserList peers={peers} handleLikeToggle={handleLikeToggle} currUser={user.username} />
       </div>
       <ListGroupItem id="current-user-container">
         <div className="list-container">

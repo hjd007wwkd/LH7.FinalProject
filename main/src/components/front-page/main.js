@@ -50,8 +50,8 @@ class Main extends React.Component {
       console.log('API failed');
       this.toggleLoading();
       this.props.alert.error('Error retrieving data from the source.', { timeout: 2000 })
-    }, 10000);
-
+    }, 15000);
+    
     fetch(requestURL)
     .then(result => {
       return result.json();
@@ -61,12 +61,12 @@ class Main extends React.Component {
       const image = data.objects[0].images[0].url || 'http://www.saesteel.com/wp-content/uploads/2016/12/Marketplace-Lending-News.jpg';
       const url = data.objects[0].pageUrl;
       const site = data.objects[0].siteName;
-      const date = data.objects[0].date;
-      const tags = data.objects[0].tags.map(item => item.label ) || [];
+      const date = data.objects[0].date || new Date().toDateString();
+      const tags = data.objects[0].tags ? data.objects[0].tags.map(item => item.label ) : [];
       const contenthtml = data.objects[0].html;
       const contenttext = data.objects[0].text;
       const username = this.props.user.username;
-
+      
       if(title && image && url && site && date && tags && contenthtml && contenttext && username) {
         this.props.socket.emit('createRoom', title, image, url, site, date, tags, contenthtml, contenttext, username);
         this.props.socket.on('roomCreated', (roomID) => {
