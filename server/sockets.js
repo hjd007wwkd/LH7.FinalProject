@@ -1,9 +1,200 @@
 const socketIO = require('socket.io'),
     uuid = require('node-uuid'),
     crypto = require('crypto'),
-    toonavatar = require('cartoon-avatar');;
+    toonavatar = require('cartoon-avatar');
 
-const clients = {};
+const clientList = {
+    Bob2030: {username: 'Bob2030', avatar: toonavatar.generate_avatar(), like: 3, userList: []},
+    Cool531: {username: 'Cool531', avatar: toonavatar.generate_avatar(), like: 5, userList: []},
+    Kihun50: {username: 'Kihun50', avatar: toonavatar.generate_avatar(), like: 9, userList: []},
+    Tool030: {username: 'Tool030', avatar: toonavatar.generate_avatar(), like: 10, userList: []},
+    Gab1230: {username: 'Gab1230', avatar: toonavatar.generate_avatar(), like: 3, userList: []},
+    Vna13: {username: 'Vna13', avatar: toonavatar.generate_avatar(), like: 0, userList: []},
+    Bnn043: {username: 'Bnn043', avatar: toonavatar.generate_avatar(), like: 7, userList: []},
+    Hunn45: {username: 'Hunn45', avatar: toonavatar.generate_avatar(), like: 1, userList: []},
+    Yisan: {username: 'Yisan', avatar: toonavatar.generate_avatar(), like: 0, userList: []},
+    Jarn00: {username: 'Jarn00', avatar: toonavatar.generate_avatar(), like: 2, userList: []},
+    Hanna00: {username: 'Hanna00', avatar: toonavatar.generate_avatar(), like: 4, userList: []},
+    Koooo: {username: 'Koooo', avatar: toonavatar.generate_avatar(), like: 5, userList: []},
+    Talan: {username: 'Talan', avatar: toonavatar.generate_avatar(), like: 2, userList: []},
+    Ghann: {username: 'Ghann', avatar: toonavatar.generate_avatar(), like: 0, userList: []},
+    Jimm09: {username: 'Jimm09', avatar: toonavatar.generate_avatar(), like: 8, userList: []},
+    Nmmm453: {username: 'Nmmm453', avatar: toonavatar.generate_avatar(), like: 3, userList: []},
+    Jkcc836: {username: 'Jkcc836', avatar: toonavatar.generate_avatar(), like: 6, userList: []},
+    Cvx3834: {username: 'Cvx3834', avatar: toonavatar.generate_avatar(), like: 1, userList: []},
+    Jiop0000: {username: 'Jiop0000', avatar: toonavatar.generate_avatar(), like: 1, userList: []},
+    Zsda9483: {username: 'Zsda9483', avatar: toonavatar.generate_avatar(), like: 0, userList: []}
+}
+
+
+const clients = {
+    33: {
+        Bob2030: clientList.Bob2030,
+        Cool531: clientList.Cool531,
+        Kihun50: clientList.Kihun50,
+        Tool030: clientList.Tool030,
+        Gab1230: clientList.Gab1230,
+        Vna13: clientList.Vna13,
+        Bnn043: clientList.Bnn043,
+        Hunn45: clientList.Hunn45,
+        Yisan: clientList.Yisan,
+        Nmmm453: clientList.Nmmm453,
+        Jimm09: clientList.Jimm09,
+        Jarn00: clientList.Jarn00,
+        Hanna00: clientList.Hanna00,
+        Zsda9483: clientList.Zsda9483,
+        Ghann: clientList.Ghann,
+        Talan: clientList.Talan,
+        Koooo: clientList.Koooo,
+        Jkcc836: clientList.Jkcc836,
+        Cvx3834: clientList.Cvx3834,
+        Jiop0000: clientList.Jiop0000
+    },
+    36: {
+        Jarn00: clientList.Jarn00,
+        Cool531: clientList.Cool531,
+        Hanna00: clientList.Hanna00,
+        Tool030: clientList.Tool030,
+        Koooo: clientList.Koooo,
+        Vna13: clientList.Vna13,
+        Talan: clientList.Talan,
+        Ghann: clientList.Ghann,
+        Jimm09: clientList.Jimm09,
+        Nmmm453: clientList.Nmmm453,
+        Yisan: clientList.Yisan,
+        Bnn043: clientList.Bnn043
+    },
+    30: {
+        Jarn00: clientList.Jarn00,
+        Jkcc836: clientList.Jkcc836,
+        Hanna00: clientList.Hanna00,
+        Cvx3834: clientList.Cvx3834,
+        Koooo: clientList.Koooo,
+        Jiop0000: clientList.Jiop0000,
+        Talan: clientList.Talan,
+        Ghann: clientList.Ghann,
+        Zsda9483: clientList.Zsda9483,
+        Nmmm453: clientList.Nmmm453
+    },
+    39: {
+        Koooo: clientList.Koooo,
+        Tool030: clientList.Tool030,
+        Bob2030: clientList.Bob2030,
+        Cool531: clientList.Cool531,
+        Ghann: clientList.Ghann,
+        Zsda9483: clientList.Zsda9483,
+        Talan: clientList.Talan,
+        Vna13: clientList.Vna13,
+        Zsda9483: clientList.Zsda9483,
+        Nmmm453: clientList.Nmmm453,
+        Cvx3834: clientList.Cvx3834,
+        Jiop0000: clientList.Jiop0000
+    },
+    35: {
+        Vna13: clientList.Vna13,
+        Hanna00: clientList.Hanna00,
+        Zsda9483: clientList.Zsda9483,
+        Kihun50: clientList.Kihun50,
+        Ghann: clientList.Ghann,
+        Cvx3834: clientList.Cvx3834,
+        Talan: clientList.Talan,
+        Yisan: clientList.Yisan,
+        Jimm09: clientList.Jimm09,
+        Nmmm453: clientList.Nmmm453
+    },
+    6: {
+        Ghann: clientList.Ghann,
+        Cvx3834: clientList.Cvx3834,
+        Talan: clientList.Talan,
+        Yisan: clientList.Yisan,
+        Jimm09: clientList.Jimm09,
+        Nmmm453: clientList.Nmmm453
+    },
+    7: {
+        Vna13: clientList.Vna13,
+        Hanna00: clientList.Hanna00,
+        Zsda9483: clientList.Zsda9483,
+        Kihun50: clientList.Kihun50,
+        Ghann: clientList.Ghann,
+        Cvx3834: clientList.Cvx3834,
+        Talan: clientList.Talan
+    },
+    12: {
+        Koooo: clientList.Koooo,
+        Tool030: clientList.Tool030,
+        Bob2030: clientList.Bob2030,
+        Cool531: clientList.Cool531,
+        Ghann: clientList.Ghann,
+        Zsda9483: clientList.Zsda9483
+    },
+    32: {
+        Ghann: clientList.Ghann,
+        Jimm09: clientList.Jimm09,
+        Nmmm453: clientList.Nmmm453
+    },
+    28: {
+        Gab1230: clientList.Gab1230,
+        Vna13: clientList.Vna13,
+        Bnn043: clientList.Bnn043,
+        Hunn45: clientList.Hunn45,
+        Yisan: clientList.Yisan,
+        Jarn00: clientList.Jarn00
+    },
+    39: {
+        Bob2030: clientList.Bob2030,
+        Cool531: clientList.Cool531,
+        Kihun50: clientList.Kihun50,
+        Tool030: clientList.Tool030
+    },
+    11: {
+        Talan: clientList.Talan,
+        Ghann: clientList.Ghann,
+        Jimm09: clientList.Jimm09,
+        Nmmm453: clientList.Nmmm453
+    },
+    13: {
+        Bob2030: clientList.Bob2030,
+        Cool531: clientList.Cool531,
+        Kihun50: clientList.Kihun50,
+        Tool030: clientList.Tool030,
+        Gab1230: clientList.Gab1230,
+        Vna13: clientList.Vna13,
+        Bnn043: clientList.Bnn043
+    },
+    22: {
+        Ghann: clientList.Ghann,
+        Cvx3834: clientList.Cvx3834,
+        Talan: clientList.Talan
+    },
+    31: {
+        Ghann: clientList.Ghann,
+        Zsda9483: clientList.Zsda9483
+    },
+    19: {
+        Ghann: clientList.Ghann,
+        Zsda9483: clientList.Zsda9483,
+        Talan: clientList.Talan,
+        Vna13: clientList.Vna13,
+        Zsda9483: clientList.Zsda9483
+    },
+    38: {
+        Gab1230: clientList.Gab1230,
+        Vna13: clientList.Vna13,
+        Bnn043: clientList.Bnn043
+    },
+    25: {
+        Bob2030: clientList.Bob2030,
+        Cool531: clientList.Cool531,
+        Kihun50: clientList.Kihun50,
+        Tool030: clientList.Tool030,
+        Gab1230: clientList.Gab1230
+    },
+    8: {
+        Jimm09: clientList.Jimm09,
+        Nmmm453: clientList.Nmmm453
+    }
+
+};
 const activeClients = {};
 
 module.exports = function (server, config, knex) {
@@ -187,7 +378,7 @@ module.exports = function (server, config, knex) {
             client.emit('message', {type: 'active', peers: activeClients[client.room]})
 
             knex('messages').join('users', 'messages.user_id', 'users.id').join('rooms', 'messages.room_id', 'rooms.id')
-            .select('messages.content', 'messages.created_at', 'users.username', 'users.avatar').where('rooms.id', roomId).then(function(rows) {
+            .select('messages.content', 'messages.created_at', 'users.username', 'users.avatar').where('rooms.id', roomId).orderBy('messages.created_at').then(function(rows) {
                 client.emit('message', {type: 'initMsg', messages: rows});
             })
 
