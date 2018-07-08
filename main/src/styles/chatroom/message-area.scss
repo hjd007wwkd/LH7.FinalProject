@@ -16,12 +16,16 @@
       
       .username {
         font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
       }
       
       .time {
         font-size: 12px;
         margin: 0.1rem 0rem 0rem 2rem;
         color: #8e949478;
+        white-space: nowrap;
+        overflow: hidden;
       }
     }
     
