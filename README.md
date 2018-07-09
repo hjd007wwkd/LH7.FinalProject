@@ -6,10 +6,11 @@ This application is built with React, WebRTC, and Socket.io on the client-side a
 
 ## Final Product
 
-!['This is the front page.'](./img/front_page.png)
-!['This is the contents page filled with all the topics.'](./img/contents.png)
-!['This is the discussion page after selecting a topic.'](./img/discussion1.png)
-!['This is the discussion page after selecting a topic and after resizing.'](./img/discussion2.png)
+!['This is the front page.'](./img/home.png)
+!['This is the contents page filled with all the topics.'](./img/searchresults.png)
+!['This is the discussion page after selecting a topic.'](./img/chatroom1.png)
+!['This is the discussion page after selecting a topic and after resizing.'](./img/chatroom2.png)
+!['This is the discussion page after selecting a topic.'](./img/chatroom3.png)
 
 ## Dependencies
 #### Front-end
