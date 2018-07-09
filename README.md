@@ -1,8 +1,8 @@
 # LH7.FinalProject: NewsWatch
 
-NewsWatch is a full stack web application built with Node, Express, React, and Webrtc that allow many users to connect together. Similar to Reddit, NewsWatch is a
-social news aggregation, web content rating, and discussion website. It allows registered user to post links, images, gifs, etc. A new feature of this
-app was made available with webrtc and that is live streaming between registered users to discuss the content of a particular post.
+NewsWatch is a platform that allows users to discuss news topics via instant messaging and live video streaming. Made to be a combination of HackerNews, Discord and Twitch.tv, NewsWatch brings a new interactive experience where users can learn many other perspectives while reading the news. Users are able to create channels around specific news topics or search and join existing channels. In the channels you can upvote people whose opinion you like and even vote to ban people on the live panel discussion. 
+
+This application is built with React, WebRTC, and Socket.io on the client-side and Node, Express, and Socket.io on the server-side. PostgreSQL is used for the database and DiffBot API is used to extract content from news websites. This application is also available as a desktop Electron app.
 
 ## Final Product
 
@@ -12,27 +12,25 @@ app was made available with webrtc and that is live streaming between registered
 !['This is the discussion page after selecting a topic and after resizing.'](./img/discussion2.png)
 
 ## Dependencies
+#### Front-end
+- Liowebrtc (WebRTC wrapper)
+- React
+- Webpack
+- Socket.io
+- Bootstrap
+- Electron
 
+#### Back-end
 - Node
 - Express
-- bcryptjs
-- body-parser
-- cookie-session
-- express
-- knex
-- pg
-- socket.io
-- babel
-- bootstrap
-- liowebrtc
-- react
-- node-sass
-- webpack
+- Knex
+- PostgreSQL
+- Socket.io
+- Liowebrtc
+
 
 ## Expected Usage
-
-Switch into the Main directory and install the dependencies (using the `npm install` command) first and then proceed below.
-
-This program should be executed from the command line, in the following manner:
-
+Clone the repo and then execute the following commands in the new directory.
+`cd main`
+`npm install`
 `npm start`
