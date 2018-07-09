@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
 import LioWebRTC from 'liowebrtc';
 import SideBar from './sidebar';
 import Main from './main';
@@ -272,6 +273,7 @@ class App extends Component {
     localStorage.getItem('username') ? true : this.props.alert.error('Please login before joining a room.');
 
     return (
+      localStorage.getItem('username') ?
       <div className="wrapper chatroom">
         <SideBar 
           peers={this.state.peers} 
@@ -319,6 +321,7 @@ class App extends Component {
           </div>
         </div>
       </div>
+      : <Redirect to={{pathname: "/"}}/>
     );
   }
 }

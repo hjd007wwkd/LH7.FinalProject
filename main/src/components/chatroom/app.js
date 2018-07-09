@@ -274,6 +274,7 @@ class App extends Component {
     this.props.cookies.get('username') ? true : this.props.alert.error('Please login before joining a room.');
 
     return (
+      this.props.cookies.get('username') ?
       <div className="wrapper chatroom">
         <SideBar 
           peers={this.state.peers} 
@@ -321,6 +322,7 @@ class App extends Component {
           </div>
         </div>
       </div>
+      : <Redirect to={{pathname: "/"}}/>
     );
   }
 }
