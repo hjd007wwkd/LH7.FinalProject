@@ -105,7 +105,8 @@ class App extends Component {
         } else if (data.type === 'typing') {
           this.receiveTypingStatus(data.peer);
         } else if (data.type === 'addBanned') {
-          if(this.state.bannedBy.length + 1 >= Object.keys(this.state.peers).length/4){
+          // if(this.state.bannedBy.length + 1 >= Object.keys(this.state.peers).length/4){
+          if(this.state.bannedBy.length > 0){
             this.webrtc.pause()
             this.setState(()=>(
               {live: false, mute: true}
